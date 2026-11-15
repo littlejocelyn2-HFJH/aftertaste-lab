@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>記憶深夜食堂：情感特調製研所</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=DM+Serif+Display&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
+<script src="config.js?v=1"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" defer></script>
+<style>
+:root{
+  --paper:#F6F1E7; --card:#FFFDF8; --ink:#1E1A16; --soft:#6E655B; --line:#2A241F;
+  --toast:#C8823E; --crust:#9C5A24; --butter:#F3D29B; --matcha:#C3CFA0; --gray:#DAD6CE; --rule:#E7DDCC;
+  --r:22px;
+  --serif:"Noto Serif TC","Songti TC","PMingLiU",serif;
+  --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --latin:"DM Serif Display",Georgia,serif;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{font-size:18px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.8;-webkit-font-smoothing:antialiased}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--crust)}
+.wrap{max-width:860px;margin:0 auto;padding:16px 18px 90px}
+
+/* 直書：逐字堆疊（存圖時也不會跑版） */
+.vstack{display:inline-flex;flex-direction:column;align-items:center;line-height:1.1}
+.vstack i{font-style:normal;display:block}
+.tag{display:inline-flex;background:#fff;border:1.5px solid var(--line);padding:9px 5px;font-size:14px;font-weight:500;box-shadow:2px 2px 0 rgba(30,26,22,.10);letter-spacing:0}
+.tag .vstack{gap:3px}
+.tag.butter{background:var(--butter)} .tag.matcha{background:var(--matcha)} .tag.gray{background:var(--gray)}
+.hz-tag{display:inline-block;border:1.5px solid var(--line);background:#fff;padding:1px 12px;font-size:15px;border-radius:4px}
+
+/* ── Hero ── */
+.hero{display:grid;grid-template-columns:1fr auto;gap:6px 14px;padding:14px 0 6px}
+.hero-left{display:flex;flex-direction:column;justify-content:space-between;gap:18px;padding-top:6px}
+.badge{display:inline-flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--serif);font-weight:900;font-size:15px;align-self:flex-start}
+.badge small{font-family:var(--latin);font-weight:400;font-size:11px;line-height:1.1;text-align:center}
+.hero-lead{font-size:16px;color:var(--soft);margin:0;line-height:2}
+.hero-v{display:flex;flex-direction:row-reverse;gap:12px;align-items:flex-start}
+.v-xl{font-family:var(--serif);font-weight:900;font-size:clamp(48px,12.5vw,86px);margin:0;line-height:1}
+.v-xl .vstack{gap:.08em}
+.v-l{font-family:var(--serif);font-weight:900;font-size:clamp(26px,6.6vw,44px);margin:1.3em 0 0;line-height:1}
+.v-l .vstack{gap:.12em}
+.v-s{font-size:13px;color:var(--soft);margin:0;line-height:1}
+.v-s .vstack{gap:.35em}
+.slices{grid-column:1/-1;display:flex;justify-content:space-between;gap:8px;margin:26px 0 0}
+.slice{position:relative;flex:1;max-width:110px;aspect-ratio:.9;border-radius:46% 46% 10px 10px/36% 36% 10px 10px;
+  background:radial-gradient(ellipse at 50% 60%,#F2CF96 0 52%,#D99A55 66%,#A9652B 100%);box-shadow:inset 0 -6px 10px rgba(120,60,20,.25)}
+.slice::after{content:"";position:absolute;left:18%;right:18%;top:30%;bottom:16%;border-radius:22%;background:var(--c);opacity:.92;box-shadow:inset 0 0 8px rgba(255,255,255,.5)}
+.slice .tag{position:absolute;top:-16px;left:50%;transform:translateX(-50%);z-index:2;font-size:12px;padding:6px 3px}
+.slice b{position:absolute;bottom:22%;left:0;right:0;text-align:center;z-index:2;font-size:22px}
+.latin-title{grid-column:1/-1;font-family:var(--latin);font-size:clamp(40px,10vw,78px);line-height:.95;margin:22px 0 0;letter-spacing:-.01em}
+.latin-title small{display:block;font-family:var(--sans);font-size:13px;letter-spacing:.1em;margin-top:6px}
+.hand{font-family:"Caveat",cursive;color:var(--toast);font-size:.42em;display:inline-block;transform:rotate(-8deg);margin-left:.3em}
+
+/* ── 學生資訊與步驟條 ── */
+.who-bar{display:flex;justify-content:flex-end;align-items:center;gap:10px;font-size:15px;color:var(--soft);margin:18px 0 6px}
+.link{background:none;border:0;color:var(--crust);text-decoration:underline;padding:0}
+.stepper{position:sticky;top:0;z-index:20;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:10px 0;background:linear-gradient(var(--paper) 80%,rgba(246,241,231,0))}
+.stepper button{border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:6px 4px;display:flex;flex-direction:column;align-items:center;line-height:1.25}
+.stepper b{font-family:var(--latin);font-weight:400;font-size:20px}
+.stepper span{font-size:12.5px}
+.stepper button.on{background:var(--ink);color:var(--paper)}
+.stepper button.done{background:var(--butter)}
+.stepper button:disabled{opacity:.38;cursor:not-allowed}
+
+/* ── 工序卡 ── */
+.stage{position:relative;background:var(--card);border:1px solid var(--rule);border-radius:var(--r);padding:30px 22px 24px;margin-top:22px;box-shadow:0 10px 30px -18px rgba(90,60,30,.35)}
+.stage>.tag.hang{position:absolute;top:-14px;left:20px}
+.stage-head{padding-left:44px;min-height:60px}
+.kicker{margin:0;font-family:var(--latin);font-size:15px;color:var(--toast);letter-spacing:.06em}
+.stage h2{font-family:var(--serif);font-weight:900;font-size:clamp(28px,6vw,38px);margin:0;line-height:1.3}
+.lead{font-size:19px;margin:16px 0 18px}
+.field{display:block;margin:14px 0}
+.field>span{display:block;font-weight:700;margin-bottom:6px}
+input[type=text],input[type=password],input[type=number],input:not([type]),textarea,select{width:100%;border:1.5px solid var(--line);border-radius:14px;padding:13px 15px;background:#fff;font-size:20px;line-height:1.7}
+textarea{resize:vertical;min-height:200px}
+input:focus,textarea:focus,select:focus{outline:3px solid var(--butter);outline-offset:1px}
+.counter{text-align:right;font-size:14px;color:var(--soft);margin-top:4px}
+.counter.ok{color:#4F7A3A}
+.note{font-size:14px;color:var(--soft)}
+.err{color:#B3392A;font-weight:700;min-height:1.5em;margin:12px 0 0;font-size:16px}
+.actions{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:18px;flex-wrap:wrap}
+.actions.center{justify-content:center}
+.btn{border:0;border-radius:999px;padding:13px 24px;font-size:18px;font-weight:700;background:var(--ink);color:var(--paper);transition:transform .1s}
+.btn:active{transform:scale(.97)}
+.btn.toast{background:var(--toast);color:#fff}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn.small{padding:8px 16px;font-size:15px}
+.btn.wide{width:100%}
+.shake{animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* 步驟一 */
+.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;overflow:hidden;margin:6px 0 12px}
+.seg button{border:0;background:#fff;padding:9px 18px;font-size:16px}
+.seg button.on{background:var(--ink);color:var(--paper)}
+.drop{display:flex;align-items:center;justify-content:center;text-align:center;min-height:220px;border:1.5px dashed var(--soft);border-radius:18px;background:#FFFBF2;cursor:pointer;overflow:hidden;color:var(--soft)}
+.drop img{max-width:100%;max-height:420px;display:block}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+.sw{width:34px;height:34px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1.5px var(--line);background:var(--c)}
+.sw.on{box-shadow:0 0 0 3px var(--toast)}
+.sz{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:3px 12px;font-size:14px}
+.sz.on{background:var(--butter)}
+.pad-wrap{width:100%}
+#pad{display:block;border-radius:18px;border:1.5px dashed var(--soft);touch-action:none;background:#FFFBF2}
+
+/* 步驟二 */
+.ta-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+.ta-head .label{font-weight:700}
+.hint-btn{border:1.5px solid var(--line);background:var(--butter);border-radius:999px;padding:6px 14px;font-size:15px;white-space:nowrap}
+.hint{background:#FFF6E2;border-left:5px solid var(--toast);border-radius:12px;padding:12px 16px;margin-bottom:12px;font-size:17px}
+.hint p{margin:0 0 4px;font-weight:700}
+.hint ul{margin:0;padding-left:1.2em}
+
+/* 步驟三 */
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;pointer-events:none}
+.chip span{display:inline-block;border:1.5px solid var(--line);border-radius:999px;padding:7px 18px;background:#fff;font-size:18px;user-select:none}
+.chip input:checked+span{background:var(--ink);color:var(--paper)}
+.chip input:focus-visible+span{outline:3px solid var(--butter)}
+#otherName{margin-top:12px;max-width:340px}
+.mission{margin-top:22px;border-top:2px dashed var(--rule);padding-top:18px;animation:rise .35s}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+.mission h3{font-family:var(--serif);font-weight:900;font-size:28px;margin:0}
+.mission-text{background:#FFF6E2;border-radius:14px;padding:12px 16px;font-size:18px;margin:10px 0 14px}
+.words-label{font-weight:700;margin-bottom:6px}
+.words-label small{font-weight:400;color:var(--soft);margin-left:6px}
+.words{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.word{border:1.5px solid var(--line);background:#fff;border-radius:6px;padding:4px 12px;font-size:17px;box-shadow:2px 2px 0 rgba(30,26,22,.12)}
+.word:active{transform:translate(1px,1px);box-shadow:none}
+.empty-tip{margin-top:16px;color:var(--soft);text-align:center;padding:24px;border:1.5px dashed var(--rule);border-radius:16px}
+
+/* 步驟四 */
+.mixer{display:grid;grid-template-columns:1fr 190px;gap:18px;align-items:center}
+.sl{margin:6px 0 12px}
+.sl-top{display:flex;justify-content:space-between;align-items:baseline;font-size:18px}
+.sl-top small{color:var(--soft);font-size:14px;margin-left:4px}
+.sl-top b{font-family:var(--latin);font-weight:400;font-size:22px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:12px;border-radius:999px;background:linear-gradient(90deg,var(--c) var(--p,0%),#EDE5D6 var(--p,0%));outline:none;padding:0;border:0}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:#fff;border:2px solid var(--line);box-shadow:0 2px 4px rgba(0,0,0,.2)}
+input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:#fff;border:2px solid var(--line)}
+.mix-preview{text-align:center}
+
+/* ── 情感食譜卡 ── */
+.final-head{text-align:center;margin:26px 0 14px}
+.final-head h2{font-family:var(--serif);font-weight:900;font-size:32px;margin:8px 0 0}
+.send-state{font-size:16px;margin:6px 0 0}
+.code-box{background:#FFF6E2;border-radius:14px;padding:12px;margin:12px auto;max-width:560px;text-align:left}
+.code-box textarea{min-height:90px;font-size:13px;font-family:monospace}
+.recipe{max-width:620px;margin:0 auto;background:#F7F2E8;border-radius:28px;padding:30px 26px 22px;border:1px solid var(--rule);box-shadow:0 20px 40px -24px rgba(90,60,30,.45);position:relative;overflow:hidden}
+.rc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.rc-brand{display:flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--serif);font-weight:900;font-size:14px}
+.rc-brand small{font-family:var(--latin);font-weight:400;font-size:11px}
+.rc-meta{font-size:13px;color:var(--soft);line-height:1}
+.rc-meta .vstack{gap:.3em}
+.rc-title{display:flex;flex-direction:row-reverse;align-items:flex-start;gap:12px}
+.rc-title h3{font-family:var(--serif);font-weight:900;margin:0;line-height:1}
+.rc-title h3 .vstack{gap:.1em}
+.rc-center{display:flex;gap:16px;align-items:flex-start}
+.toast-frame{margin:22px auto 6px;max-width:400px;padding:16px 16px 18px;border-radius:44% 44% 16px 16px/30% 30% 16px 16px;
+  background:radial-gradient(ellipse at 50% 58%,#F4D7A6 0 56%,#D99A55 70%,#A9652B 100%);box-shadow:inset 0 -8px 14px rgba(120,60,20,.25)}
+.toast-frame img{display:block;width:100%;border-radius:38% 38% 12px 12px/22% 22% 12px 12px;margin-top:16%;aspect-ratio:4/3;object-fit:cover;background:#fff}
+.rc-people{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:12px 0 4px}
+.rc-sec{display:flex;gap:14px;margin-top:20px;align-items:flex-start}
+.rc-sec>div{flex:1}
+.rc-sec h4{font-family:var(--serif);font-weight:900;font-size:20px;margin:0 0 4px}
+.rc-sec p{margin:0;font-size:17px;line-height:1.95;white-space:pre-wrap;word-break:break-word}
+.rc-palette{display:flex;gap:14px;align-items:center;margin-top:22px;flex-wrap:wrap}
+.rc-palette ul{list-style:none;padding:0;margin:0;flex:1;min-width:180px}
+.bar-li{display:grid;grid-template-columns:78px 1fr 44px;gap:8px;align-items:center;font-size:15px;margin:3px 0}
+.bar{height:10px;border-radius:999px;background:#EDE5D6;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:999px}
+.bar-li b{font-family:var(--latin);font-weight:400;text-align:right}
+.rc-sum{margin:26px 0 8px;padding:18px 18px 18px 22px;border-left:6px solid var(--toast);background:#fff;border-radius:6px 16px 16px 6px;font-family:var(--serif);font-weight:900;font-size:21px;line-height:1.7}
+.rc-foot{display:flex;justify-content:space-between;align-items:flex-end;margin-top:18px;border-top:1px solid var(--rule);padding-top:10px}
+.rc-foot .latin{font-family:var(--latin);font-size:26px;line-height:1}
+.rc-foot small{color:var(--soft);font-size:13px}
+
+/* ── Modal ── */
+.modal{position:fixed;inset:0;background:rgba(30,26,22,.55);z-index:100;display:flex;align-items:flex-start;justify-content:center;padding:24px 14px;overflow:auto}
+.modal-card{background:var(--card);border-radius:24px;max-width:460px;width:100%;padding:26px 22px 20px;position:relative;margin:auto}
+.modal-card.wide{max-width:700px;background:transparent;padding:0}
+.modal-card h2{font-family:var(--serif);font-weight:900;margin:4px 0 2px;font-size:28px}
+.reg-head{display:flex;gap:14px;align-items:flex-start}
+.teacher-link{display:block;text-align:center;margin-top:16px;font-size:15px}
+.x{position:absolute;top:10px;right:12px;border:0;background:#fff;border-radius:50%;width:40px;height:40px;font-size:20px;z-index:3;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+
+/* ── 教師頁 ── */
+.t-head{display:flex;align-items:flex-start;gap:14px;margin:12px 0 16px}
+.t-head h1{font-family:var(--serif);font-weight:900;font-size:clamp(26px,6vw,36px);margin:0;line-height:1.3}
+.t-head p{margin:2px 0 0;color:var(--soft);font-size:15px}
+.panel{background:var(--card);border:1px solid var(--rule);border-radius:var(--r);padding:18px 18px;margin:14px 0}
+.panel h2{font-family:var(--serif);font-weight:900;font-size:24px;margin:0 0 10px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.row input,.row select{width:auto;font-size:17px;padding:8px 12px;flex:0 1 auto}
+.tbl-wrap{overflow:auto}
+table{border-collapse:collapse;width:100%;font-size:16px}
+th,td{padding:8px 8px;border-bottom:1px solid var(--rule);text-align:left;white-space:nowrap}
+th{font-size:14px;color:var(--soft);font-weight:500}
+tr.flag td{background:#FFF0EC}
+.pill{display:inline-block;background:#F8D9D2;color:#8E2A1D;border-radius:999px;padding:0 8px;font-size:13px;margin-right:3px}
+.mode-note{background:#FFF6E2;border-radius:12px;padding:10px 14px;font-size:15px;margin-bottom:10px}
+.food-wall{display:flex;flex-wrap:wrap;gap:8px}
+
+/* ── 大屏 ── */
+body.screen{background:#16130F;color:#F6F1E7}
+.scr{padding:2.2vw 3vw;min-height:100vh;display:flex;flex-direction:column}
+.scr-head{display:flex;align-items:center;gap:2vw;flex-wrap:wrap}
+.scr-head h1{font-family:var(--serif);font-weight:900;font-size:4vw;margin:0;flex:1;line-height:1.2}
+.scr-head select{width:auto;font-size:1.8vw;padding:.3vw 1vw;background:#2A241F;color:#F6F1E7;border-color:#F6F1E7}
+.scr-head a{color:#F3D29B;font-size:1.3vw}
+.scr-clock{font-family:var(--latin);font-size:2.4vw;color:#F3D29B}
+.scr-grid{flex:1;display:grid;grid-template-columns:1fr 1.2fr 1.1fr;gap:2vw;margin-top:2vw}
+.scr-box{background:#241F1A;border-radius:2vw;padding:2vw}
+.scr-box h2{font-family:var(--serif);font-size:2.2vw;margin:0 0 1vw;color:#F3D29B}
+.scr-num{font-family:var(--latin);font-size:13vw;line-height:1}
+.scr-unit{font-size:2.2vw}
+.scr-rank{list-style:none;padding:0;margin:0;font-size:2.4vw;line-height:1.75}
+.scr-rank b{font-family:var(--latin);font-weight:400;color:#F3D29B;display:inline-block;min-width:2.2em}
+.scr-wall{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:1vw;align-items:flex-start;align-content:flex-start;min-height:8vw}
+.scr-wall span{background:#F6F1E7;color:#1E1A16;border-radius:.6vw;padding:.3vw 1.2vw;font-size:2vw;font-weight:700}
+.scr-legend{font-size:1.9vw;line-height:1.7}
+@media (max-width:640px){
+  html{font-size:17px}
+  .mixer{grid-template-columns:1fr}
+  .mix-preview{order:-1}
+  .stage{padding:28px 16px 20px}
+  .recipe{padding:24px 18px 18px;border-radius:22px}
+  .rc-sum{font-size:19px}
+}
+@media print{.no-print{display:none!important}}
+</style>
+</head>
+<body>
+<main id="app"></main>
+
+<!-- ═════════ 學生頁 ═════════ -->
+<template id="tpl-student">
+<div class="wrap">
+  <header class="hero">
+    <div class="hero-left">
+      <div class="badge"><span data-v>深夜食堂</span><small>since<br>2026</small></div>
+      <p class="hero-lead">一道菜，一段時光。<br>把食物端上桌，<br>把人寫進碗裡，<br>再調出記憶真正的滋味。</p>
+    </div>
+    <div class="hero-v">
+      <h1 class="v-xl" data-v>記憶深夜食堂</h1>
+      <p class="v-l" data-v>情感特調製研所</p>
+      <p class="v-s" data-v>國三散文寫作鷹架</p>
+    </div>
+    <div class="slices" aria-hidden="true">
+      <div class="slice" style="--c:#F1E08A"><span class="tag" data-v>微酸</span><b>🍋</b></div>
+      <div class="slice" style="--c:#F6C2BB"><span class="tag" data-v>溫甜</span><b>🍬</b></div>
+      <div class="slice" style="--c:#8A6A52"><span class="tag gray" data-v>苦澀</span><b>☕</b></div>
+      <div class="slice" style="--c:#DE7A63"><span class="tag" data-v>嗆辣</span><b>🌶️</b></div>
+      <div class="slice" style="--c:#E2D7C1"><span class="tag matcha" data-v>鹹香</span><b>🧂</b></div>
+    </div>
+    <div class="latin-title">Memory<br>Midnight DINER<span class="hand">emotional recipe</span><small>MADE IN 國三教室</small></div>
+  </header>
+
+  <div class="who-bar no-print"><span id="whoText"></span><button class="link" id="changeWho">更換</button></div>
+
+  <nav class="stepper no-print" id="stepper">
+    <button data-go="1"><b>01</b><span>選材上菜</span></button>
+    <button data-go="2"><b>02</b><span>記憶濾鏡</span></button>
+    <button data-go="3"><b>03</b><span>人物刻痕</span></button>
+    <button data-go="4"><b>04</b><span>情感調色</span></button>
+  </nav>
+
+  <div id="editor">
+    <!-- 步驟一 -->
+    <section class="stage" data-step="1">
+      <span class="tag hang butter" data-v>工序壹</span>
+      <div class="stage-head"><p class="kicker">STEP 01 ・ 視覺設定</p><h2>選材與上菜</h2></div>
+      <p class="lead">請輸入這道充滿記憶的食物名稱，並為它上傳一張照片（或畫下它的樣子）。</p>
+      <label class="field"><span>這道食物的名稱</span><input id="food" maxlength="16" placeholder="例如：阿嬤的菜脯蛋" autocomplete="off"></label>
+      <div class="seg" role="tablist">
+        <button type="button" data-pm="upload">📷 上傳照片</button>
+        <button type="button" data-pm="draw">✏️ 畫下它</button>
+      </div>
+      <div id="pm-upload">
+        <label class="drop" for="file"><img id="upPreview" alt="食物照片預覽" hidden><span id="upHint">點這裡選擇照片<br><small>手機可以直接拍照</small></span></label>
+        <input type="file" id="file" accept="image/*" hidden>
+        <p class="note" id="upAgain" hidden>想換一張？再點一次圖片就可以。</p>
+      </div>
+      <div id="pm-draw" hidden>
+        <div class="tools" id="tools"></div>
+        <div class="pad-wrap"><canvas id="pad"></canvas></div>
+        <p class="note">用手指或滑鼠畫畫看，不用畫得很像，重點是「你記得的樣子」。</p>
+      </div>
+      <p class="err" id="err1"></p>
+      <div class="actions"><span></span><button class="btn" data-next="1">端上桌，下一步 →</button></div>
+    </section>
+
+    <!-- 步驟二 -->
+    <section class="stage" data-step="2" hidden>
+      <span class="tag hang" data-v>工序貳</span>
+      <div class="stage-head"><p class="kicker">STEP 02 ・ 感官前奏</p><h2>記憶濾鏡</h2></div>
+      <p class="lead">先別急著寫人，讓這道菜「出場」。</p>
+      <div class="ta-head"><span class="label">這道食物出場的畫面</span><button type="button" class="hint-btn" id="hintBtn" aria-expanded="false">💡 靈感小提示</button></div>
+      <div class="hint" id="hint" hidden>
+        <p>不知道怎麼開頭嗎？試著想想：</p>
+        <ul>
+          <li>這道食物通常出現在什麼特定的時刻？（例如：冬天的宵夜、下雨天、拜拜的桌上）</li>
+          <li>它剛端上桌時，有什麼特別的氣味、顏色或是聲音？</li>
+        </ul>
+      </div>
+      <textarea id="sense" rows="8" placeholder="請在這裡寫下這道食物出場的畫面與氣味..."></textarea>
+      <div class="counter" id="c-sense"></div>
+      <p class="err" id="err2"></p>
+      <div class="actions"><button class="btn ghost" data-prev="2">← 上一步</button><button class="btn" data-next="2">下一步 →</button></div>
+    </section>
+
+    <!-- 步驟三 -->
+    <section class="stage" data-step="3" hidden>
+      <span class="tag hang matcha" data-v>工序參</span>
+      <div class="stage-head"><p class="kicker">STEP 03 ・ 核心寫作區</p><h2>靈魂人物與刻痕</h2></div>
+      <p class="lead">誰和你一起吃這道菜？（可複選）</p>
+      <div class="chips" id="people"></div>
+      <input id="otherName" maxlength="10" placeholder="「其他」是誰？例如：舅舅" hidden>
+      <div class="empty-tip" id="noPeople">先勾選共餐者，寫作任務就會出現。</div>
+      <div class="mission" id="mission" hidden>
+        <h3 id="mTitle"></h3>
+        <p class="mission-text" id="mText"></p>
+        <p class="note" id="mWho"></p>
+        <div class="words-label">靈感詞彙庫<small>點一下就會放進文字框</small></div>
+        <div class="words" id="words"></div>
+        <textarea id="core" rows="10" placeholder="請在這裡寫下你的觀察與感受..."></textarea>
+        <div class="counter" id="c-core"></div>
+      </div>
+      <p class="err" id="err3"></p>
+      <div class="actions"><button class="btn ghost" data-prev="3">← 上一步</button><button class="btn" data-next="3">下一步 →</button></div>
+    </section>
+
+    <!-- 步驟四 -->
+    <section class="stage" data-step="4" hidden>
+      <span class="tag hang gray" data-v>工序肆</span>
+      <div class="stage-head"><p class="kicker">STEP 04 ・ 複合情緒歸納</p><h2>情感調色盤與餘韻</h2></div>
+      <p class="lead">記憶的滋味從來不是單一的。請調配這段回憶的情感比例。</p>
+      <div class="mixer">
+        <div id="sliders"></div>
+        <div class="mix-preview"><div id="liveDonut"></div><p class="note">比例會自動換算成 100%</p></div>
+      </div>
+      <label class="field"><span>最後，請用一句話總結這碗特調的滋味：</span>
+        <input id="summary" maxlength="80" placeholder="（例如：這是一碗在微辣衝突中，帶著鹹鹹日常的記憶。）" autocomplete="off"></label>
+      <p class="err" id="err4"></p>
+      <div class="actions"><button class="btn ghost" data-prev="4">← 上一步</button><button class="btn toast" id="finishBtn">完成特調 🍜</button></div>
+    </section>
+  </div>
+
+  <div id="final" hidden>
+    <div class="final-head">
+      <span class="tag butter" data-v>出餐</span>
+      <h2>你的情感食譜卡</h2>
+      <p class="send-state" id="sendState"></p>
+      <div class="code-box" id="codeBox" hidden>
+        <p style="margin:0 0 6px">沒連上網路？請把下面的「作品碼」複製給老師：</p>
+        <textarea id="codeText" readonly></textarea>
+        <button class="btn small" id="copyCode" style="margin-top:8px">複製作品碼</button>
+      </div>
+    </div>
+    <div id="cardHost"></div>
+    <div class="actions center no-print">
+      <button class="btn" id="dlCard">⬇ 存成圖片</button>
+      <button class="btn ghost" id="editAgain">回去修改</button>
+      <button class="btn ghost" id="newBowl">再調一碗</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="reg" hidden>
+  <div class="modal-card">
+    <div class="reg-head"><span class="tag butter" data-v>入店登記</span>
+      <div><h2>歡迎光臨</h2><p style="margin:0" class="note">請先登記，作品才會送到老師那裡。</p></div></div>
+    <label class="field"><span>班級</span><input id="rCls" inputmode="numeric" maxlength="6" placeholder="例如：901"></label>
+    <label class="field"><span>座號</span><input id="rSeat" inputmode="numeric" maxlength="3" placeholder="例如：5"></label>
+    <label class="field"><span>姓名</span><input id="rName" maxlength="12" placeholder="你的名字"></label>
+    <p class="err" id="rErr"></p>
+    <button class="btn wide" id="rOk">入座</button>
+    <a href="#scores" class="teacher-link">我是老師，先略過，直接看班級成績 →</a>
+  </div>
+</div>
+</template>
+
+<!-- ═════════ 教師頁 ═════════ -->
+<template id="tpl-teacher">
+<div class="wrap">
+  <header class="t-head">
+    <span class="tag butter" data-v>教師後台</span>
+    <div><h1>記憶深夜食堂・作品牆</h1><p><a href="#">← 回學生頁</a></p></div>
+  </header>
+  <div class="panel">
+    <div class="mode-note" id="modeNote"></div>
+    <div class="row" id="loginRow">
+      <input type="password" id="tpw" placeholder="老師密碼" style="max-width:220px">
+      <button class="btn small" id="tLogin">登入</button>
+      <button class="btn small ghost" id="tLogout" hidden>登出</button>
+      <button class="btn small toast" id="goScreen" hidden>📺 開啟大屏</button>
+      <span id="tState" class="note"></span>
+    </div>
+  </div>
+  <div class="row" style="margin:6px 0">
+    <span>班級</span><select id="tCls"></select>
+    <button class="btn small ghost" id="tRefresh">重新整理</button>
+    <span class="note" id="tLoad"></span>
+  </div>
+
+  <section class="panel">
+    <h2>🏅 字數榜</h2>
+    <div class="tbl-wrap"><table id="board"></table></div>
+    <p class="note">每位同學取「字數最多的一次作品」。</p>
+  </section>
+
+  <div id="tOnly" hidden>
+    <section class="panel">
+      <h2>🎨 全班情感調色盤</h2>
+      <div class="rc-palette" id="classPalette"></div>
+      <h3 style="font-size:17px;margin:16px 0 8px">今晚的菜單</h3>
+      <div class="food-wall" id="foodWall"></div>
+    </section>
+
+    <section class="panel">
+      <h2>📒 作品紀錄</h2>
+      <div class="row" style="margin-bottom:10px">
+        <input id="fSeat" placeholder="篩座號" style="width:110px">
+        <label><input type="checkbox" id="fFlag"> 只看需留意</label>
+        <label>用時少於 <input type="number" id="thSecs" value="180" min="0" style="width:90px"> 秒</label>
+        <label>字數少於 <input type="number" id="thChars" value="150" min="0" style="width:90px"></label>
+        <button class="btn small ghost" id="copyTsv">複製（貼到 Excel）</button>
+      </div>
+      <div class="tbl-wrap"><table id="logs"></table></div>
+      <p class="note">「需留意」只是提醒（用時過短、字數偏少、兩段內容重複、連續重複字），請老師點「查看」確認。</p>
+    </section>
+
+    <section class="panel">
+      <h2>🧰 教師區</h2>
+      <div class="row">
+        <button class="btn small ghost" id="exportCsv">匯出本班 CSV</button>
+        <button class="btn small ghost" id="clearCls" style="color:#B3392A;border-color:#B3392A">清除本班資料</button>
+      </div>
+      <h3 style="font-size:17px;margin:16px 0 6px">匯入作品碼</h3>
+      <textarea id="importText" placeholder="把學生給的作品碼貼在這裡（可一次貼多個，一行一個）" style="min-height:100px;font-size:14px"></textarea>
+      <div class="row" style="margin-top:8px"><button class="btn small" id="importBtn">匯入</button><span class="note" id="importMsg"></span></div>
+    </section>
+  </div>
+</div>
+<div class="modal" id="viewer" hidden><div class="modal-card wide"><button class="x" id="vClose" aria-label="關閉">✕</button><div id="vHost"></div></div></div>
+</template>
+
+<!-- ═════════ 大屏 ═════════ -->
+<template id="tpl-screen">
+<div class="scr">
+  <div class="scr-head">
+    <h1>記憶深夜食堂・今晚出餐中</h1>
+    <select id="sCls"></select>
+    <span class="scr-clock" id="sClock"></span>
+    <a href="#scores">離開大屏</a>
+  </div>
+  <div class="scr-grid">
+    <div class="scr-box"><h2>完成特調</h2><div class="scr-num" id="sDone">0</div><div class="scr-unit">位同學</div></div>
+    <div class="scr-box"><h2>全班情感調色盤</h2><div style="display:flex;gap:2vw;align-items:center"><div id="sDonut"></div><div class="scr-legend" id="sLegend"></div></div></div>
+    <div class="scr-box"><h2>筆耕前五名</h2><ol class="scr-rank" id="sRank"></ol></div>
+    <div class="scr-box scr-wall" id="sWall"></div>
+  </div>
+</div>
+</template>
+
+<script>
+(() => {
+"use strict";
+const CFG = window.MZ_CONFIG || {};
+const API = String(CFG.sheetApi || "").trim();
+const FLAVORS = [
+  {k:"sour",  icon:"🍋", name:"微酸", sub:"委屈／心酸", color:"#E3C64A"},
+  {k:"sweet", icon:"🍬", name:"溫甜", sub:"溫馨／快樂", color:"#EE9C92"},
+  {k:"bitter",icon:"☕", name:"苦澀", sub:"挫折／辛苦", color:"#6B4A33"},
+  {k:"spicy", icon:"🌶️", name:"嗆辣", sub:"衝突／生氣", color:"#C9432B"},
+  {k:"salty", icon:"🧂", name:"鹹香", sub:"平淡日常",   color:"#B3A383"}
+];
+const PEOPLE = ["爸爸","媽媽","阿公","阿嬤","自己","朋友","其他"];
+const MODE = {
+  A:{title:"⏳ 時間魔法發動",
+     text:"時間會在食物上留下痕跡。請寫下他/她『以前』吃這道菜的習慣是什麼？『現在』有改變嗎？你覺得這個改變代表了什麼？",
+     words:["歲月","講究","匆忙","細嚼慢嚥","捨不得","變老"]},
+  B:{title:"⚔️ 餐桌上的性格對比",
+     text:"同一道食物，每個人吃法都不同。請寫出這兩個人吃這道菜『最不同的地方』。他們的吃法，跟他們平常做事的個性有什麼關聯？",
+     words:["急躁","條理分明","豪邁","堅持","互補","不拘小節"]}
+};
+const MIN = {sense:30, core:50, summary:6};
+const COLORS = ["#1E1A16","#9C5A24","#E8A44A","#F3D29B","#C9432B","#7FA05A","#5B83A8","#FFFFFF"];
+
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const count = s => String(s || "").replace(/\s/g, "").length;
+const vt = s => `<span class="vstack">${Array.from(String(s)).map(c => `<i>${esc(c)}</i>`).join("")}</span>`;
+const applyV = root => $$("[data-v]", root).forEach(el => { el.innerHTML = vt(el.textContent.trim()); });
+const store = {
+  get(k, d){ try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch(e){ return d; } },
+  set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch(e){ return false; } },
+  del(k){ try { localStorage.removeItem(k); } catch(e){} }
+};
+const ss = {
+  get(k){ try { return sessionStorage.getItem(k) || ""; } catch(e){ return ""; } },
+  set(k, v){ try { v ? sessionStorage.setItem(k, v) : sessionStorage.removeItem(k); } catch(e){} }
+};
+const pad2 = n => String(n).padStart(2, "0");
+function dateStr(iso, withTime){
+  const d = new Date(iso); if (isNaN(d)) return "";
+  const s = `${d.getFullYear()}.${pad2(d.getMonth()+1)}.${pad2(d.getDate())}`;
+  return withTime ? `${s} ${pad2(d.getHours())}:${pad2(d.getMinutes())}` : s;
+}
+function secsStr(s){ s = Number(s)||0; return s >= 60 ? `${Math.floor(s/60)}分${s%60}秒` : `${s}秒`; }
+
+async function api(body){
+  const r = await fetch(API, {method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"}, body:JSON.stringify(body)});
+  const j = await r.json();
+  if (!j.ok) throw new Error(j.error || "後端錯誤");
+  return j;
+}
+
+/* ── 本機模式資料庫 ── */
+const LDB = {
+  all(){ return store.get("mzd_db", {}); },
+  save(rec){
+    const db = this.all(); const key = rec.cls + "|" + rec.seat;
+    const old = db[key] || {cls:rec.cls, seat:rec.seat, name:rec.name, attempts:[], count:0, best:0, image:""};
+    const seen = new Set(old.attempts.map(a => a.at));
+    const fresh = (rec.attempts||[]).filter(a => a && a.at && !seen.has(a.at));
+    let all = old.attempts.concat(fresh).sort((a,b) => String(a.at).localeCompare(String(b.at))).slice(-20);
+    const latest = all[all.length-1] || {};
+    Object.assign(old, {name:rec.name || old.name, attempts:all, count:old.count + fresh.length,
+      best:Math.max(old.best, ...all.map(a => a.chars||0)), last:latest.at||"", food:latest.food||"", flavors:latest.flavors||{}});
+    if (rec.image && fresh.length) old.image = rec.image;
+    db[key] = old;
+    if (!store.set("mzd_db", db)) { old.image = ""; store.set("mzd_db", db); }
+    return fresh.length;
+  },
+  list(){ return Object.values(this.all()); },
+  clear(cls){ const db = this.all(); Object.keys(db).forEach(k => { if (db[k].cls === cls) delete db[k]; }); store.set("mzd_db", db); }
+};
+
+/* ── 共用：比例、圓餅、食譜卡 ── */
+function norm(fl){
+  fl = fl || {};
+  const tot = FLAVORS.reduce((s,f) => s + (Number(fl[f.k])||0), 0);
+  const out = {};
+  if (!tot) { FLAVORS.forEach(f => out[f.k] = 0); return out; }
+  let acc = 0;
+  FLAVORS.forEach((f,i) => { out[f.k] = Math.round((Number(fl[f.k])||0) / tot * 100); acc += out[f.k]; });
+  if (acc !== 100) { const top = FLAVORS.slice().sort((a,b) => out[b.k]-out[a.k])[0]; out[top.k] += 100 - acc; }
+  return out;
+}
+function donut(n, size, dark){
+  let acc = 0;
+  const segs = FLAVORS.map(f => {
+    const p = n[f.k] || 0;
+    const s = p > 0 ? `<circle r="15.9155" cx="21" cy="21" fill="none" stroke="${f.color}" stroke-width="6.5" stroke-dasharray="${p} ${100-p}" stroke-dashoffset="${25-acc}"/>` : "";
+    acc += p; return s;
+  }).join("");
+  const top = FLAVORS.slice().sort((a,b) => (n[b.k]||0)-(n[a.k]||0))[0];
+  const has = FLAVORS.some(f => n[f.k] > 0);
+  return `<svg viewBox="0 0 42 42" width="${size}" height="${size}" role="img" aria-label="情感比例圖">
+    <circle r="15.9155" cx="21" cy="21" fill="none" stroke="${dark?"#3A332C":"#EDE5D6"}" stroke-width="6.5"/>${segs}
+    ${has ? `<text x="21" y="20.5" text-anchor="middle" font-size="7.5">${top.icon}</text>
+    <text x="21" y="27.6" text-anchor="middle" font-size="4" font-weight="700" fill="${dark?"#F6F1E7":"#1E1A16"}" font-family="Noto Sans TC,sans-serif">${top.name} ${n[top.k]}%</text>` : ""}
+  </svg>`;
+}
+function bars(n){
+  return `<ul>${FLAVORS.map(f => `<li class="bar-li"><span>${f.icon} ${f.name}</span><span class="bar"><i style="width:${n[f.k]}%;background:${f.color}"></i></span><b>${n[f.k]}%</b></li>`).join("")}</ul>`;
+}
+function nl(s){ return esc(s); }
+function renderCard(a, pic, who){
+  const n = norm(a.flavors);
+  const len = Array.from(a.food || "").length;
+  const fs = len <= 4 ? 54 : len <= 6 ? 44 : len <= 9 ? 34 : 28;
+  const m = MODE[a.mode] || MODE.A;
+  return `<article class="recipe">
+    <div class="rc-top">
+      <div class="rc-brand">${vt("深夜食堂")}<small>since<br>2026</small></div>
+      <div class="rc-title">
+        <h3 style="font-size:${fs}px">${vt(a.food || "")}</h3>
+        <span class="tag butter">${vt("本日特調")}</span>
+        <span class="rc-meta">${vt(`${who.cls}班${who.seat}號`)}</span>
+        <span class="rc-meta">${vt(who.name || "")}</span>
+      </div>
+    </div>
+    ${pic ? `<div class="toast-frame"><img src="${pic}" alt="${esc(a.food)}"></div>` : ""}
+    <div class="rc-people">${(a.people||[]).map(p => `<span class="hz-tag">${esc(p)}</span>`).join("")}</div>
+    <section class="rc-sec"><span class="tag">${vt("記憶濾鏡")}</span><div><h4>出場的畫面與氣味</h4><p>${nl(a.sense)}</p></div></section>
+    <section class="rc-sec"><span class="tag matcha">${vt("人物刻痕")}</span><div><h4>${esc(m.title)}</h4><p>${nl(a.core)}</p></div></section>
+    <section class="rc-palette"><span class="tag gray">${vt("情感比例")}</span>${donut(n, 132)}${bars(n)}</section>
+    <blockquote class="rc-sum">${esc(a.summary)}</blockquote>
+    <footer class="rc-foot"><span class="latin">Memory<br>Midnight DINER</span><small>${dateStr(a.at)}・全文 ${a.chars||0} 字</small></footer>
+  </article>`;
+}
+function flagsOf(a, th){
+  const f = [];
+  if ((a.secs||0) < th.secs) f.push("用時過短");
+  if ((a.chars||0) < th.chars) f.push("字數偏少");
+  if (count(a.sense) > 0 && String(a.sense).replace(/\s/g,"") === String(a.core).replace(/\s/g,"")) f.push("兩段重複");
+  if (/(.)\1{7,}/.test(String(a.sense) + String(a.core))) f.push("連續重複字");
+  return f;
+}
+function loadImage(src){ return new Promise((ok, no) => { const im = new Image(); im.onload = () => ok(im); im.onerror = no; im.src = src; }); }
+async function shrink(src, max, q){
+  const im = await loadImage(src);
+  const k = Math.min(1, max / Math.max(im.width, im.height));
+  const c = document.createElement("canvas");
+  c.width = Math.round(im.width * k); c.height = Math.round(im.height * k);
+  const x = c.getContext("2d"); x.fillStyle = "#FFFBF2"; x.fillRect(0,0,c.width,c.height);
+  x.drawImage(im, 0, 0, c.width, c.height);
+  return c.toDataURL("image/jpeg", q);
+}
+
+/* ═════════ 路由 ═════════ */
+let timers = [];
+function mount(id){
+  timers.forEach(t => clearInterval(t)); timers = [];
+  const app = $("#app"); app.innerHTML = "";
+  app.appendChild($(id).content.cloneNode(true));
+  applyV(app);
+  document.body.className = "";
+  window.scrollTo(0, 0);
+}
+function route(){
+  const h = location.hash;
+  if (h === "#scores") Teacher();
+  else if (h === "#screen") Screen();
+  else Student();
+}
+window.addEventListener("hashchange", route);
+
+/* ═════════ 學生 ═════════ */
+function Student(){
+  mount("#tpl-student");
+  let who = store.get("mzd_student", null);
+  let D = null;
+  const draftKey = () => `mzd_draft_${who.cls}_${who.seat}`;
+  const newDraft = () => ({step:1, maxStep:1, food:"", picMode:"upload", upPic:"", drawPic:"", sense:"",
+    people:[], other:"", core:"", flavors:{sour:20,sweet:20,bitter:20,spicy:20,salty:20}, summary:"", active:0, done:false, last:null});
+  const save = () => store.set(draftKey(), D);
+  const getPic = () => D.picMode === "draw" ? D.drawPic : D.upPic;
+
+  /* 登記 */
+  const reg = $("#reg");
+  function openReg(){
+    reg.hidden = false;
+    if (who) { $("#rCls").value = who.cls; $("#rSeat").value = who.seat; $("#rName").value = who.name; }
+    setTimeout(() => $("#rCls").focus(), 50);
+  }
+  $("#rOk").onclick = () => {
+    const cls = $("#rCls").value.trim(), seatRaw = $("#rSeat").value.trim(), name = $("#rName").value.trim();
+    const seat = String(parseInt(seatRaw, 10));
+    if (!cls || !seatRaw || seat === "NaN" || !name) { $("#rErr").textContent = "班級、座號、姓名都要填喔！"; return; }
+    who = {cls, seat, name}; store.set("mzd_student", who);
+    reg.hidden = true; start();
+  };
+  reg.addEventListener("keydown", e => { if (e.key === "Enter") $("#rOk").click(); });
+  $("#changeWho").onclick = openReg;
+
+  /* 步驟一：畫布 */
+  const cv = $("#pad"), ctx = cv.getContext("2d");
+  let pen = {c:"#1E1A16", s:6, erase:false}, drawing = false, last = null, cvW = 0, cvH = 0;
+  $("#tools").innerHTML =
+    COLORS.map((c,i) => `<button type="button" class="sw${i===0?" on":""}" style="--c:${c}" data-c="${c}" aria-label="顏色"></button>`).join("") +
+    [["細",3],["中",6],["粗",14]].map(([t,s]) => `<button type="button" class="sz${s===6?" on":""}" data-s="${s}">${t}</button>`).join("") +
+    `<button type="button" class="sz" id="eraser">橡皮擦</button><button type="button" class="sz" id="clearPad">全部清除</button>`;
+  $("#tools").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    if (b.dataset.c) { pen.c = b.dataset.c; pen.erase = false; $$(".sw").forEach(x => x.classList.toggle("on", x === b)); $("#eraser").classList.remove("on"); }
+    if (b.dataset.s) { pen.s = +b.dataset.s; $$(".sz[data-s]").forEach(x => x.classList.toggle("on", x === b)); }
+    if (b.id === "eraser") { pen.erase = !pen.erase; b.classList.toggle("on", pen.erase); }
+    if (b.id === "clearPad" && confirm("確定要清除整張畫嗎？")) { paper(); D.drawPic = ""; save(); }
+  });
+  function paper(){ ctx.fillStyle = "#FFFBF2"; ctx.fillRect(0, 0, cvW, cvH); }
+  async function fitPad(){
+    const w = cv.parentElement.clientWidth; if (!w) return;
+    const h = Math.round(Math.min(w * 0.7, 460)); const dpr = window.devicePixelRatio || 1;
+    if (w === cvW && h === cvH) return;
+    cvW = w; cvH = h;
+    cv.width = w * dpr; cv.height = h * dpr; cv.style.width = w + "px"; cv.style.height = h + "px";
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); paper();
+    if (D.drawPic) { try { const im = await loadImage(D.drawPic); ctx.drawImage(im, 0, 0, w, h); } catch(e){} }
+  }
+  const pos = e => { const r = cv.getBoundingClientRect(); return {x:e.clientX - r.left, y:e.clientY - r.top}; };
+  function stroke(a, b){
+    ctx.strokeStyle = pen.erase ? "#FFFBF2" : pen.c; ctx.lineWidth = pen.erase ? pen.s * 3 : pen.s;
+    ctx.lineCap = "round"; ctx.lineJoin = "round";
+    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x + .01, b.y); ctx.stroke();
+  }
+  cv.addEventListener("pointerdown", e => { e.preventDefault(); drawing = true; cv.setPointerCapture(e.pointerId); last = pos(e); stroke(last, last); });
+  cv.addEventListener("pointermove", e => { if (!drawing) return; const p = pos(e); stroke(last, p); last = p; });
+  const endDraw = () => { if (!drawing) return; drawing = false; D.drawPic = cv.toDataURL("image/jpeg", .82); save(); clearErr(1); };
+  cv.addEventListener("pointerup", endDraw); cv.addEventListener("pointercancel", endDraw);
+  window.addEventListener("resize", () => { if (!$("#pm-draw") || $("#pm-draw").hidden) return; fitPad(); });
+
+  function setPM(m){
+    D.picMode = m; save();
+    $$("[data-pm]").forEach(b => b.classList.toggle("on", b.dataset.pm === m));
+    $("#pm-upload").hidden = m !== "upload"; $("#pm-draw").hidden = m !== "draw";
+    if (m === "draw") requestAnimationFrame(fitPad);
+  }
+  $$("[data-pm]").forEach(b => b.onclick = () => setPM(b.dataset.pm));
+  function showUp(){
+    const has = !!D.upPic; $("#upPreview").hidden = !has; $("#upHint").hidden = has; $("#upAgain").hidden = !has;
+    if (has) $("#upPreview").src = D.upPic;
+  }
+  $("#file").onchange = async e => {
+    const f = e.target.files[0]; if (!f) return;
+    const url = URL.createObjectURL(f);
+    try { D.upPic = await shrink(url, 900, .82); save(); showUp(); clearErr(1); }
+    catch(err){ showErr(1, "這張圖片讀不出來，換一張試試看。"); }
+    URL.revokeObjectURL(url); e.target.value = "";
+  };
+
+  /* 步驟二 */
+  $("#hintBtn").onclick = () => { const h = $("#hint"); h.hidden = !h.hidden; $("#hintBtn").setAttribute("aria-expanded", String(!h.hidden)); };
+
+  /* 步驟三 */
+  $("#people").innerHTML = PEOPLE.map(p => `<label class="chip"><input type="checkbox" value="${p}"><span>${p}</span></label>`).join("");
+  $("#people").addEventListener("change", () => {
+    D.people = $$("#people input:checked").map(i => i.value); save(); updateMission(); clearErr(3);
+  });
+  const peopleList = () => D.people.map(p => p === "其他" ? (D.other.trim() || "其他") : p);
+  const modeOf = () => D.people.length >= 2 ? "B" : "A";
+  function updateMission(){
+    $("#otherName").hidden = !D.people.includes("其他");
+    const has = D.people.length > 0;
+    $("#mission").hidden = !has; $("#noPeople").hidden = has;
+    if (!has) return;
+    const m = MODE[modeOf()], list = peopleList();
+    if ($("#mTitle").dataset.mode !== modeOf()) {
+      $("#mTitle").dataset.mode = modeOf();
+      $("#mTitle").textContent = m.title; $("#mText").textContent = m.text;
+      $("#words").innerHTML = m.words.map(w => `<button type="button" class="word" data-w="${w}">［${w}］</button>`).join("");
+    }
+    $("#mWho").textContent = modeOf() === "A"
+      ? `你選的人：${list[0]}`
+      : `你選的人：${list.join("、")}` + (list.length > 2 ? "（勾了超過兩位？挑出對比最強烈的兩位來寫。）" : "");
+  }
+  $("#words").addEventListener("click", e => {
+    const b = e.target.closest("[data-w]"); if (!b) return;
+    const ta = $("#core"), w = b.dataset.w;
+    const s = ta.selectionStart ?? ta.value.length, en = ta.selectionEnd ?? ta.value.length;
+    ta.value = ta.value.slice(0, s) + w + ta.value.slice(en);
+    ta.focus(); ta.setSelectionRange(s + w.length, s + w.length);
+    ta.dispatchEvent(new Event("input"));
+  });
+
+  /* 步驟四 */
+  $("#sliders").innerHTML = FLAVORS.map(f => `
+    <div class="sl"><div class="sl-top"><label for="sl-${f.k}">${f.icon} ${f.name}<small>${f.sub}</small></label><b id="pv-${f.k}">0%</b></div>
+    <input type="range" id="sl-${f.k}" data-k="${f.k}" min="0" max="100" step="5" style="--c:${f.color}"></div>`).join("");
+  function updateMix(){
+    const n = norm(D.flavors);
+    FLAVORS.forEach(f => {
+      const el = $("#sl-" + f.k); el.value = D.flavors[f.k] || 0; el.style.setProperty("--p", el.value + "%");
+      $("#pv-" + f.k).textContent = n[f.k] + "%";
+    });
+    $("#liveDonut").innerHTML = donut(n, 180);
+  }
+  $("#sliders").addEventListener("input", e => {
+    const k = e.target.dataset.k; if (!k) return;
+    D.flavors[k] = +e.target.value; save(); updateMix(); clearErr(4);
+  });
+
+  /* 文字輸入綁定 */
+  const bind = (id, key, after) => { const el = $("#" + id); el.value = D[key] || ""; el.addEventListener("input", () => { D[key] = el.value; save(); after && after(); }); };
+  function counters(){
+    [["sense","c-sense",MIN.sense],["core","c-core",MIN.core]].forEach(([k,id,min]) => {
+      const n = count(D[k]); const el = $("#" + id);
+      el.textContent = n >= min ? `${n} 字 ✓` : `${n} 字・至少 ${min} 字`; el.classList.toggle("ok", n >= min);
+    });
+  }
+
+  /* 驗證與換頁 */
+  function validate(n){
+    if (n === 1) { if (!D.food.trim()) return "先寫下這道食物的名稱。"; if (!getPic()) return D.picMode === "draw" ? "在畫布上畫下它的樣子吧！" : "上傳一張照片，或切換到「畫下它」。"; }
+    if (n === 2 && count(D.sense) < MIN.sense) return `再多寫一點畫面與氣味（目前 ${count(D.sense)} 字，至少 ${MIN.sense} 字）。`;
+    if (n === 3) { if (!D.people.length) return "先勾選和你一起吃這道菜的人。"; if (count(D.core) < MIN.core) return `核心寫作區至少 ${MIN.core} 字（目前 ${count(D.core)} 字）。`; }
+    if (n === 4) { if (!FLAVORS.some(f => D.flavors[f.k] > 0)) return "至少調一種滋味進去。"; if (count(D.summary) < MIN.summary) return "用一句話總結這碗特調的滋味。"; }
+    return "";
+  }
+  function showErr(n, msg){ const el = $("#err" + n); el.textContent = msg; const st = $(`.stage[data-step="${n}"]`); st.classList.remove("shake"); void st.offsetWidth; st.classList.add("shake"); }
+  function clearErr(n){ const el = $("#err" + n); if (el) el.textContent = ""; }
+  function showStep(n){
+    D.step = n; save();
+    $("#editor").hidden = false; $("#final").hidden = true;
+    $$(".stage").forEach(s => s.hidden = +s.dataset.step !== n);
+    $$("#stepper button").forEach(b => {
+      const i = +b.dataset.go; b.disabled = i > D.maxStep;
+      b.classList.toggle("on", i === n); b.classList.toggle("done", i !== n && i < D.maxStep);
+    });
+    if (n === 1 && D.picMode === "draw") requestAnimationFrame(fitPad);
+    const top = $("#stepper").getBoundingClientRect().top + window.scrollY - 4;
+    if (window.scrollY > top) window.scrollTo({top, behavior:"smooth"});
+  }
+  $$("[data-next]").forEach(b => b.onclick = () => {
+    const n = +b.dataset.next, err = validate(n);
+    if (err) return showErr(n, err);
+    clearErr(n); D.maxStep = Math.max(D.maxStep, n + 1); showStep(n + 1);
+  });
+  $$("[data-prev]").forEach(b => b.onclick = () => showStep(+b.dataset.prev - 1));
+  $("#stepper").addEventListener("click", e => {
+    const b = e.target.closest("[data-go]"); if (!b || b.disabled) return;
+    if (D.done) { D.done = false; save(); }
+    showStep(+b.dataset.go);
+  });
+
+  /* 完成特調 */
+  $("#finishBtn").onclick = async () => {
+    for (let i = 1; i <= 4; i++) { const err = validate(i); if (err) { showStep(i); return showErr(i, err); } }
+    const a = {at:new Date().toISOString(), food:D.food.trim(), people:peopleList(), mode:modeOf(),
+      sense:D.sense.trim(), core:D.core.trim(), flavors:norm(D.flavors), summary:D.summary.trim(), secs:D.active};
+    a.chars = count(a.sense) + count(a.core) + count(a.summary);
+    D.done = true; D.last = a; save();
+    showFinal();
+    submit(a);
+  };
+  function showFinal(){
+    $("#editor").hidden = true; $("#final").hidden = false;
+    $$("#stepper button").forEach(b => { b.classList.remove("on"); b.classList.add("done"); b.disabled = false; });
+    $("#cardHost").innerHTML = renderCard(D.last, getPic(), who);
+    window.scrollTo({top:$("#final").getBoundingClientRect().top + window.scrollY - 70, behavior:"smooth"});
+  }
+  async function submit(a){
+    const st = $("#sendState"); $("#codeBox").hidden = true;
+    let thumb = "";
+    try { thumb = await shrink(getPic(), 320, .62); if (thumb.length > 40000) thumb = await shrink(getPic(), 240, .5); } catch(e){}
+    const record = {cls:who.cls, seat:who.seat, name:who.name, image:thumb, attempts:[a]};
+    if (!API) { LDB.save(record); st.textContent = "🍜 已存在這台裝置（本機模式）。可以存成圖片交給老師。"; return; }
+    st.textContent = "⏳ 正在把食譜卡送到老師那裡…";
+    try { await api({action:"save", record}); st.textContent = "✅ 已送到老師那裡！"; }
+    catch(e){
+      st.textContent = "⚠️ 沒有送出成功，請把作品碼交給老師。";
+      const lite = {...record, image:""};
+      $("#codeText").value = "MZD1:" + btoa(unescape(encodeURIComponent(JSON.stringify(lite))));
+      $("#codeBox").hidden = false;
+    }
+  }
+  $("#copyCode").onclick = async () => {
+    const t = $("#codeText"); try { await navigator.clipboard.writeText(t.value); $("#copyCode").textContent = "已複製 ✓"; } catch(e){ t.select(); document.execCommand("copy"); }
+  };
+  $("#editAgain").onclick = () => { D.done = false; save(); showStep(4); };
+  $("#newBowl").onclick = () => {
+    if (!confirm("要開始調一碗新的嗎？目前的內容會清空（已送出的作品不會消失）。")) return;
+    D = newDraft(); save(); fill(); showStep(1);
+  };
+  $("#dlCard").onclick = async () => {
+    const card = $("#cardHost .recipe");
+    if (!window.html2canvas) { alert("圖片工具還沒載入，請直接截圖這張卡片。"); return; }
+    const b = $("#dlCard"); b.textContent = "製作中…"; b.disabled = true;
+    try {
+      const c = await html2canvas(card, {scale:2, backgroundColor:"#F6F1E7", useCORS:true});
+      const link = document.createElement("a");
+      link.download = `情感食譜卡_${who.cls}_${who.seat}_${D.last.food}.png`;
+      link.href = c.toDataURL("image/png"); link.click();
+    } catch(e){ alert("存圖失敗，請直接截圖這張卡片。"); }
+    b.textContent = "⬇ 存成圖片"; b.disabled = false;
+  };
+
+  /* 使用時間：只算畫面開著的秒數 */
+  timers.push(setInterval(() => {
+    if (!D || D.done || document.hidden || !reg.hidden) return;
+    D.active++; if (D.active % 5 === 0) save();
+  }, 1000));
+
+  function fill(){
+    $("#food").value = D.food; $("#sense").value = D.sense; $("#core").value = D.core;
+    $("#summary").value = D.summary; $("#otherName").value = D.other;
+    $$("#people input").forEach(i => i.checked = D.people.includes(i.value));
+    $("#mTitle").dataset.mode = "";
+    cvW = 0; cvH = 0;
+    setPM(D.picMode); showUp(); updateMission(); updateMix(); counters();
+  }
+  let bound = false;
+  function start(){
+    $("#whoText").textContent = `${who.cls} 班 ${who.seat} 號 ${who.name}`;
+    D = Object.assign(newDraft(), store.get(draftKey(), {}));
+    if (!bound) {
+      bound = true;
+      bind("food", "food", () => clearErr(1));
+      bind("sense", "sense", () => { counters(); clearErr(2); });
+      bind("core", "core", () => { counters(); clearErr(3); });
+      bind("summary", "summary", () => clearErr(4));
+      bind("otherName", "other", updateMission);
+    }
+    fill();
+    if (D.done && D.last) showFinal(); else showStep(Math.min(D.step, D.maxStep));
+  }
+  if (!who) openReg(); else start();
+}
+
+/* ═════════ 教師 ═════════ */
+function Teacher(){
+  mount("#tpl-teacher");
+  let pw = ss.get("mzd_tpw"), teacher = false, records = [], cls = store.get("mzd_tcls", "");
+  const th = () => ({secs:+$("#thSecs").value || 0, chars:+$("#thChars").value || 0});
+  $("#modeNote").innerHTML = API
+    ? "已連接 Google 試算表。學生只看得到字數榜；作品內容要老師登入才會顯示。"
+    : "⚠️ 本機模式：尚未在 config.js 設定試算表網址，只會顯示「這台裝置」上的作品。按「登入」即可預覽教師功能。";
+
+  async function load(){
+    $("#tLoad").textContent = "讀取中…";
+    try {
+      if (API) { const r = await api({action:"list", password:pw || undefined}); records = r.records || []; teacher = !!r.teacher; }
+      else { records = LDB.list(); teacher = !!ss.get("mzd_local_t"); }
+      if (API && pw && !teacher) { ss.set("mzd_tpw", ""); pw = ""; $("#tState").textContent = "密碼錯誤。"; }
+      $("#tLoad").textContent = "更新於 " + dateStr(new Date().toISOString(), true).slice(11);
+    } catch(e){ $("#tLoad").textContent = "讀取失敗：" + e.message; }
+    render();
+  }
+  function render(){
+    $("#tpw").hidden = teacher; $("#tLogin").hidden = teacher; $("#tLogout").hidden = !teacher; $("#goScreen").hidden = !teacher;
+    if (teacher) $("#tState").textContent = "老師已登入";
+    $("#tOnly").hidden = !teacher;
+    const classes = [...new Set(records.map(r => String(r.cls)))].sort();
+    if (!classes.includes(cls)) cls = classes[0] || "";
+    $("#tCls").innerHTML = classes.length ? classes.map(c => `<option${c===cls?" selected":""}>${esc(c)}</option>`).join("") : "<option value=''>（尚無資料）</option>";
+    const rs = records.filter(r => String(r.cls) === cls).sort((a,b) => b.best - a.best || a.seat - b.seat);
+    const T = th();
+    $("#board").innerHTML = `<tr><th>名次</th><th>座號</th><th>姓名</th><th>料理</th><th>最多字數</th><th>作品數</th>${teacher?"<th>最後完成</th><th>需留意</th>":""}</tr>` +
+      (rs.length ? rs.map((r,i) => `<tr><td>${i+1}</td><td>${esc(r.seat)}</td><td>${esc(r.name)}</td><td>${esc(r.food)}</td><td>${r.best}</td><td>${r.count}</td>${teacher ?
+        `<td>${dateStr(r.last, true)}</td><td>${(r.attempts||[]).filter(a => flagsOf(a, T).length).length || ""}</td>` : ""}</tr>`).join("")
+       : `<tr><td colspan="8" class="note">還沒有同學完成。</td></tr>`);
+    if (!teacher) return;
+    /* 調色盤 */
+    const sum = {}; FLAVORS.forEach(f => sum[f.k] = 0);
+    rs.forEach(r => { const n = norm(r.flavors); FLAVORS.forEach(f => sum[f.k] += n[f.k]); });
+    const n = norm(sum);
+    $("#classPalette").innerHTML = rs.length ? donut(n, 150) + bars(n) : "<p class='note'>尚無資料</p>";
+    $("#foodWall").innerHTML = rs.map(r => `<span class="hz-tag">${esc(r.food)}<small class="note"> ・${esc(r.seat)}號</small></span>`).join("");
+    /* 紀錄表 */
+    const fs = $("#fSeat").value.trim(), only = $("#fFlag").checked;
+    let rows = [];
+    rs.forEach(r => (r.attempts||[]).forEach(a => rows.push({r, a, f:flagsOf(a, T)})));
+    rows.sort((x,y) => String(y.a.at).localeCompare(String(x.a.at)));
+    if (fs) rows = rows.filter(x => String(x.r.seat) === String(parseInt(fs,10)));
+    if (only) rows = rows.filter(x => x.f.length);
+    logRows = rows;
+    $("#logs").innerHTML = `<tr><th>完成時間</th><th>座號</th><th>姓名</th><th>料理</th><th>共餐者</th><th>字數</th><th>用時</th><th>提醒</th><th></th></tr>` +
+      (rows.length ? rows.map((x,i) => `<tr class="${x.f.length?"flag":""}"><td>${dateStr(x.a.at,true)}</td><td>${esc(x.r.seat)}</td><td>${esc(x.r.name)}</td><td>${esc(x.a.food)}</td>
+        <td>${esc((x.a.people||[]).join("、"))}</td><td>${x.a.chars||0}</td><td>${secsStr(x.a.secs)}</td><td>${x.f.map(t => `<span class="pill">${t}</span>`).join("")}</td>
+        <td><button class="btn small ghost" data-view="${i}">查看</button></td></tr>`).join("") : `<tr><td colspan="9" class="note">沒有符合的紀錄。</td></tr>`);
+  }
+  let logRows = [];
+  $("#logs").addEventListener("click", e => {
+    const b = e.target.closest("[data-view]"); if (!b) return;
+    const x = logRows[+b.dataset.view];
+    const latest = (x.r.attempts||[]).slice(-1)[0];
+    $("#vHost").innerHTML = renderCard(x.a, latest && latest.at === x.a.at ? x.r.image : "", x.r);
+    $("#viewer").hidden = false;
+  });
+  $("#vClose").onclick = () => $("#viewer").hidden = true;
+  $("#viewer").onclick = e => { if (e.target.id === "viewer") $("#viewer").hidden = true; };
+
+  $("#tLogin").onclick = async () => {
+    if (!API) { ss.set("mzd_local_t", "1"); return load(); }
+    const p = $("#tpw").value; if (!p) return;
+    $("#tState").textContent = "驗證中…";
+    try {
+      const r = await api({action:"check", password:p});
+      if (r.teacher) { pw = p; ss.set("mzd_tpw", p); $("#tState").textContent = ""; load(); }
+      else $("#tState").textContent = "密碼錯誤（若 Code.gs 第 8 行仍是 change-me，請先修改並重新部署）。";
+    } catch(e){ $("#tState").textContent = "無法連線：" + e.message; }
+  };
+  $("#tpw").addEventListener("keydown", e => { if (e.key === "Enter") $("#tLogin").click(); });
+  $("#tLogout").onclick = () => { pw = ""; ss.set("mzd_tpw", ""); ss.set("mzd_local_t", ""); teacher = false; $("#tState").textContent = ""; load(); };
+  $("#goScreen").onclick = () => { location.hash = "#screen"; };
+  $("#tCls").onchange = e => { cls = e.target.value; store.set("mzd_tcls", cls); render(); };
+  $("#tRefresh").onclick = load;
+  ["fSeat","fFlag","thSecs","thChars"].forEach(id => $("#" + id).addEventListener("input", render));
+  $("#fFlag").addEventListener("change", render);
+
+  $("#copyTsv").onclick = async () => {
+    const head = ["完成時間","班級","座號","姓名","料理","共餐者","字數","用時(秒)","提醒","記憶濾鏡","人物刻痕","一句話總結"];
+    const clean = s => String(s ?? "").replace(/[\t\r\n]+/g, " ");
+    const lines = [head.join("\t")].concat(logRows.map(x => [dateStr(x.a.at,true), x.r.cls, x.r.seat, x.r.name, x.a.food, (x.a.people||[]).join("、"),
+      x.a.chars, x.a.secs, x.f.join("、"), x.a.sense, x.a.core, x.a.summary].map(clean).join("\t")));
+    try { await navigator.clipboard.writeText(lines.join("\n")); $("#copyTsv").textContent = "已複製 ✓"; }
+    catch(e){ alert("瀏覽器不允許複製，請改用「匯出本班 CSV」。"); }
+    setTimeout(() => $("#copyTsv").textContent = "複製（貼到 Excel）", 1800);
+  };
+  $("#exportCsv").onclick = () => {
+    const q = s => `"${String(s ?? "").replace(/"/g, '""')}"`;
+    const head = ["完成時間","班級","座號","姓名","料理","共餐者","寫作任務","記憶濾鏡","人物刻痕",...FLAVORS.map(f => f.name + "%"),"一句話總結","字數","用時(秒)"];
+    const rows = [];
+    records.filter(r => String(r.cls) === cls).forEach(r => (r.attempts||[]).forEach(a => rows.push([dateStr(a.at,true), r.cls, r.seat, r.name, a.food, (a.people||[]).join("、"),
+      (MODE[a.mode]||MODE.A).title, a.sense, a.core, ...FLAVORS.map(f => (a.flavors||{})[f.k]||0), a.summary, a.chars, a.secs])));
+    const csv = "﻿" + [head, ...rows].map(r => r.map(q).join(",")).join("\r\n");
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(new Blob([csv], {type:"text/csv"})); link.download = `記憶深夜食堂_${cls}.csv`; link.click();
+  };
+  $("#clearCls").onclick = async () => {
+    if (!cls) return;
+    const ans = prompt(`確定要清除「${cls}」班的所有作品嗎？這個動作無法復原。\n請輸入班級「${cls}」確認：`);
+    if (ans !== cls) return;
+    try {
+      if (API) await api({action:"clearClass", cls, password:pw}); else LDB.clear(cls);
+      load();
+    } catch(e){ alert("清除失敗：" + e.message); }
+  };
+  $("#importBtn").onclick = async () => {
+    const codes = $("#importText").value.split(/\s+/).filter(s => s.startsWith("MZD1:"));
+    if (!codes.length) { $("#importMsg").textContent = "沒有找到作品碼（開頭是 MZD1:）"; return; }
+    let ok = 0, bad = 0;
+    for (const c of codes) {
+      try {
+        const rec = JSON.parse(decodeURIComponent(escape(atob(c.slice(5)))));
+        if (API) await api({action:"save", record:rec}); else LDB.save(rec);
+        ok++;
+      } catch(e){ bad++; }
+    }
+    $("#importMsg").textContent = `匯入成功 ${ok} 筆` + (bad ? `，失敗 ${bad} 筆` : "");
+    $("#importText").value = ""; load();
+  };
+  load();
+}
+
+/* ═════════ 大屏 ═════════ */
+function Screen(){
+  mount("#tpl-screen");
+  document.body.className = "screen";
+  let records = [], cls = store.get("mzd_tcls", "");
+  const tick = () => { const d = new Date(); $("#sClock").textContent = `${pad2(d.getHours())}:${pad2(d.getMinutes())}`; };
+  async function load(){
+    try {
+      if (API) records = (await api({action:"list"})).records || [];
+      else records = LDB.list();
+    } catch(e){}
+    render();
+  }
+  function render(){
+    const classes = [...new Set(records.map(r => String(r.cls)))].sort();
+    if (!classes.includes(cls)) cls = classes[0] || "";
+    $("#sCls").innerHTML = classes.map(c => `<option${c===cls?" selected":""}>${esc(c)}</option>`).join("") || "<option>—</option>";
+    const rs = records.filter(r => String(r.cls) === cls);
+    $("#sDone").textContent = rs.length;
+    const sum = {}; FLAVORS.forEach(f => sum[f.k] = 0);
+    rs.forEach(r => { const n = norm(r.flavors); FLAVORS.forEach(f => sum[f.k] += n[f.k]); });
+    const n = norm(sum);
+    const sz = Math.round(window.innerWidth * .14);
+    $("#sDonut").innerHTML = donut(n, sz, true);
+    $("#sLegend").innerHTML = FLAVORS.map(f => `<div>${f.icon} ${f.name} <b style="font-family:var(--latin);font-weight:400">${n[f.k]}%</b></div>`).join("");
+    $("#sRank").innerHTML = rs.slice().sort((a,b) => b.best - a.best).slice(0,5)
+      .map((r,i) => `<li><b>${i+1}</b>${esc(r.name)}　<span style="opacity:.7">${r.best} 字</span></li>`).join("") || "<li style='opacity:.6'>等待第一碗出餐…</li>";
+    $("#sWall").innerHTML = rs.map(r => `<span>${esc(r.food)}</span>`).join("");
+  }
+  $("#sCls").onchange = e => { cls = e.target.value; store.set("mzd_tcls", cls); render(); };
+  tick(); load();
+  timers.push(setInterval(load, 15000), setInterval(tick, 10000));
+}
+
+route();
+})();
+</script>
+</body>
+</html>

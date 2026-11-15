@@ -183,6 +183,9 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 .rc-foot .latin{font-family:var(--latin);font-size:26px;line-height:1}
 .rc-foot small{color:var(--soft);font-size:13px}
 
+.pv-bar{background:#FFF6E2;border:1.5px dashed var(--toast);border-radius:16px;padding:12px 16px;margin:10px 0}
+.pv-bar p{margin:0 0 8px;font-size:16px}
+.all-open .stage{margin-top:34px}
 /* ── Modal ── */
 .modal{position:fixed;inset:0;background:rgba(30,26,22,.55);z-index:100;display:flex;align-items:flex-start;justify-content:center;padding:24px 14px;overflow:auto}
 .modal-card{background:var(--card);border-radius:24px;max-width:460px;width:100%;padding:26px 22px 20px;position:relative;margin:auto}
@@ -265,6 +268,16 @@ body.screen{background:#16130F;color:#F6F1E7}
   </header>
 
   <div class="who-bar no-print"><span id="whoText"></span><button class="link" id="changeWho">更換</button></div>
+
+  <div class="pv-bar no-print" id="pvBar" hidden>
+    <p><b>👀 老師預覽模式</b>：可以自由切換、不必寫完，內容不會記錄、也不會送出。</p>
+    <div class="row">
+      <button class="btn small" id="pvAll">展開全部工序</button>
+      <button class="btn small ghost" id="pvSample">填入範例內容</button>
+      <button class="btn small ghost" id="pvClear">清空</button>
+      <a class="btn small ghost" href="#scores" style="text-decoration:none">← 回教師後台</a>
+    </div>
+  </div>
 
   <nav class="stepper no-print" id="stepper">
     <button data-go="1"><b>01</b><span>選材上菜</span></button>
@@ -402,6 +415,7 @@ body.screen{background:#16130F;color:#F6F1E7}
       <button class="btn small" id="tLogin">登入</button>
       <button class="btn small ghost" id="tLogout" hidden>登出</button>
       <button class="btn small toast" id="goScreen" hidden>📺 開啟大屏</button>
+      <button class="btn small" id="goPreview" hidden>👀 預覽學生內容</button>
       <span id="tState" class="note"></span>
     </div>
   </div>
@@ -633,19 +647,21 @@ function route(){
   const h = location.hash;
   if (h === "#scores") Teacher();
   else if (h === "#screen") Screen();
-  else Student();
+  else if (h === "#preview") Student(true);
+  else Student(false);
 }
 window.addEventListener("hashchange", route);
 
 /* ═════════ 學生 ═════════ */
-function Student(){
+function Student(preview){
   mount("#tpl-student");
-  let who = store.get("mzd_student", null);
+  let who = preview ? {cls:"示範", seat:"0", name:"老師預覽"} : store.get("mzd_student", null);
+  let allOpen = false;
   let D = null;
   const draftKey = () => `mzd_draft_${who.cls}_${who.seat}`;
   const newDraft = () => ({step:1, maxStep:1, food:"", picMode:"upload", upPic:"", drawPic:"", sense:"",
     people:[], other:"", core:"", flavors:{sour:20,sweet:20,bitter:20,spicy:20,salty:20}, summary:"", active:0, done:false, last:null});
-  const save = () => store.set(draftKey(), D);
+  const save = () => { if (!preview) store.set(draftKey(), D); };
   const getPic = () => D.picMode === "draw" ? D.drawPic : D.upPic;
 
   /* 登記 */
@@ -793,17 +809,20 @@ function Student(){
   function showStep(n){
     D.step = n; save();
     $("#editor").hidden = false; $("#final").hidden = true;
-    $$(".stage").forEach(s => s.hidden = +s.dataset.step !== n);
+    $$(".stage").forEach(s => s.hidden = !allOpen && +s.dataset.step !== n);
+    $("#editor").classList.toggle("all-open", allOpen);
+    if (allOpen) { $("#hint").hidden = false; $("#hintBtn").setAttribute("aria-expanded", "true"); }
     $$("#stepper button").forEach(b => {
       const i = +b.dataset.go; b.disabled = i > D.maxStep;
       b.classList.toggle("on", i === n); b.classList.toggle("done", i !== n && i < D.maxStep);
     });
     if (n === 1 && D.picMode === "draw") requestAnimationFrame(fitPad);
     const top = $("#stepper").getBoundingClientRect().top + window.scrollY - 4;
-    if (window.scrollY > top) window.scrollTo({top, behavior:"smooth"});
+    if (allOpen && preview) { const st = $(`.stage[data-step="${n}"]`); window.scrollTo({top:st.getBoundingClientRect().top + window.scrollY - 90, behavior:"smooth"}); }
+    else if (window.scrollY > top) window.scrollTo({top, behavior:"smooth"});
   }
   $$("[data-next]").forEach(b => b.onclick = () => {
-    const n = +b.dataset.next, err = validate(n);
+    const n = +b.dataset.next, err = preview ? "" : validate(n);
     if (err) return showErr(n, err);
     clearErr(n); D.maxStep = Math.max(D.maxStep, n + 1); showStep(n + 1);
   });
@@ -816,7 +835,8 @@ function Student(){
 
   /* 完成特調 */
   $("#finishBtn").onclick = async () => {
-    for (let i = 1; i <= 4; i++) { const err = validate(i); if (err) { showStep(i); return showErr(i, err); } }
+    if (preview) { if ([1,2,3,4].some(i => validate(i))) fillSample(); }
+    else for (let i = 1; i <= 4; i++) { const err = validate(i); if (err) { showStep(i); return showErr(i, err); } }
     const a = {at:new Date().toISOString(), food:D.food.trim(), people:peopleList(), mode:modeOf(),
       sense:D.sense.trim(), core:D.core.trim(), flavors:norm(D.flavors), summary:D.summary.trim(), secs:D.active};
     a.chars = count(a.sense) + count(a.core) + count(a.summary);
@@ -832,6 +852,7 @@ function Student(){
   }
   async function submit(a){
     const st = $("#sendState"); $("#codeBox").hidden = true;
+    if (preview) { st.textContent = "👀 老師預覽：這張卡片不會送出，也不會記錄。"; return; }
     let thumb = "";
     try { thumb = await shrink(getPic(), 320, .62); if (thumb.length > 40000) thumb = await shrink(getPic(), 240, .5); } catch(e){}
     const record = {cls:who.cls, seat:who.seat, name:who.name, image:thumb, attempts:[a]};
@@ -851,7 +872,7 @@ function Student(){
   $("#editAgain").onclick = () => { D.done = false; save(); showStep(4); };
   $("#newBowl").onclick = () => {
     if (!confirm("要開始調一碗新的嗎？目前的內容會清空（已送出的作品不會消失）。")) return;
-    D = newDraft(); save(); fill(); showStep(1);
+    D = newDraft(); if (preview) D.maxStep = 4; save(); fill(); showStep(1);
   };
   $("#dlCard").onclick = async () => {
     const card = $("#cardHost .recipe");
@@ -868,7 +889,7 @@ function Student(){
 
   /* 使用時間：只算畫面開著的秒數 */
   timers.push(setInterval(() => {
-    if (!D || D.done || document.hidden || !reg.hidden) return;
+    if (preview || !D || D.done || document.hidden || !reg.hidden) return;
     D.active++; if (D.active % 5 === 0) save();
   }, 1000));
 
@@ -882,8 +903,8 @@ function Student(){
   }
   let bound = false;
   function start(){
-    $("#whoText").textContent = `${who.cls} 班 ${who.seat} 號 ${who.name}`;
-    D = Object.assign(newDraft(), store.get(draftKey(), {}));
+    $("#whoText").textContent = preview ? "老師預覽（不會記錄）" : `${who.cls} 班 ${who.seat} 號 ${who.name}`;
+    D = preview ? Object.assign(newDraft(), {maxStep:4}) : Object.assign(newDraft(), store.get(draftKey(), {}));
     if (!bound) {
       bound = true;
       bind("food", "food", () => clearErr(1));
@@ -895,7 +916,33 @@ function Student(){
     fill();
     if (D.done && D.last) showFinal(); else showStep(Math.min(D.step, D.maxStep));
   }
-  if (!who) openReg(); else start();
+  /* 老師預覽工具 */
+  function samplePic(){
+    const c = document.createElement("canvas"); c.width = 480; c.height = 360; const x = c.getContext("2d");
+    x.fillStyle = "#FFFBF2"; x.fillRect(0,0,480,360);
+    x.fillStyle = "#fff"; x.strokeStyle = "#2A241F"; x.lineWidth = 4;
+    x.beginPath(); x.ellipse(240,200,190,120,0,0,Math.PI*2); x.fill(); x.stroke();
+    x.fillStyle = "#E8B04A"; x.beginPath(); x.ellipse(240,195,130,80,-.1,0,Math.PI*2); x.fill();
+    x.fillStyle = "#C27A2C"; x.beginPath(); x.ellipse(240,195,130,80,-.1,0,Math.PI*2); x.globalAlpha=.25; x.fill(); x.globalAlpha=1;
+    x.fillStyle = "#8A5A2B"; [[190,170],[260,160],[300,210],[220,220],[170,205],[280,185],[240,240]].forEach(([a,b]) => { x.beginPath(); x.ellipse(a,b,10,6,.5,0,Math.PI*2); x.fill(); });
+    x.fillStyle = "#7FA05A"; [[210,190],[275,225],[300,175]].forEach(([a,b]) => { x.beginPath(); x.arc(a,b,5,0,Math.PI*2); x.fill(); });
+    return c.toDataURL("image/jpeg", .85);
+  }
+  function fillSample(){
+    Object.assign(D, {food:"阿嬤的菜脯蛋", picMode:"upload", upPic:samplePic(), people:["阿嬤","爸爸"], other:"",
+      sense:"每到寒流來的晚上，廚房就會傳出「滋——」的一聲。菜脯在熱油裡翻滾，鹹香混著蛋香一路飄進客廳，連電視的聲音都蓋不住。端上桌時，蛋的邊緣煎得焦黃酥脆，中間還冒著熱氣。",
+      core:"爸爸吃菜脯蛋總是很急躁，筷子一夾就是一大塊，三兩口配著白飯扒完，好像等一下還有什麼事要趕。阿嬤卻不一樣，她會先把焦黑的邊挑起來放在自己碗裡，把最軟嫩的中間推到我面前，自己細嚼慢嚥地吃那些別人不要的部分。爸爸做事也是這樣，衝第一、不拘小節；阿嬤則是把好的都留給別人。他們一快一慢，剛好互補。",
+      flavors:{sour:15, sweet:35, bitter:5, spicy:15, salty:30}, summary:"這是一碗在微辣衝突中，帶著鹹鹹日常與溫甜心意的記憶。"});
+    fill();
+  }
+  if (preview) {
+    $("#pvBar").hidden = false; $("#changeWho").hidden = true;
+    $("#pvAll").onclick = () => { allOpen = !allOpen; $("#pvAll").textContent = allOpen ? "改回一步一步看" : "展開全部工序"; showStep(allOpen ? 1 : D.step); };
+    $("#pvSample").onclick = () => { fillSample(); showStep(D.step); };
+    $("#pvClear").onclick = () => { D = Object.assign(newDraft(), {maxStep:4}); fill(); showStep(1); };
+    start();
+  }
+  else if (!who) openReg(); else start();
 }
 
 /* ═════════ 教師 ═════════ */
@@ -918,7 +965,7 @@ function Teacher(){
     render();
   }
   function render(){
-    $("#tpw").hidden = teacher; $("#tLogin").hidden = teacher; $("#tLogout").hidden = !teacher; $("#goScreen").hidden = !teacher;
+    $("#tpw").hidden = teacher; $("#tLogin").hidden = teacher; $("#tLogout").hidden = !teacher; $("#goScreen").hidden = !teacher; $("#goPreview").hidden = !teacher;
     if (teacher) $("#tState").textContent = "老師已登入";
     $("#tOnly").hidden = !teacher;
     const classes = [...new Set(records.map(r => String(r.cls)))].sort();
@@ -974,6 +1021,7 @@ function Teacher(){
   $("#tpw").addEventListener("keydown", e => { if (e.key === "Enter") $("#tLogin").click(); });
   $("#tLogout").onclick = () => { pw = ""; ss.set("mzd_tpw", ""); ss.set("mzd_local_t", ""); teacher = false; $("#tState").textContent = ""; load(); };
   $("#goScreen").onclick = () => { location.hash = "#screen"; };
+  $("#goPreview").onclick = () => { location.hash = "#preview"; };
   $("#tCls").onchange = e => { cls = e.target.value; store.set("mzd_tcls", cls); render(); };
   $("#tRefresh").onclick = load;
   ["fSeat","fFlag","thSecs","thChars"].forEach(id => $("#" + id).addEventListener("input", render));

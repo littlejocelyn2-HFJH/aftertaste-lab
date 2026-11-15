@@ -396,6 +396,7 @@ body.screen{background:#16130F;color:#F6F1E7}
     <label class="field"><span>姓名</span><input id="rName" maxlength="12" placeholder="你的名字"></label>
     <p class="err" id="rErr"></p>
     <button class="btn wide" id="rOk">入座</button>
+    <a href="#preview" class="btn ghost wide" style="display:block;text-align:center;text-decoration:none;margin-top:14px">👀 我是老師，先瀏覽四個步驟</a>
     <a href="#scores" class="teacher-link">我是老師，先略過，直接看班級成績 →</a>
   </div>
 </div>
@@ -415,9 +416,13 @@ body.screen{background:#16130F;color:#F6F1E7}
       <button class="btn small" id="tLogin">登入</button>
       <button class="btn small ghost" id="tLogout" hidden>登出</button>
       <button class="btn small toast" id="goScreen" hidden>📺 開啟大屏</button>
-      <button class="btn small" id="goPreview" hidden>👀 預覽學生內容</button>
+
       <span id="tState" class="note"></span>
     </div>
+  </div>
+  <div class="panel" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:#FFF6E2">
+    <div><b style="font-size:19px">👀 瀏覽學生的四個步驟</b><p class="note" style="margin:0">用老師身分走一遍，可展開全部工序、填入範例，不會記錄。</p></div>
+    <button class="btn" id="goPreview">進入預覽 →</button>
   </div>
   <div class="row" style="margin:6px 0">
     <span>班級</span><select id="tCls"></select>
@@ -965,7 +970,7 @@ function Teacher(){
     render();
   }
   function render(){
-    $("#tpw").hidden = teacher; $("#tLogin").hidden = teacher; $("#tLogout").hidden = !teacher; $("#goScreen").hidden = !teacher; $("#goPreview").hidden = !teacher;
+    $("#tpw").hidden = teacher; $("#tLogin").hidden = teacher; $("#tLogout").hidden = !teacher; $("#goScreen").hidden = !teacher;
     if (teacher) $("#tState").textContent = "老師已登入";
     $("#tOnly").hidden = !teacher;
     const classes = [...new Set(records.map(r => String(r.cls)))].sort();

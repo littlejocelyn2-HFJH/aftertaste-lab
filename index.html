@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>記憶深夜食堂：情感特調製研所</title>
+<title>回味製研所：情感特調</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=DM+Serif+Display&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
@@ -249,12 +249,12 @@ body.screen{background:#16130F;color:#F6F1E7}
 <div class="wrap">
   <header class="hero">
     <div class="hero-left">
-      <div class="badge"><span data-v>深夜食堂</span><small>since<br>2026</small></div>
+      <div class="badge"><span data-v>回味</span><small>since<br>2026</small></div>
       <p class="hero-lead">一道菜，一段時光。<br>把食物端上桌，<br>把人寫進碗裡，<br>再調出記憶真正的滋味。</p>
     </div>
     <div class="hero-v">
-      <h1 class="v-xl" data-v>記憶深夜食堂</h1>
-      <p class="v-l" data-v>情感特調製研所</p>
+      <h1 class="v-xl" data-v>回味製研所</h1>
+      <p class="v-l" data-v>情感特調</p>
       <p class="v-s" data-v>國三散文寫作鷹架</p>
     </div>
     <div class="slices" aria-hidden="true">
@@ -264,7 +264,7 @@ body.screen{background:#16130F;color:#F6F1E7}
       <div class="slice" style="--c:#DE7A63"><span class="tag" data-v>嗆辣</span><b>🌶️</b></div>
       <div class="slice" style="--c:#E2D7C1"><span class="tag matcha" data-v>鹹香</span><b>🧂</b></div>
     </div>
-    <div class="latin-title">Memory<br>Midnight DINER<span class="hand">emotional recipe</span><small>MADE IN 國三教室</small></div>
+    <div class="latin-title">Aftertaste<br>LAB<span class="hand">emotional recipe</span><small>MADE IN 國三教室</small></div>
   </header>
 
   <div class="who-bar no-print"><span id="whoText"></span><button class="link" id="changeWho">更換</button></div>
@@ -406,7 +406,7 @@ body.screen{background:#16130F;color:#F6F1E7}
 <div class="wrap">
   <header class="t-head">
     <span class="tag butter" data-v>教師後台</span>
-    <div><h1>記憶深夜食堂・作品牆</h1><p><a href="#">← 回學生頁</a></p></div>
+    <div><h1>回味製研所・作品牆</h1><p><a href="#">← 回學生頁</a></p></div>
   </header>
   <div class="panel">
     <div class="mode-note" id="modeNote"></div>
@@ -435,7 +435,7 @@ body.screen{background:#16130F;color:#F6F1E7}
     <section class="panel">
       <h2>🎨 全班情感調色盤</h2>
       <div class="rc-palette" id="classPalette"></div>
-      <h3 style="font-size:17px;margin:16px 0 8px">今晚的菜單</h3>
+      <h3 style="font-size:17px;margin:16px 0 8px">本班菜單</h3>
       <div class="food-wall" id="foodWall"></div>
     </section>
 
@@ -471,7 +471,7 @@ body.screen{background:#16130F;color:#F6F1E7}
 <template id="tpl-screen">
 <div class="scr">
   <div class="scr-head">
-    <h1>記憶深夜食堂・今晚出餐中</h1>
+    <h1>回味製研所・出餐中</h1>
     <select id="sCls"></select>
     <span class="scr-clock" id="sClock"></span>
     <a href="#scores">離開大屏</a>
@@ -597,7 +597,7 @@ function renderCard(a, pic, who){
   const m = MODE[a.mode] || MODE.A;
   return `<article class="recipe">
     <div class="rc-top">
-      <div class="rc-brand">${vt("深夜食堂")}<small>since<br>2026</small></div>
+      <div class="rc-brand">${vt("回味")}<small>since<br>2026</small></div>
       <div class="rc-title">
         <h3 style="font-size:${fs}px">${vt(a.food || "")}</h3>
         <span class="tag butter">${vt("本日特調")}</span>
@@ -611,7 +611,7 @@ function renderCard(a, pic, who){
     <section class="rc-sec"><span class="tag matcha">${vt("人物刻痕")}</span><div><h4>${esc(m.title)}</h4><p>${nl(a.core)}</p></div></section>
     <section class="rc-palette"><span class="tag gray">${vt("情感比例")}</span>${donut(n, 132)}${bars(n)}</section>
     <blockquote class="rc-sum">${esc(a.summary)}</blockquote>
-    <footer class="rc-foot"><span class="latin">Memory<br>Midnight DINER</span><small>${dateStr(a.at)}・全文 ${a.chars||0} 字</small></footer>
+    <footer class="rc-foot"><span class="latin">Aftertaste<br>LAB</span><small>${dateStr(a.at)}・全文 ${a.chars||0} 字</small></footer>
   </article>`;
 }
 function flagsOf(a, th){
@@ -1044,7 +1044,7 @@ function Teacher(){
       (MODE[a.mode]||MODE.A).title, a.sense, a.core, ...FLAVORS.map(f => (a.flavors||{})[f.k]||0), a.summary, a.chars, a.secs])));
     const csv = "﻿" + [head, ...rows].map(r => r.map(q).join(",")).join("\r\n");
     const link = document.createElement("a");
-    link.href = URL.createObjectURL(new Blob([csv], {type:"text/csv"})); link.download = `記憶深夜食堂_${cls}.csv`; link.click();
+    link.href = URL.createObjectURL(new Blob([csv], {type:"text/csv"})); link.download = `回味製研所_${cls}.csv`; link.click();
   };
   $("#clearCls").onclick = async () => {
     if (!cls) return;

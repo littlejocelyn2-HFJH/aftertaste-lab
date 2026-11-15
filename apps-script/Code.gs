@@ -1,5 +1,5 @@
 /**
- * 記憶深夜食堂：情感特調製研所 — 後端（Google Apps Script）
+ * 回味製研所：情感特調 — 後端（Google Apps Script）
  * 部署：部署 → 新增部署作業 → 類型「網頁應用程式」
  *   執行身分：我　／　誰可以存取：所有人
  * ★ 請把第 8 行的密碼改成你自己的（維持 change-me 時，一律視為密碼錯誤）
@@ -15,7 +15,7 @@ const LOG_HEADERS = ["完成時間", "班級", "座號", "姓名", "料理", "�
 const FLAVOR_NAMES = { sour: "微酸", sweet: "溫甜", bitter: "苦澀", spicy: "嗆辣", salty: "鹹香" };
 
 function doGet() {
-  return json_({ ok: true, service: "memory-diner", time: new Date().toISOString() });
+  return json_({ ok: true, service: "aftertaste-lab", time: new Date().toISOString() });
 }
 
 function doPost(e) {

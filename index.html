@@ -186,6 +186,22 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 .pv-bar{background:#FFF6E2;border:1.5px dashed var(--toast);border-radius:16px;padding:12px 16px;margin:10px 0}
 .pv-bar p{margin:0 0 8px;font-size:16px}
 .all-open .stage{margin-top:34px}
+.ov summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.ov summary::-webkit-details-marker{display:none}
+.ov summary b{font-size:20px;display:block}
+.ov-arrow{border:1.5px solid var(--line);border-radius:999px;padding:3px 14px;font-size:15px;white-space:nowrap}
+.ov details[open] .ov-arrow{background:var(--butter)}
+.ov-step{border-top:2px dashed var(--rule);margin-top:18px;padding-top:14px;display:flex;gap:14px;align-items:flex-start}
+.ov-step>div{flex:1;min-width:0}
+.ov-step h3{font-family:var(--serif);font-weight:900;font-size:22px;margin:0 0 6px}
+.ov-step h4{font-size:16px;margin:12px 0 4px;color:var(--crust)}
+.ov-step p,.ov-step li{font-size:17px;margin:2px 0}
+.ov-step ul{margin:2px 0;padding-left:1.2em}
+.ov-q{background:#FFF6E2;border-radius:10px;padding:8px 12px;margin:4px 0}
+.ov-ph{color:var(--soft);font-style:italic}
+.ov-mode{border:1.5px solid var(--rule);border-radius:12px;padding:10px 12px;margin:8px 0;background:#fff}
+.ov-words{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.ov-words span{border:1.5px solid var(--line);border-radius:6px;padding:0 10px;font-size:15px;background:#fff}
 /* ── Modal ── */
 .modal{position:fixed;inset:0;background:rgba(30,26,22,.55);z-index:100;display:flex;align-items:flex-start;justify-content:center;padding:24px 14px;overflow:auto}
 .modal-card{background:var(--card);border-radius:24px;max-width:460px;width:100%;padding:26px 22px 20px;position:relative;margin:auto}
@@ -420,6 +436,12 @@ body.screen{background:#16130F;color:#F6F1E7}
       <span id="tState" class="note"></span>
     </div>
   </div>
+  <section class="panel ov">
+    <details id="ovBox">
+      <summary><span><b>📖 網頁內容總覽</b><small class="note">學生在每一步會看到的文字、提示與詞彙</small></span><span class="ov-arrow">展開 ▾</span></summary>
+      <div id="overview"></div>
+    </details>
+  </section>
   <div class="panel" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:#FFF6E2">
     <div><b style="font-size:19px">👀 瀏覽學生的四個步驟</b><p class="note" style="margin:0">用老師身分走一遍，可展開全部工序、填入範例，不會記錄。</p></div>
     <button class="btn" id="goPreview">進入預覽 →</button>
@@ -1027,6 +1049,8 @@ function Teacher(){
   $("#tLogout").onclick = () => { pw = ""; ss.set("mzd_tpw", ""); ss.set("mzd_local_t", ""); teacher = false; $("#tState").textContent = ""; load(); };
   $("#goScreen").onclick = () => { location.hash = "#screen"; };
   $("#goPreview").onclick = () => { location.hash = "#preview"; };
+  $("#overview").innerHTML = overviewHTML(); applyV($("#overview"));
+  $("#ovBox").addEventListener("toggle", () => { $(".ov-arrow").textContent = $("#ovBox").open ? "收合 ▴" : "展開 ▾"; });
   $("#tCls").onchange = e => { cls = e.target.value; store.set("mzd_tcls", cls); render(); };
   $("#tRefresh").onclick = load;
   ["fSeat","fFlag","thSecs","thChars"].forEach(id => $("#" + id).addEventListener("input", render));
@@ -1075,6 +1099,58 @@ function Teacher(){
     $("#importText").value = ""; load();
   };
   load();
+}
+
+/* ═════════ 內容總覽（教師端） ═════════ */
+function overviewHTML(){
+  const mode = m => `<div class="ov-mode"><p><b>${esc(m.title)}</b></p><p class="ov-q">${esc(m.text)}</p>
+    <p class="note" style="margin-top:6px">靈感詞彙庫（按鈕，點一下插入文字框）：</p><div class="ov-words">${m.words.map(w => `<span>［${esc(w)}］</span>`).join("")}</div></div>`;
+  return `
+  <div class="ov-step"><span class="tag butter" data-v>工序壹</span><div>
+    <h3>選材與上菜（視覺設定）</h3>
+    <p class="ov-q">請輸入這道充滿記憶的食物名稱，並為它上傳一張照片（或畫下它的樣子）。</p>
+    <h4>學生要做的事</h4>
+    <ul><li>輸入框：這道食物的名稱 <span class="ov-ph">（提示字：例如：阿嬤的菜脯蛋）</span></li>
+    <li>二選一：📷 上傳照片（手機可直接拍照），或 ✏️ 畫下它（8 種顏色、粗細筆、橡皮擦）</li>
+    <li>畫布下方說明：用手指或滑鼠畫畫看，不用畫得很像，重點是「你記得的樣子」。</li></ul>
+    <h4>過關條件</h4><p>有食物名稱，且有照片或畫。</p>
+  </div></div>
+
+  <div class="ov-step"><span class="tag" data-v>工序貳</span><div>
+    <h3>記憶濾鏡（感官前奏）</h3>
+    <p class="ov-q">先別急著寫人，讓這道菜「出場」。</p>
+    <h4>💡 靈感小提示（按鈕展開）</h4>
+    <p>不知道怎麼開頭嗎？試著想想：</p>
+    <ul><li>這道食物通常出現在什麼特定的時刻？（例如：冬天的宵夜、下雨天、拜拜的桌上）</li>
+    <li>它剛端上桌時，有什麼特別的氣味、顏色或是聲音？</li></ul>
+    <h4>大文字框</h4><p class="ov-ph">請在這裡寫下這道食物出場的畫面與氣味...</p>
+    <h4>過關條件</h4><p>至少 ${MIN.sense} 字。</p>
+  </div></div>
+
+  <div class="ov-step"><span class="tag matcha" data-v>工序參</span><div>
+    <h3>靈魂人物與刻痕（核心寫作區）</h3>
+    <p class="ov-q">誰和你一起吃這道菜？（可複選）</p>
+    <div class="ov-words">${PEOPLE.map(p => `<span>☐ ${p}</span>`).join("")}</div>
+    <h4>只勾 1 人時出現</h4>${mode(MODE.A)}
+    <h4>勾 2 人以上時出現</h4>${mode(MODE.B)}
+    <p class="note">勾超過兩位時另有提醒：挑出對比最強烈的兩位來寫。</p>
+    <h4>過關條件</h4><p>至少勾 1 人，文字至少 ${MIN.core} 字。</p>
+  </div></div>
+
+  <div class="ov-step"><span class="tag gray" data-v>工序肆</span><div>
+    <h3>情感調色盤與餘韻（複合情緒歸納）</h3>
+    <p class="ov-q">記憶的滋味從來不是單一的。請調配這段回憶的情感比例。</p>
+    <h4>五個滑動拉桿（自動換算成 100%，旁邊即時顯示圓餅圖）</h4>
+    <ul>${FLAVORS.map(f => `<li>${f.icon} ${f.name}（${f.sub}）</li>`).join("")}</ul>
+    <h4>一句話總結</h4>
+    <p class="ov-q">最後，請用一句話總結這碗特調的滋味：（例如：這是一碗在微辣衝突中，帶著鹹鹹日常的記憶。）</p>
+    <h4>過關條件</h4><p>至少調一種滋味，並寫下總結句。</p>
+  </div></div>
+
+  <div class="ov-step"><span class="tag butter" data-v>出餐</span><div>
+    <h3>情感食譜卡</h3>
+    <p>按「完成特調 🍜」後，前面的編輯區會收起，把食物名稱、圖片、共餐者、兩段文字、情感比例（圓餅圖＋長條圖）和總結句排成一張卡片，可存成圖片。作品同時送到老師的試算表。</p>
+  </div></div>`;
 }
 
 /* ═════════ 大屏 ═════════ */

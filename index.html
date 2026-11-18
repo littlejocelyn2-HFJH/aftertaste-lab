@@ -232,6 +232,78 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 .ov-mode{border:1.5px solid var(--rule);border-radius:12px;padding:10px 12px;margin:8px 0;background:#fff}
 .ov-words{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .ov-words span{border:1.5px solid var(--line);border-radius:6px;padding:0 10px;font-size:15px;background:#fff}
+
+/* ── 卡片風格選擇 ── */
+.style-pick{max-width:620px;margin:6px auto 16px;text-align:center}
+.style-pick p{margin:0 0 8px;font-weight:700}
+.sp-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.sp-row button{border:1.5px solid var(--line);background:#fff;border-radius:16px;padding:10px 6px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1.3}
+.sp-row button.on{background:var(--ink);color:var(--paper);box-shadow:0 0 0 3px var(--butter)}
+.sp-row b{font-size:15px}
+.sp-row small{font-size:11.5px;opacity:.75}
+.sp-sw{display:block;width:46px;height:34px;border-radius:6px;margin-bottom:4px;border:1px solid rgba(0,0,0,.15)}
+.sw-toast{background:radial-gradient(ellipse at 50% 70%,#FFF8EA 0 40%,#D99A55 62%,#A9652B 100%);border-radius:40% 40% 6px 6px/30% 30% 6px 6px}
+.sw-menu{background:radial-gradient(circle,#fff 0 30%,#E9D6B5 32%);outline:2px double #5A3E22;outline-offset:-5px}
+.sw-diary{background:repeating-linear-gradient(#fff 0 6px,#BFD2E6 6px 7px);border-left:3px solid #E58C8C}
+
+/* 共用：菜單與日記改成橫書 */
+.s-menu .vstack,.s-diary .vstack{flex-direction:row;gap:0!important}
+.s-menu .tag,.s-diary .tag{padding:2px 10px}
+
+/* ── 風格二：牛皮紙菜單 ── */
+.recipe.s-menu{background:#E8D3AE repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 2px,transparent 2px 5px);border:0;padding:34px 28px 24px;
+  box-shadow:inset 0 0 0 10px #E8D3AE,inset 0 0 0 12px #5A3E22,inset 0 0 0 15px #E8D3AE,inset 0 0 0 16px #5A3E22,0 20px 40px -24px rgba(90,60,30,.5);color:#2E2014}
+.s-menu .rc-top{flex-direction:column;align-items:center;text-align:center;gap:6px}
+.s-menu .rc-brand{flex-direction:row;gap:8px;font-size:13px;letter-spacing:.3em;align-items:baseline}
+.s-menu .rc-brand small br{display:none}
+.s-menu .rc-brand::before,.s-menu .rc-brand::after{content:"";width:40px;border-top:1.5px solid #5A3E22;align-self:center}
+.s-menu .rc-title{flex-direction:column;align-items:center;gap:6px}
+.s-menu .rc-title h3{font-size:clamp(30px,8vw,44px)!important;order:-1;letter-spacing:.08em}
+.s-menu .rc-title .tag{background:#5A3E22;color:#F3E6CC;border-color:#5A3E22;box-shadow:none;letter-spacing:.3em;order:-2}
+.s-menu .rc-meta{font-size:14px;color:#6B5238;display:inline}
+.s-menu .toast-frame{width:min(72%,300px);aspect-ratio:1;border-radius:50%;padding:16px;margin:22px auto 8px;background:#fff;box-shadow:0 0 0 2px #fff,0 0 0 5px #D2BB92,0 12px 24px -10px rgba(60,35,10,.5)}
+.s-menu .toast-frame img{border-radius:50%;margin:0;aspect-ratio:1;height:100%}
+.s-menu .rc-people{margin-top:16px}
+.s-menu .hz-tag{background:transparent;border-color:#5A3E22}
+.s-menu .rc-sec{flex-direction:column;align-items:center;gap:6px;margin-top:24px}
+.s-menu .rc-sec .tag,.s-menu .rc-palette .tag{background:transparent;border:0;border-top:1.5px solid #5A3E22;border-bottom:1.5px solid #5A3E22;box-shadow:none;letter-spacing:.35em;padding:3px 14px;font-weight:700}
+.s-menu .rc-sec h4{text-align:center;font-size:18px;margin-bottom:6px}
+.s-menu .rc-sec p{text-align:justify}
+.s-menu .rc-palette{flex-direction:column;align-items:center}
+.s-menu .rc-palette ul{width:100%;max-width:380px}
+.s-menu .bar{background:rgba(90,62,34,.15)}
+.s-menu .rc-sum{background:transparent;border:0;border-top:3px double #5A3E22;border-bottom:3px double #5A3E22;border-radius:0;text-align:center;padding:16px 6px}
+.s-menu .rc-foot{flex-direction:column;align-items:center;gap:4px;border-top:0;text-align:center}
+.s-menu .rc-foot .latin br{display:none}
+.s-menu .rc-foot .latin{font-size:22px;letter-spacing:.04em}
+
+/* ── 風格三：拍立得日記 ── */
+.recipe.s-diary{background:#fff repeating-linear-gradient(transparent 0 33px,#D5E2EF 33px 34px);background-position:0 18px;border:1px solid #E3E8EE;border-radius:10px;padding:30px 24px 24px 46px;color:#22303D}
+.recipe.s-diary::before{content:"";position:absolute;top:0;bottom:0;left:30px;border-left:2px solid #EBA3A3}
+.s-diary .rc-top{flex-direction:column-reverse;gap:6px}
+.s-diary .rc-brand{flex-direction:row;gap:8px;font-size:13px;align-items:baseline;color:#5B6B7A;align-self:flex-end}
+.s-diary .rc-brand small br{display:none}
+.s-diary .rc-title{flex-direction:row;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.s-diary .rc-title h3{font-size:clamp(28px,7.5vw,40px)!important;width:100%;background:linear-gradient(transparent 62%,#FFE58A 62% 92%,transparent 92%);display:inline;width:auto}
+.s-diary .rc-title .tag{order:-1;background:#FFB4A2;border:0;box-shadow:none;transform:rotate(-3deg);font-size:13px}
+.s-diary .rc-meta{font-size:14px;color:#5B6B7A}
+.s-diary .toast-frame{position:relative;max-width:330px;background:#fff;border-radius:2px;padding:12px 12px 46px;margin:28px auto 10px;transform:rotate(-2.5deg);box-shadow:0 10px 22px -8px rgba(0,0,0,.35),0 0 0 1px #EEE}
+.s-diary .toast-frame::before{content:"";position:absolute;top:-12px;left:50%;width:96px;height:26px;margin-left:-48px;background:rgba(243,210,155,.75);transform:rotate(3deg)}
+.s-diary .toast-frame::after{content:attr(data-cap);position:absolute;left:0;right:0;bottom:10px;text-align:center;font-family:var(--serif);font-weight:900;font-size:17px;color:#22303D}
+.s-diary .toast-frame img{border-radius:0;margin:0;aspect-ratio:4/3}
+.s-diary .hz-tag{border:0;background:#E3EEF9;border-radius:999px}
+.s-diary .rc-sec{flex-direction:column;gap:4px;margin-top:22px}
+.s-diary .rc-sec .tag,.s-diary .rc-palette .tag{border:0;box-shadow:none;background:#BFE0C8;font-weight:700;border-radius:4px}
+.s-diary .rc-sec .tag{background:#CFE3F6}
+.s-diary .rc-sec .tag.matcha{background:#D9EDC4}
+.s-diary .rc-sec h4{font-size:19px}
+.s-diary .rc-sec p{line-height:34px;font-size:17px}
+.s-diary .rc-palette{gap:10px 16px}
+.s-diary .rc-palette .tag{width:100%;flex:none;background:#F6D9E8}
+.s-diary .rc-sum{background:#FFF1A8;border:0;border-radius:2px;transform:rotate(1.2deg);box-shadow:0 8px 16px -8px rgba(0,0,0,.35);margin:30px 6px 12px}
+.s-diary .rc-foot{border-top:1px dashed #B7C6D6}
+.s-diary .rc-foot .latin{font-size:20px;color:#5B6B7A}
+.s-diary .rc-foot .latin br{display:none}
 /* ── Modal ── */
 .modal{position:fixed;inset:0;background:rgba(30,26,22,.55);z-index:100;display:flex;align-items:flex-start;justify-content:center;padding:24px 14px;overflow:auto}
 .modal-card{background:var(--card);border-radius:24px;max-width:460px;width:100%;padding:26px 22px 20px;position:relative;margin:auto}
@@ -433,6 +505,14 @@ body.screen{background:#16130F;color:#F6F1E7}
         <p style="margin:0 0 6px">沒連上網路？請把下面的「作品碼」複製給老師：</p>
         <textarea id="codeText" readonly></textarea>
         <button class="btn small" id="copyCode" style="margin-top:8px">複製作品碼</button>
+      </div>
+    </div>
+    <div class="style-pick no-print">
+      <p>選一種你喜歡的卡片風格：</p>
+      <div class="sp-row" id="stylePick">
+        <button type="button" data-style="toast"><i class="sp-sw sw-toast"></i><b>吐司海報</b><small>直書・日系留白</small></button>
+        <button type="button" data-style="menu"><i class="sp-sw sw-menu"></i><b>牛皮紙菜單</b><small>置中・餐廳菜單</small></button>
+        <button type="button" data-style="diary"><i class="sp-sw sw-diary"></i><b>拍立得日記</b><small>橫線紙・便利貼</small></button>
       </div>
     </div>
     <div id="cardHost"></div>
@@ -671,14 +751,14 @@ function bars(n){
   return `<ul>${FLAVORS.map(f => `<li class="bar-li"><span>${f.icon} ${f.name}</span><span class="bar"><i style="width:${n[f.k]}%;background:${f.color}"></i></span><b>${n[f.k]}%</b></li>`).join("")}</ul>`;
 }
 function nl(s){ return esc(s); }
-function renderCard(a, pic, who){
+function renderCard(a, pic, who, style){
   const n = norm(a.flavors);
   const len = Array.from(a.food || "").length;
   const fs = len <= 4 ? 54 : len <= 6 ? 44 : len <= 9 ? 34 : 28;
   const m = MODE[a.mode] || MODE.A;
-  return `<article class="recipe">
+  return `<article class="recipe s-${style || "toast"}">
     <div class="rc-top">
-      <div class="rc-brand">${vt("回味")}<small>since<br>2026</small></div>
+      <div class="rc-brand">${vt("回味")}<small>since<br> 2026</small></div>
       <div class="rc-title">
         <h3 style="font-size:${fs}px">${vt(a.food || "")}</h3>
         <span class="tag butter">${vt("本日特調")}</span>
@@ -686,13 +766,13 @@ function renderCard(a, pic, who){
         <span class="rc-meta">${vt(who.name || "")}</span>
       </div>
     </div>
-    ${pic ? `<div class="toast-frame"><img src="${pic}" alt="${esc(a.food)}"></div>` : ""}
+    ${pic ? `<div class="toast-frame" data-cap="${esc(a.food)}"><img src="${pic}" alt="${esc(a.food)}"></div>` : ""}
     <div class="rc-people">${(a.people||[]).map(p => `<span class="hz-tag">${esc(p)}</span>`).join("")}</div>
     <section class="rc-sec"><span class="tag">${vt("記憶濾鏡")}</span><div><h4>出場的畫面與氣味</h4><p>${nl(a.sense)}</p></div></section>
     <section class="rc-sec"><span class="tag matcha">${vt("人物刻痕")}</span><div><h4>${esc(m.title)}</h4><p>${nl(a.core)}</p></div></section>
     <section class="rc-palette"><span class="tag gray">${vt("情感比例")}</span>${donut(n, 132)}${bars(n)}</section>
     <blockquote class="rc-sum">${esc(a.summary)}</blockquote>
-    <footer class="rc-foot"><span class="latin">Aftertaste<br>LAB</span><small>${dateStr(a.at)}・全文 ${a.chars||0} 字</small></footer>
+    <footer class="rc-foot"><span class="latin">Aftertaste<br> LAB</span><small>${dateStr(a.at)}・全文 ${a.chars||0} 字</small></footer>
   </article>`;
 }
 function flagsOf(a, th){
@@ -977,12 +1057,21 @@ function Student(preview){
     showFinal();
     submit(a);
   };
+  function drawCard(){
+    const st = D.cardStyle || "toast";
+    $$("#stylePick button").forEach(b => b.classList.toggle("on", b.dataset.style === st));
+    $("#cardHost").innerHTML = renderCard(D.last, getPic(), who, st);
+  }
+  $("#stylePick").addEventListener("click", e => {
+    const b = e.target.closest("[data-style]"); if (!b) return;
+    D.cardStyle = b.dataset.style; save(); drawCard();
+  });
   function showFinal(){
     $("#editor").hidden = true; $("#final").hidden = false; $("#resendTip").hidden = true;
     if (preview) renderSent("preview", D.last);
     else if (D.sent && D.sent.at === D.last.at) renderSent(D.sent.ok ? (D.sent.local ? "local" : "ok") : "fail", D.last);
     $$("#stepper button").forEach(b => { b.classList.remove("on"); b.classList.add("done"); b.disabled = false; });
-    $("#cardHost").innerHTML = renderCard(D.last, getPic(), who);
+    drawCard();
     window.scrollTo({top:$("#final").getBoundingClientRect().top + window.scrollY - 70, behavior:"smooth"});
   }
   function renderSent(kind, a){

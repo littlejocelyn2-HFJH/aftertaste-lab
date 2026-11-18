@@ -6,7 +6,7 @@
 <title>回味製研所：情感特調</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=DM+Serif+Display&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=LXGW+WenKai+TC:wght@400;700&family=DM+Serif+Display&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
 <script src="config.js?v=1"></script>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" defer></script>
 <style>
@@ -242,68 +242,84 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 .sp-row b{font-size:15px}
 .sp-row small{font-size:11.5px;opacity:.75}
 .sp-sw{display:block;width:46px;height:34px;border-radius:6px;margin-bottom:4px;border:1px solid rgba(0,0,0,.15)}
-.sw-toast{background:radial-gradient(ellipse at 50% 70%,#FFF8EA 0 40%,#D99A55 62%,#A9652B 100%);border-radius:40% 40% 6px 6px/30% 30% 6px 6px}
-.sw-menu{background:radial-gradient(circle,#fff 0 30%,#E9D6B5 32%);outline:2px double #5A3E22;outline-offset:-5px}
-.sw-diary{background:repeating-linear-gradient(#fff 0 6px,#BFD2E6 6px 7px);border-left:3px solid #E58C8C}
+.sw-sketch{background:linear-gradient(165deg,#FBF6EE 0 55%,#F3D3C8 56%)}
+.sw-zen{background:#fff;border-right:4px solid #A8402C}
+.sw-night{background:linear-gradient(180deg,#0F1620,#2C3E55)}
 
-/* 共用：菜單與日記改成橫書 */
-.s-menu .vstack,.s-diary .vstack{flex-direction:row;gap:0!important}
-.s-menu .tag,.s-diary .tag{padding:2px 10px}
+.vcols{display:inline-flex;flex-direction:row-reverse;align-items:flex-start;gap:.45em}
+.ph{background-size:cover;background-position:center;background-repeat:no-repeat;background-color:#fff}
+.hand-font{font-family:"LXGW WenKai TC","Klee One",var(--sans)}
 
-/* ── 風格二：牛皮紙菜單 ── */
-.recipe.s-menu{background:#E8D3AE repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 2px,transparent 2px 5px);border:0;padding:34px 28px 24px;
-  box-shadow:inset 0 0 0 10px #E8D3AE,inset 0 0 0 12px #5A3E22,inset 0 0 0 15px #E8D3AE,inset 0 0 0 16px #5A3E22,0 20px 40px -24px rgba(90,60,30,.5);color:#2E2014}
-.s-menu .rc-top{flex-direction:column;align-items:center;text-align:center;gap:6px}
-.s-menu .rc-brand{flex-direction:row;gap:8px;font-size:13px;letter-spacing:.3em;align-items:baseline}
-.s-menu .rc-brand small br{display:none}
-.s-menu .rc-brand::before,.s-menu .rc-brand::after{content:"";width:40px;border-top:1.5px solid #5A3E22;align-self:center}
-.s-menu .rc-title{flex-direction:column;align-items:center;gap:6px}
-.s-menu .rc-title h3{font-size:clamp(30px,8vw,44px)!important;order:-1;letter-spacing:.08em}
-.s-menu .rc-title .tag{background:#5A3E22;color:#F3E6CC;border-color:#5A3E22;box-shadow:none;letter-spacing:.3em;order:-2}
-.s-menu .rc-meta{font-size:14px;color:#6B5238;display:inline}
-.s-menu .toast-frame{width:min(72%,300px);aspect-ratio:1;border-radius:50%;padding:16px;margin:22px auto 8px;background:#fff;box-shadow:0 0 0 2px #fff,0 0 0 5px #D2BB92,0 12px 24px -10px rgba(60,35,10,.5)}
-.s-menu .toast-frame img{border-radius:50%;margin:0;aspect-ratio:1;height:100%}
-.s-menu .rc-people{margin-top:16px}
-.s-menu .hz-tag{background:transparent;border-color:#5A3E22}
-.s-menu .rc-sec{flex-direction:column;align-items:center;gap:6px;margin-top:24px}
-.s-menu .rc-sec .tag,.s-menu .rc-palette .tag{background:transparent;border:0;border-top:1.5px solid #5A3E22;border-bottom:1.5px solid #5A3E22;box-shadow:none;letter-spacing:.35em;padding:3px 14px;font-weight:700}
-.s-menu .rc-sec h4{text-align:center;font-size:18px;margin-bottom:6px}
-.s-menu .rc-sec p{text-align:justify}
-.s-menu .rc-palette{flex-direction:column;align-items:center}
-.s-menu .rc-palette ul{width:100%;max-width:380px}
-.s-menu .bar{background:rgba(90,62,34,.15)}
-.s-menu .rc-sum{background:transparent;border:0;border-top:3px double #5A3E22;border-bottom:3px double #5A3E22;border-radius:0;text-align:center;padding:16px 6px}
-.s-menu .rc-foot{flex-direction:column;align-items:center;gap:4px;border-top:0;text-align:center}
-.s-menu .rc-foot .latin br{display:none}
-.s-menu .rc-foot .latin{font-size:22px;letter-spacing:.04em}
+/* ── 風格一：手繪插畫食譜 ── */
+.recipe.r-sketch{background:#FBF6EE;border:0;padding:28px 22px 20px;color:#3B3430;font-family:"LXGW WenKai TC",var(--sans);overflow:hidden}
+.sk-head{position:relative}
+.sk-title{font-family:"LXGW WenKai TC",var(--serif);font-weight:700;font-size:clamp(34px,9.5vw,50px);margin:0;line-height:1.15;transform:rotate(-2deg);transform-origin:left center}
+.sk-sub{font-size:23px;margin:2px 0 0 2.4em;transform:rotate(-2deg)}
+.sk-who{position:absolute;right:0;top:4px;font-size:14px;text-align:right;line-height:1.5;color:#7A6E66}
+.sk-stage{position:relative;padding:46px 0 40px}
+.sk-photo{width:56%;aspect-ratio:1;margin:0 auto;border:3px solid #3B3430;border-radius:47% 53% 50% 50%/53% 47% 53% 47%;transform:rotate(-2deg);box-shadow:8px 10px 0 #F3D3C8}
+.sk-note{position:absolute;font-size:18px;display:flex;align-items:center;gap:2px;white-space:nowrap;line-height:1.2}
+.sk-note svg{width:38px;height:28px;flex:none}
+.sk-note.n0{top:10px;left:2%} .sk-note.n0 svg{transform:rotate(10deg)}
+.sk-note.n1{top:16px;right:2%;flex-direction:row-reverse} .sk-note.n1 svg{transform:scaleX(-1) rotate(10deg)}
+.sk-note.n2{bottom:40px;left:0;flex-direction:column-reverse;align-items:flex-start} .sk-note.n2 svg{transform:scaleY(-1) rotate(-20deg)}
+.sk-note.n3{bottom:46px;right:0;flex-direction:column-reverse;align-items:flex-end} .sk-note.n3 svg{transform:scale(-1,-1) rotate(-20deg)}
+.sk-flav{position:absolute;width:21%;font-size:13px;color:#7A6E66;text-align:center;line-height:1.3}
+.sk-flav b{display:block;font-size:26px}
+.sk-flav.f0{left:0;top:42%} .sk-flav.f1{right:0;top:38%}
+.sk-bottom{margin:0 -22px -20px;padding:58px 24px 20px;background:linear-gradient(173deg,rgba(243,211,200,0) 0 50px,#F3D3C8 51px)}
+.sk-bottom h4{font-family:"LXGW WenKai TC",var(--serif);font-weight:700;font-size:21px;margin:0 0 4px}
+.sk-bottom p{font-size:16.5px;line-height:1.95;margin:0;white-space:pre-wrap;word-break:break-word}
+.sk-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px 24px}
+.sk-cols h4::before{content:"● ";font-size:.6em;vertical-align:middle;color:#C9705A}
+.sk-pal{display:flex;gap:14px;align-items:center;margin-top:20px;flex-wrap:wrap}
+.sk-pal ul{flex:1;min-width:180px}
+.sk-pal .bar{background:rgba(255,255,255,.6)}
+.sk-ps{font-size:22px;line-height:1.6;margin:20px 0 8px}
+.sk-ps em{font-style:normal;font-family:"Caveat",cursive;font-size:30px;color:#C9705A;margin-right:6px}
+.sk-foot{display:flex;justify-content:space-between;font-size:13px;color:#7A6E66;border-top:1px dashed rgba(59,52,48,.3);padding-top:8px;margin-top:10px}
 
-/* ── 風格三：拍立得日記 ── */
-.recipe.s-diary{background:#fff repeating-linear-gradient(transparent 0 33px,#D5E2EF 33px 34px);background-position:0 18px;border:1px solid #E3E8EE;border-radius:10px;padding:30px 24px 24px 46px;color:#22303D}
-.recipe.s-diary::before{content:"";position:absolute;top:0;bottom:0;left:30px;border-left:2px solid #EBA3A3}
-.s-diary .rc-top{flex-direction:column-reverse;gap:6px}
-.s-diary .rc-brand{flex-direction:row;gap:8px;font-size:13px;align-items:baseline;color:#5B6B7A;align-self:flex-end}
-.s-diary .rc-brand small br{display:none}
-.s-diary .rc-title{flex-direction:row;flex-wrap:wrap;align-items:center;gap:6px 10px}
-.s-diary .rc-title h3{font-size:clamp(28px,7.5vw,40px)!important;width:100%;background:linear-gradient(transparent 62%,#FFE58A 62% 92%,transparent 92%);display:inline;width:auto}
-.s-diary .rc-title .tag{order:-1;background:#FFB4A2;border:0;box-shadow:none;transform:rotate(-3deg);font-size:13px}
-.s-diary .rc-meta{font-size:14px;color:#5B6B7A}
-.s-diary .toast-frame{position:relative;max-width:330px;background:#fff;border-radius:2px;padding:12px 12px 46px;margin:28px auto 10px;transform:rotate(-2.5deg);box-shadow:0 10px 22px -8px rgba(0,0,0,.35),0 0 0 1px #EEE}
-.s-diary .toast-frame::before{content:"";position:absolute;top:-12px;left:50%;width:96px;height:26px;margin-left:-48px;background:rgba(243,210,155,.75);transform:rotate(3deg)}
-.s-diary .toast-frame::after{content:attr(data-cap);position:absolute;left:0;right:0;bottom:10px;text-align:center;font-family:var(--serif);font-weight:900;font-size:17px;color:#22303D}
-.s-diary .toast-frame img{border-radius:0;margin:0;aspect-ratio:4/3}
-.s-diary .hz-tag{border:0;background:#E3EEF9;border-radius:999px}
-.s-diary .rc-sec{flex-direction:column;gap:4px;margin-top:22px}
-.s-diary .rc-sec .tag,.s-diary .rc-palette .tag{border:0;box-shadow:none;background:#BFE0C8;font-weight:700;border-radius:4px}
-.s-diary .rc-sec .tag{background:#CFE3F6}
-.s-diary .rc-sec .tag.matcha{background:#D9EDC4}
-.s-diary .rc-sec h4{font-size:19px}
-.s-diary .rc-sec p{line-height:34px;font-size:17px}
-.s-diary .rc-palette{gap:10px 16px}
-.s-diary .rc-palette .tag{width:100%;flex:none;background:#F6D9E8}
-.s-diary .rc-sum{background:#FFF1A8;border:0;border-radius:2px;transform:rotate(1.2deg);box-shadow:0 8px 16px -8px rgba(0,0,0,.35);margin:30px 6px 12px}
-.s-diary .rc-foot{border-top:1px dashed #B7C6D6}
-.s-diary .rc-foot .latin{font-size:20px;color:#5B6B7A}
-.s-diary .rc-foot .latin br{display:none}
+/* ── 風格二：日式留白 ── */
+.recipe.r-zen{background:#fff;border:1px solid #EEE9E2;border-radius:6px;padding:34px 26px 24px;color:#3A3632;font-family:var(--serif)}
+.zn-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.zn-cap{font-size:13px;color:#8A7F76;line-height:1;margin-top:150px}
+.zn-cap .vstack{gap:.3em}
+.zn-right{display:flex;flex-direction:row-reverse;gap:16px;align-items:flex-start}
+.zn-date{font-size:15px;font-weight:600;line-height:1}
+.zn-date .vstack{gap:.15em}
+.zn-title{font-weight:600;color:#A8402C;margin:0;line-height:1}
+.zn-title .vstack{gap:.12em}
+.zn-sum{font-size:14px;color:#A8402C;line-height:1;margin-top:3.6em}
+.zn-sum .vstack{gap:.28em}
+.zn-photo{width:90%;aspect-ratio:4/3;margin:20px auto 0;border-radius:3px}
+.zn-people{text-align:center;font-size:14px;color:#8A7F76;letter-spacing:.2em;margin:12px 0 0}
+.zn-sec{margin-top:26px}
+.zn-sec h4{display:flex;align-items:center;gap:12px;font-size:15px;font-weight:600;color:#A8402C;letter-spacing:.3em;margin:0 0 8px}
+.zn-sec h4::after{content:"";flex:1;border-top:1px solid #E6D9CF}
+.zn-sec p{font-size:16px;line-height:2.1;margin:0;white-space:pre-wrap;word-break:break-word}
+.zn-bar{display:flex;height:8px;border-radius:999px;overflow:hidden;margin:4px 0 10px;background:#F1ECE6}
+.zn-bar i{display:block;height:100%}
+.zn-legend{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:13.5px;color:#6E655B;font-family:var(--sans)}
+.zn-foot{text-align:center;font-family:var(--latin);letter-spacing:.14em;font-size:13px;color:#8A7F76;margin-top:30px}
+
+/* ── 風格三：暗色攝影海報 ── */
+.recipe.r-night{background:#1D2836 repeating-linear-gradient(115deg,rgba(255,255,255,.025) 0 2px,rgba(255,255,255,0) 2px 6px);color:#F2EFE9;border:0;padding:0;overflow:hidden}
+.nt-hero{position:relative;aspect-ratio:4/5}
+.nt-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,22,32,.85) 0%,rgba(15,22,32,.2) 40%,rgba(15,22,32,.12) 62%,#1D2836 100%)}
+.nt-head{position:absolute;top:0;left:0;right:0;text-align:center;padding:30px 18px}
+.nt-title{font-family:"LXGW WenKai TC",var(--serif);font-weight:700;font-size:clamp(36px,10vw,56px);margin:0;line-height:1.2;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.45)}
+.nt-circ{display:inline-block;border:2.5px solid #fff;border-radius:50%;padding:0 .1em;line-height:1.15;margin-left:.04em}
+.nt-sub{font-family:"LXGW WenKai TC",var(--sans);font-size:18px;margin:10px 0 0;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.nt-body{padding:0 24px 26px}
+.nt-sec{margin-top:22px}
+.nt-sec h4{font-family:"LXGW WenKai TC",var(--serif);font-weight:700;font-size:22px;margin:0 0 4px;color:#F3D29B}
+.nt-sec p{font-size:16.5px;line-height:1.95;margin:0;color:#E6E2DA;white-space:pre-wrap;word-break:break-word}
+.nt-pal{display:flex;gap:14px;align-items:center;margin-top:22px;flex-wrap:wrap}
+.nt-pal ul{flex:1;min-width:180px}
+.nt-pal .bar{background:rgba(255,255,255,.12)}
+.nt-sum{text-align:center;font-family:"LXGW WenKai TC",var(--serif);font-size:22px;line-height:1.7;margin:26px 0 0}
+.nt-box{border:1.5px solid #F2EFE9;width:fit-content;margin:18px auto 10px;padding:6px 22px;text-align:center;font-family:var(--latin);letter-spacing:.08em;line-height:1.55;font-size:16px}
+.nt-foot{text-align:center;font-size:13px;opacity:.7}
 /* ── Modal ── */
 .modal{position:fixed;inset:0;background:rgba(30,26,22,.55);z-index:100;display:flex;align-items:flex-start;justify-content:center;padding:24px 14px;overflow:auto}
 .modal-card{background:var(--card);border-radius:24px;max-width:460px;width:100%;padding:26px 22px 20px;position:relative;margin:auto}
@@ -510,9 +526,9 @@ body.screen{background:#16130F;color:#F6F1E7}
     <div class="style-pick no-print">
       <p>選一種你喜歡的卡片風格：</p>
       <div class="sp-row" id="stylePick">
-        <button type="button" data-style="toast"><i class="sp-sw sw-toast"></i><b>吐司海報</b><small>直書・日系留白</small></button>
-        <button type="button" data-style="menu"><i class="sp-sw sw-menu"></i><b>牛皮紙菜單</b><small>置中・餐廳菜單</small></button>
-        <button type="button" data-style="diary"><i class="sp-sw sw-diary"></i><b>拍立得日記</b><small>橫線紙・便利貼</small></button>
+        <button type="button" data-style="sketch"><i class="sp-sw sw-sketch"></i><b>手繪食譜</b><small>插畫標註・粉色底</small></button>
+        <button type="button" data-style="zen"><i class="sp-sw sw-zen"></i><b>日式留白</b><small>直書・大量留白</small></button>
+        <button type="button" data-style="night"><i class="sp-sw sw-night"></i><b>暗色海報</b><small>照片滿版・手寫字</small></button>
       </div>
     </div>
     <div id="cardHost"></div>
@@ -674,7 +690,9 @@ const $ = (s, r=document) => r.querySelector(s);
 const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const count = s => String(s || "").replace(/\s/g, "").length;
-const vt = s => `<span class="vstack">${Array.from(String(s)).map(c => `<i>${esc(c)}</i>`).join("")}</span>`;
+const VPUNC = {"，":"︐","。":"︒","、":"︑","：":"︓","；":"︔","！":"︕","？":"︖","「":"﹁","」":"﹂","『":"﹃","』":"﹄","（":"︵","）":"︶","—":"︱","…":"︙","～":"︴","-":"︱"};
+const vt = s => `<span class="vstack">${Array.from(String(s)).map(c => `<i>${esc(VPUNC[c] || c)}</i>`).join("")}</span>`;
+const vcols = (s, per) => { const a = Array.from(String(s || "")); const cols = []; for (let i = 0; i < a.length; i += per) cols.push(a.slice(i, i + per).join("")); return `<span class="vcols">${cols.map(vt).join("")}</span>`; };
 const applyV = root => $$("[data-v]", root).forEach(el => { el.innerHTML = vt(el.textContent.trim()); });
 const store = {
   get(k, d){ try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch(e){ return d; } },
@@ -752,6 +770,11 @@ function bars(n){
 }
 function nl(s){ return esc(s); }
 function renderCard(a, pic, who, style){
+  if (style === "zen") return cardZen(a, pic, who);
+  if (style === "night") return cardNight(a, pic, who);
+  return cardSketch(a, pic, who);
+}
+function renderCardToast(a, pic, who){
   const n = norm(a.flavors);
   const len = Array.from(a.food || "").length;
   const fs = len <= 4 ? 54 : len <= 6 ? 44 : len <= 9 ? 34 : 28;
@@ -773,6 +796,77 @@ function renderCard(a, pic, who, style){
     <section class="rc-palette"><span class="tag gray">${vt("情感比例")}</span>${donut(n, 132)}${bars(n)}</section>
     <blockquote class="rc-sum">${esc(a.summary)}</blockquote>
     <footer class="rc-foot"><span class="latin">Aftertaste<br> LAB</span><small>${dateStr(a.at)}・全文 ${a.chars||0} 字</small></footer>
+  </article>`;
+}
+function cardParts(a, pic, who){
+  const n = norm(a.flavors), m = MODE[a.mode] || MODE.A, people = a.people || [];
+  const top2 = FLAVORS.slice().sort((x,y) => n[y.k] - n[x.k]).slice(0, 2).filter(f => n[f.k] > 0);
+  return {n, m, people, top2, ppl:people.join("、"), whoTxt:`${who.cls}班 ${who.seat}號 ${who.name || ""}`, photo:pic ? `background-image:url(${pic})` : ""};
+}
+const ARROW = `<svg viewBox="0 0 40 30" aria-hidden="true"><path d="M3 5 C 17 2, 29 9, 33 24" fill="none" stroke="#3B3430" stroke-width="1.8" stroke-linecap="round"/><path d="M27 20 L33.5 25.5 L36 17.5" fill="none" stroke="#3B3430" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+function cardSketch(a, pic, who){
+  const c = cardParts(a, pic, who);
+  return `<article class="recipe r-sketch">
+    <div class="sk-head"><h3 class="sk-title">${esc(a.food)}</h3><p class="sk-sub">情感特調</p><div class="sk-who">${esc(who.cls)}班 ${esc(who.seat)}號<br>${esc(who.name || "")}</div></div>
+    <div class="sk-stage">
+      <div class="sk-photo ph" style="${c.photo}"></div>
+      ${c.people.slice(0,4).map((p,i) => `<span class="sk-note n${i}">${esc(p)}${ARROW}</span>`).join("")}
+      ${c.top2.map((f,i) => `<span class="sk-flav f${i}"><b>${f.icon}</b>${f.name} ${c.n[f.k]}%</span>`).join("")}
+    </div>
+    <div class="sk-bottom">
+      <div class="sk-cols">
+        <section><h4>記憶濾鏡：出場的畫面</h4><p>${esc(a.sense)}</p></section>
+        <section><h4>${esc(c.m.title)}</h4><p>${esc(a.core)}</p></section>
+      </div>
+      <div class="sk-pal">${donut(c.n, 112)}${bars(c.n)}</div>
+      <p class="sk-ps"><em>P.S.</em>${esc(a.summary)}</p>
+      <div class="sk-foot"><span>Aftertaste LAB ・ 回味製研所</span><span>${dateStr(a.at)}・${a.chars||0} 字</span></div>
+    </div>
+  </article>`;
+}
+function zhNum(n){ const d = "〇一二三四五六七八九"; return n <= 10 ? (n === 10 ? "十" : d[n]) : n < 20 ? "十" + d[n % 10] : d[Math.floor(n / 10)] + "十" + (n % 10 ? d[n % 10] : ""); }
+function cardZen(a, pic, who){
+  const c = cardParts(a, pic, who);
+  const len = Array.from(a.food || "").length;
+  const fs = len <= 4 ? 46 : len <= 6 ? 38 : len <= 8 ? 32 : 28;
+  const d = new Date(a.at);
+  return `<article class="recipe r-zen">
+    <div class="zn-top">
+      <div class="zn-cap">${vt(c.whoTxt.replace(/\s+/g, ""))}</div>
+      <div class="zn-right">
+        <div class="zn-date">${vt(`本日，${zhNum(d.getMonth()+1)}月${zhNum(d.getDate())}日是`)}</div>
+        <h3 class="zn-title" style="font-size:${fs}px">${vcols(`「${a.food}」。`, 9)}</h3>
+        <div class="zn-sum">${vcols(a.summary, 12)}</div>
+      </div>
+    </div>
+    <div class="zn-photo ph" style="${c.photo}"></div>
+    <p class="zn-people">與 ${esc(c.ppl)} 同桌</p>
+    <section class="zn-sec"><h4>記憶濾鏡</h4><p>${esc(a.sense)}</p></section>
+    <section class="zn-sec"><h4>${esc(c.m.title.replace(/^\S+\s/, ""))}</h4><p>${esc(a.core)}</p></section>
+    <section class="zn-sec"><h4>滋味比例</h4>
+      <div class="zn-bar">${FLAVORS.map(f => c.n[f.k] ? `<i style="width:${c.n[f.k]}%;background:${f.color}"></i>` : "").join("")}</div>
+      <div class="zn-legend">${FLAVORS.map(f => `<span>${f.icon} ${f.name} ${c.n[f.k]}%</span>`).join("")}</div>
+    </section>
+    <div class="zn-foot">aftertaste lab ・ ${dateStr(a.at)} ・ ${a.chars||0} 字</div>
+  </article>`;
+}
+function cardNight(a, pic, who){
+  const c = cardParts(a, pic, who);
+  const ch = Array.from(a.food || ""), last = ch.pop() || "";
+  return `<article class="recipe r-night">
+    <div class="nt-hero ph" style="${c.photo}">
+      <div class="nt-shade"></div>
+      <div class="nt-head"><h3 class="nt-title">${esc(ch.join(""))}<span class="nt-circ">${esc(last)}</span></h3>
+        <p class="nt-sub">與${esc(c.ppl)}，一碗情感特調</p></div>
+    </div>
+    <div class="nt-body">
+      <section class="nt-sec"><h4>記憶濾鏡</h4><p>${esc(a.sense)}</p></section>
+      <section class="nt-sec"><h4>${esc(c.m.title)}</h4><p>${esc(a.core)}</p></section>
+      <div class="nt-pal">${donut(c.n, 112, true)}${bars(c.n)}</div>
+      <p class="nt-sum">${esc(a.summary)}</p>
+      <div class="nt-box">${dateStr(a.at)}<br>全文 ${a.chars||0} 字</div>
+      <div class="nt-foot">${esc(c.whoTxt)} ・ Aftertaste LAB</div>
+    </div>
   </article>`;
 }
 function flagsOf(a, th){
@@ -1058,7 +1152,7 @@ function Student(preview){
     submit(a);
   };
   function drawCard(){
-    const st = D.cardStyle || "toast";
+    const st = ["sketch","zen","night"].includes(D.cardStyle) ? D.cardStyle : "sketch";
     $$("#stylePick button").forEach(b => b.classList.toggle("on", b.dataset.style === st));
     $("#cardHost").innerHTML = renderCard(D.last, getPic(), who, st);
   }

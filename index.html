@@ -281,13 +281,14 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 
 /* ── 風格二：日式留白 ── */
 .recipe.r-zen{background:#fff;border:1px solid #EEE9E2;border-radius:6px;padding:34px 26px 24px;color:#3A3632;font-family:var(--serif)}
-.zn-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.zn-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:10px}
+.zn-top .zn-photo{order:3;flex-basis:100%}
 .zn-cap{font-size:13px;color:#8A7F76;line-height:1;margin-top:150px}
 .zn-cap .vstack{gap:.3em}
 .zn-right{display:flex;flex-direction:row-reverse;gap:16px;align-items:flex-start}
 .zn-date{font-size:15px;font-weight:600;line-height:1}
 .zn-date .vstack{gap:.15em}
-.zn-title{font-weight:600;color:#A8402C;margin:0;line-height:1}
+.zn-title{font-weight:600;color:#A8402C;margin:0;line-height:1;font-size:var(--fs,40px)}
 .zn-title .vstack{gap:.12em}
 .zn-sum{font-size:14px;color:#A8402C;line-height:1;margin-top:3.6em}
 .zn-sum .vstack{gap:.28em}
@@ -320,6 +321,71 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 .nt-sum{text-align:center;font-family:"LXGW WenKai TC",var(--serif);font-size:22px;line-height:1.7;margin:26px 0 0}
 .nt-box{border:1.5px solid #F2EFE9;width:fit-content;margin:18px auto 10px;padding:6px 22px;text-align:center;font-family:var(--latin);letter-spacing:.08em;line-height:1.55;font-size:16px}
 .nt-foot{text-align:center;font-size:13px;opacity:.7}
+/* ══ 海報（A4 直式 794×1123） ══ */
+.poster-wrap{position:relative;margin:0 auto;overflow:hidden;border-radius:6px;box-shadow:0 24px 50px -24px rgba(60,35,10,.55);cursor:zoom-in}
+.poster{width:var(--pw,794px);transform-origin:0 0;position:absolute;top:0;left:0}
+.poster .recipe{max-width:none;width:var(--pw,794px);min-height:var(--ph,1123px);margin:0;border-radius:0;box-shadow:none;border:0;display:flex;flex-direction:column}
+.poster p{font-size:var(--tf,20px)!important}
+.poster .sk-ps,.poster .nt-sum{font-size:calc(var(--tf,20px)*1.45)!important}
+.poster .zn-people,.poster .sk-sub,.poster .nt-sub{font-size:revert}
+/* 手繪 */
+.poster .r-sketch{padding:50px 60px 40px}
+.poster .sk-title{font-size:72px}
+.poster .sk-sub{font-size:36px!important;margin-left:3em}
+.poster .sk-who{font-size:19px;top:10px}
+.poster .sk-stage{padding:34px 0 30px}
+.poster .sk-photo{width:40%;box-shadow:14px 16px 0 #F3D3C8;border-width:4px}
+.poster .sk-note{font-size:28px}
+.poster .sk-note svg{width:62px;height:46px}
+.poster .sk-note.n0{left:8%} .poster .sk-note.n1{right:8%}
+.poster .sk-flav{font-size:19px;width:20%} .poster .sk-flav b{font-size:40px}
+.poster .sk-flav.f0{left:4%} .poster .sk-flav.f1{right:4%}
+.poster .sk-bottom{flex:1;display:flex;flex-direction:column;margin:0 -60px -40px;padding:70px 60px 34px;background:linear-gradient(175deg,rgba(243,211,200,0) 0 70px,#F3D3C8 71px)}
+.poster .sk-bottom h4{font-size:28px}
+.poster .sk-cols{grid-template-columns:1fr 1fr;gap:30px}
+.poster .sk-pal svg,.poster .nt-pal svg{width:132px;height:132px}
+.poster .bar-li{font-size:16px;grid-template-columns:90px 1fr 50px;margin:1px 0}
+.poster .sk-pal,.poster .nt-pal{margin-top:18px}
+.poster .sk-foot,.poster .nt-foot{margin-top:auto;font-size:15px}
+.poster .sk-ps{margin:18px 0 18px}
+/* 日式 */
+.poster .r-zen{padding:64px 64px 40px}
+.poster .zn-top{flex-wrap:nowrap;gap:28px;min-height:560px}
+.poster .zn-top .zn-photo{order:0;flex:1;flex-basis:auto;align-self:flex-end;aspect-ratio:4/5;width:auto;margin:0}
+.poster .zn-right{order:1}
+.poster .zn-title{font-size:calc(var(--fs,40px)*1.6)}
+.poster .zn-date{font-size:24px}
+.poster .zn-sum{font-size:20px!important;margin-top:4.2em}
+.poster .zn-sum *,.poster .zn-date *{font-size:inherit}
+.poster .zn-cap{font-size:16px;margin-top:0;align-self:flex-end}
+.poster .zn-people{font-size:18px;margin-top:18px}
+.poster .zn-cols{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.poster .zn-sec{margin-top:34px}
+.poster .zn-sec h4{font-size:18px}
+.poster .zn-legend{font-size:16px}
+.poster .zn-bar{height:10px}
+.poster .zn-foot{margin-top:auto;padding-top:30px;font-size:15px}
+/* 暗色 */
+.poster .nt-hero{aspect-ratio:auto;height:520px}
+.poster .nt-head{padding:56px 40px}
+.poster .nt-title{font-size:84px}
+.poster .nt-sub{font-size:28px!important;margin-top:16px}
+.poster .nt-body{flex:1;display:flex;flex-direction:column;padding:0 60px 44px}
+.poster .nt-cols{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.poster .nt-sec h4{font-size:30px}
+.poster .nt-sum{margin-top:30px}
+.poster .nt-box{font-size:20px;padding:8px 30px}
+/* 全螢幕 */
+.poster-full{position:fixed;inset:0;z-index:120;background:rgba(20,16,12,.92);display:flex;align-items:center;justify-content:center}
+.pf-host{position:relative;overflow:hidden}
+#printHost{display:none}
+@page{size:A4 portrait;margin:0}
+@media print{
+  body>*:not(#printHost){display:none!important}
+  #printHost{display:block!important}
+  #printHost .poster{position:static;transform-origin:0 0}
+  #printHost .poster .recipe{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
 /* ── Modal ── */
 .modal{position:fixed;inset:0;background:rgba(30,26,22,.55);z-index:100;display:flex;align-items:flex-start;justify-content:center;padding:24px 14px;overflow:auto}
 .modal-card{background:var(--card);border-radius:24px;max-width:460px;width:100%;padding:26px 22px 20px;position:relative;margin:auto}
@@ -533,7 +599,9 @@ body.screen{background:#16130F;color:#F6F1E7}
     </div>
     <div id="cardHost"></div>
     <div class="actions center no-print">
-      <button class="btn" id="dlCard">⬇ 存成圖片</button>
+      <button class="btn" id="dlCard">⬇ 存成海報圖片</button>
+      <button class="btn ghost" id="fullPoster">🔍 全螢幕看海報</button>
+      <button class="btn ghost" id="printPoster">🖨 列印 A4</button>
       <button class="btn ghost" id="editAgain">回去修改</button>
       <button class="btn ghost" id="newBowl">再調一碗</button>
     </div>
@@ -541,6 +609,8 @@ body.screen{background:#16130F;color:#F6F1E7}
   </div>
 </div>
 
+<div class="poster-full" id="pFull" hidden><button class="x" id="pfClose" aria-label="關閉">✕</button><div class="pf-host" id="pfHost"></div></div>
+<div id="printHost"></div>
 <div class="modal" id="check" hidden>
   <div class="modal-card">
     <div class="reg-head"><span class="tag butter" data-v>出餐檢查</span>
@@ -835,14 +905,14 @@ function cardZen(a, pic, who){
       <div class="zn-cap">${vt(c.whoTxt.replace(/\s+/g, ""))}</div>
       <div class="zn-right">
         <div class="zn-date">${vt(`本日，${zhNum(d.getMonth()+1)}月${zhNum(d.getDate())}日是`)}</div>
-        <h3 class="zn-title" style="font-size:${fs}px">${vcols(`「${a.food}」。`, 9)}</h3>
+        <h3 class="zn-title" style="--fs:${fs}px">${vcols(`「${a.food}」。`, 9)}</h3>
         <div class="zn-sum">${vcols(a.summary, 12)}</div>
       </div>
+      <div class="zn-photo ph" style="${c.photo}"></div>
     </div>
-    <div class="zn-photo ph" style="${c.photo}"></div>
     <p class="zn-people">與 ${esc(c.ppl)} 同桌</p>
-    <section class="zn-sec"><h4>記憶濾鏡</h4><p>${esc(a.sense)}</p></section>
-    <section class="zn-sec"><h4>${esc(c.m.title.replace(/^\S+\s/, ""))}</h4><p>${esc(a.core)}</p></section>
+    <div class="zn-cols"><section class="zn-sec"><h4>記憶濾鏡</h4><p>${esc(a.sense)}</p></section>
+    <section class="zn-sec"><h4>${esc(c.m.title.replace(/^\S+\s/, ""))}</h4><p>${esc(a.core)}</p></section></div>
     <section class="zn-sec"><h4>滋味比例</h4>
       <div class="zn-bar">${FLAVORS.map(f => c.n[f.k] ? `<i style="width:${c.n[f.k]}%;background:${f.color}"></i>` : "").join("")}</div>
       <div class="zn-legend">${FLAVORS.map(f => `<span>${f.icon} ${f.name} ${c.n[f.k]}%</span>`).join("")}</div>
@@ -860,8 +930,8 @@ function cardNight(a, pic, who){
         <p class="nt-sub">與${esc(c.ppl)}，一碗情感特調</p></div>
     </div>
     <div class="nt-body">
-      <section class="nt-sec"><h4>記憶濾鏡</h4><p>${esc(a.sense)}</p></section>
-      <section class="nt-sec"><h4>${esc(c.m.title)}</h4><p>${esc(a.core)}</p></section>
+      <div class="nt-cols"><section class="nt-sec"><h4>記憶濾鏡</h4><p>${esc(a.sense)}</p></section>
+      <section class="nt-sec"><h4>${esc(c.m.title)}</h4><p>${esc(a.core)}</p></section></div>
       <div class="nt-pal">${donut(c.n, 112, true)}${bars(c.n)}</div>
       <p class="nt-sum">${esc(a.summary)}</p>
       <div class="nt-box">${dateStr(a.at)}<br>全文 ${a.chars||0} 字</div>
@@ -1154,8 +1224,46 @@ function Student(preview){
   function drawCard(){
     const st = ["sketch","zen","night"].includes(D.cardStyle) ? D.cardStyle : "sketch";
     $$("#stylePick button").forEach(b => b.classList.toggle("on", b.dataset.style === st));
-    $("#cardHost").innerHTML = renderCard(D.last, getPic(), who, st);
+    $("#cardHost").innerHTML = `<div class="poster-wrap" id="pWrap"><div class="poster">${renderCard(D.last, getPic(), who, st)}</div></div>`;
+    fitPoster($("#pWrap .poster")); scalePoster();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { const p = $("#pWrap .poster"); if (p) { fitPoster(p); scalePoster(); } });
+    $("#pWrap").onclick = openFull;
   }
+  /* 文字太多時自動縮小內文，盡量排進一張 A4 */
+  function fitPoster(p){
+    /* 先縮內文（最小 17px）；還放不下就把畫布等比例放大，維持 A4 比例 */
+    const r = p.querySelector(".recipe"); let tf = 21, w = 794;
+    const set = () => { r.style.setProperty("--tf", tf + "px"); p.style.setProperty("--pw", w + "px"); p.style.setProperty("--ph", Math.round(w * 1.4142) + "px"); };
+    set();
+    while (r.scrollHeight > w * 1.4142 + 1 && tf > 17) { tf -= .5; set(); }
+    while (r.scrollHeight > w * 1.4142 + 1 && w < 1400) { w += 20; set(); }
+    p.dataset.w = w; p.dataset.h = Math.max(Math.round(w * 1.4142), r.scrollHeight);
+  }
+  function placePoster(host, p, k){
+    p.style.transform = `scale(${k})`;
+    host.style.width = (+p.dataset.w) * k + "px"; host.style.height = (+p.dataset.h) * k + "px";
+  }
+  function scalePoster(){
+    const w = $("#pWrap"); if (!w) return;
+    const avail = Math.min($("#final").clientWidth || 360, 860);
+    const p = w.querySelector(".poster"); placePoster(w, p, Math.min(1, avail / (+p.dataset.w)));
+  }
+  window.addEventListener("resize", () => { if (!$("#final") || $("#final").hidden) return; scalePoster(); if (!$("#pFull").hidden) openFull(); });
+  function openFull(){
+    const src = $("#pWrap .poster"); if (!src) return;
+    const host = $("#pfHost"); host.innerHTML = ""; const p = src.cloneNode(true); host.appendChild(p);
+    const k = Math.min((window.innerWidth - 16) / (+src.dataset.w), (window.innerHeight - 16) / (+src.dataset.h));
+    placePoster(host, p, k); $("#pFull").hidden = false;
+  }
+  $("#pfClose").onclick = () => { $("#pFull").hidden = true; };
+  $("#pFull").onclick = e => { if (e.target.id === "pFull") $("#pFull").hidden = true; };
+  $("#fullPoster").onclick = openFull;
+  $("#printPoster").onclick = () => {
+    const src = $("#pWrap .poster"); if (!src) return;
+    const host = $("#printHost"); host.innerHTML = ""; const c = src.cloneNode(true);
+    c.style.transform = `scale(${794 / (+src.dataset.w)})`; host.appendChild(c);
+    try { window.print(); } catch(e){}
+  };
   $("#stylePick").addEventListener("click", e => {
     const b = e.target.closest("[data-style]"); if (!b) return;
     D.cardStyle = b.dataset.style; save(); drawCard();
@@ -1205,16 +1313,18 @@ function Student(preview){
     D = newDraft(); if (preview) D.maxStep = 4; save(); fill(); showStep(1);
   };
   $("#dlCard").onclick = async () => {
-    const card = $("#cardHost .recipe");
-    if (!window.html2canvas) { alert("圖片工具還沒載入，請直接截圖這張卡片。"); return; }
+    const src = $("#pWrap .poster");
+    if (!src || !window.html2canvas) { alert("圖片工具還沒載入，請直接截圖海報。"); return; }
     const b = $("#dlCard"); b.textContent = "製作中…"; b.disabled = true;
+    const tmp = document.createElement("div"); tmp.style.cssText = "position:fixed;left:-10000px;top:0;";
+    const p = src.cloneNode(true); p.style.transform = "none"; p.style.position = "static"; tmp.appendChild(p); document.body.appendChild(tmp);
     try {
-      const c = await html2canvas(card, {scale:2, backgroundColor:"#F6F1E7", useCORS:true});
+      const c = await html2canvas(p.querySelector(".recipe"), {scale:3, backgroundColor:null, useCORS:true, windowWidth:900});
       const link = document.createElement("a");
-      link.download = `情感食譜卡_${who.cls}_${who.seat}_${D.last.food}.png`;
+      link.download = `情感海報_${who.cls}_${who.seat}_${D.last.food}.png`;
       link.href = c.toDataURL("image/png"); link.click();
-    } catch(e){ alert("存圖失敗，請直接截圖這張卡片。"); }
-    b.textContent = "⬇ 存成圖片"; b.disabled = false;
+    } catch(e){ alert("存圖失敗，請直接截圖海報。"); }
+    tmp.remove(); b.textContent = "⬇ 存成海報圖片"; b.disabled = false;
   };
 
   /* 使用時間：只算畫面開著的秒數 */

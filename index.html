@@ -342,63 +342,62 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 .poster-wrap{position:relative;margin:0 auto;overflow:hidden;border-radius:6px;box-shadow:0 24px 50px -24px rgba(60,35,10,.55);cursor:zoom-in}
 .poster{width:var(--pw,794px);transform-origin:0 0;position:absolute;top:0;left:0}
 .poster .recipe{max-width:none;width:var(--pw,794px);min-height:var(--ph,1123px);margin:0;border-radius:0;box-shadow:none;border:0;display:flex;flex-direction:column}
-.poster p{font-size:var(--tf,20px)!important}
-.poster .sk-ps,.poster .nt-sum{font-size:calc(var(--tf,20px)*1.45)!important}
+.poster p{font-size:var(--tf,24px)!important;line-height:1.85!important}
+.poster .sk-ps,.poster .nt-sum{font-size:calc(var(--tf,24px)*1.3)!important}
 .poster .zn-people,.poster .sk-sub,.poster .nt-sub{font-size:revert}
 /* 手繪 */
 .poster .r-sketch{padding:50px 60px 40px}
 .poster .sk-title{font-size:72px}
-.poster .sk-sub{font-size:36px!important;margin-left:3em}
-.poster .sk-who{font-size:19px;top:10px}
-.poster .sk-stage{padding:34px 0 30px}
-.poster .sk-photo{width:40%;box-shadow:14px 16px 0 #F3D3C8;border-width:4px}
-.poster .sk-note{font-size:28px}
+.poster .sk-sub{font-size:34px!important;margin-left:3em}
+.poster .sk-who{font-size:21px;top:10px}
+.poster .sk-stage{padding:22px 0 16px}
+.poster .sk-photo{width:290px;box-shadow:14px 16px 0 #F3D3C8;border-width:4px}
+.poster .sk-note{font-size:30px}
 .poster .sk-note svg{width:62px;height:46px}
 .poster .sk-note.n0{left:8%} .poster .sk-note.n1{right:8%}
-.poster .sk-flav{font-size:19px;width:20%} .poster .sk-flav b{font-size:40px}
+.poster .sk-flav{font-size:22px;width:22%} .poster .sk-flav b{font-size:40px}
 .poster .sk-flav.f0{left:4%} .poster .sk-flav.f1{right:4%}
-.poster .sk-bottom{flex:1;display:flex;flex-direction:column;margin:0 -60px -40px;padding:70px 60px 34px;background:linear-gradient(175deg,rgba(243,211,200,0) 0 70px,#F3D3C8 71px)}
-.poster .sk-bottom h4{font-size:28px}
+.poster .sk-bottom{flex:1;display:flex;flex-direction:column;margin:0 -60px -40px;padding:62px 60px 34px;background:linear-gradient(175deg,rgba(243,211,200,0) 0 70px,#F3D3C8 71px)}
+.poster .sk-bottom h4{font-size:31px}
 .poster .sk-cols{grid-template-columns:1fr 1fr;gap:30px}
-.poster .sk-pal svg,.poster .nt-pal svg{width:132px;height:132px}
-.poster .bar-li{font-size:16px;grid-template-columns:90px 1fr 50px;margin:1px 0}
+.poster .sk-pal svg,.poster .nt-pal svg,.poster .pt-pal svg{width:150px;height:150px}
+.poster .bar-li{font-size:20px;grid-template-columns:112px 1fr 62px;margin:3px 0}
 .poster .sk-pal,.poster .nt-pal{margin-top:18px}
-.poster .sk-foot,.poster .nt-foot{margin-top:auto;font-size:15px}
+.poster .sk-foot,.poster .nt-foot{margin-top:auto;font-size:18px}
 .poster .sk-ps{margin:18px 0 18px}
 /* 日式 */
 .poster .r-zen{padding:64px 64px 40px}
-.poster .zn-top{flex-wrap:nowrap;gap:28px;min-height:560px}
-.poster .zn-top .zn-photo{order:0;flex:1;flex-basis:auto;align-self:flex-end;aspect-ratio:4/5;width:auto;margin:0}
+.poster .zn-top{flex-wrap:nowrap;gap:28px}
+.poster .zn-top .zn-photo{order:0;flex:1;flex-basis:auto;align-self:flex-end;aspect-ratio:auto;height:480px;width:auto;margin:0}
 .poster .zn-right{order:1}
-.poster .zn-title{font-size:calc(var(--fs,40px)*1.6)}
-.poster .zn-date{font-size:24px}
-.poster .zn-sum{font-size:20px!important;margin-top:4.2em}
+.poster .zn-title{font-size:calc(var(--fs,40px)*1.35)}
+.poster .zn-date{font-size:27px}
+.poster .zn-sum{font-size:23px!important;margin-top:4.2em}
 .poster .zn-sum *,.poster .zn-date *{font-size:inherit}
-.poster .zn-cap{font-size:16px;margin-top:0;align-self:flex-end}
-.poster .zn-people{font-size:18px;margin-top:18px}
+.poster .zn-cap{font-size:19px;margin-top:0;align-self:flex-end}
+.poster .zn-people{font-size:21px!important;margin-top:18px}
 .poster .zn-cols{display:grid;grid-template-columns:1fr 1fr;gap:40px}
 .poster .zn-sec{margin-top:34px}
-.poster .zn-sec h4{font-size:18px}
-.poster .zn-legend{font-size:16px}
+.poster .zn-sec h4{font-size:23px}
+.poster .zn-legend{font-size:20px}
 .poster .zn-bar{height:10px}
-.poster .zn-foot{margin-top:auto;padding-top:30px;font-size:15px}
+.poster .zn-foot{margin-top:auto;padding-top:30px;font-size:18px}
 /* 暖光攝影 */
-.poster .pt-hero{aspect-ratio:auto;height:660px}
-.poster .pt-title{left:56px;top:54px;font-size:68px}
-.poster .pt-title small{font-size:15px}
+.poster .pt-hero{aspect-ratio:auto;height:540px}
+.poster .pt-title{left:56px;top:50px;font-size:66px}
+.poster .pt-title small{font-size:17px}
 .poster .pt-doodle{width:96px;height:96px}
 .poster .pt-doodle.d1{right:70px} .poster .pt-doodle.d2{right:90px;width:104px} .poster .pt-doodle.d3{left:50px;width:86px}
-.poster .pt-badge{width:150px;height:150px;font-size:18px;right:-6px}
+.poster .pt-badge{width:158px;height:158px;font-size:21px;right:-6px}
 .poster .pt-badge i{width:60px}
-.poster .pt-note{right:56px;bottom:44px;max-width:52%;font-size:19px!important;padding:10px 0 0 20px}
+.poster .pt-note{right:56px;bottom:40px;max-width:56%;font-size:23px!important;padding:10px 0 0 20px}
 .poster .pt-note::before{width:20px;height:20px}
 .poster .pt-body{flex:1;display:flex;flex-direction:column;padding:4px 56px 40px}
 .poster .pt-cols{display:grid;grid-template-columns:1fr 1fr;gap:40px}
-.poster .pt-sec h4{font-size:26px}
-.poster .pt-sec h4 small{font-size:13px}
-.poster .pt-pal svg{width:132px;height:132px}
-.poster .pt-foot{margin-top:auto;font-size:15px}
-.poster .pt-foot b{font-size:24px}
+.poster .pt-sec h4{font-size:31px}
+.poster .pt-sec h4 small{font-size:15px}
+.poster .pt-foot{margin-top:auto;font-size:18px}
+.poster .pt-foot b{font-size:28px}
 /* 全螢幕 */
 .poster-full{position:fixed;inset:0;z-index:120;background:rgba(20,16,12,.92);display:flex;align-items:center;justify-content:center}
 .pf-host{position:relative;overflow:hidden}
@@ -1277,11 +1276,11 @@ function Student(preview){
   }
   /* 文字太多時自動縮小內文，盡量排進一張 A4 */
   function fitPoster(p){
-    /* 先縮內文（最小 17px）；還放不下就把畫布等比例放大，維持 A4 比例 */
-    const r = p.querySelector(".recipe"); let tf = 21, w = 794;
+    /* 先縮內文（最小 21px）；還放不下就把畫布等比例放大，維持 A4 比例 */
+    const r = p.querySelector(".recipe"); let tf = 25, w = 794;
     const set = () => { r.style.setProperty("--tf", tf + "px"); p.style.setProperty("--pw", w + "px"); p.style.setProperty("--ph", Math.round(w * 1.4142) + "px"); };
     set();
-    while (r.scrollHeight > w * 1.4142 + 1 && tf > 17) { tf -= .5; set(); }
+    while (r.scrollHeight > w * 1.4142 + 1 && tf > 21) { tf -= .5; set(); }
     while (r.scrollHeight > w * 1.4142 + 1 && w < 1400) { w += 20; set(); }
     p.dataset.w = w; p.dataset.h = Math.max(Math.round(w * 1.4142), r.scrollHeight);
   }

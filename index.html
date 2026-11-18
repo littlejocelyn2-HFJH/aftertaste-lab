@@ -244,7 +244,7 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 .sp-sw{display:block;width:46px;height:34px;border-radius:6px;margin-bottom:4px;border:1px solid rgba(0,0,0,.15)}
 .sw-sketch{background:linear-gradient(165deg,#FBF6EE 0 55%,#F3D3C8 56%)}
 .sw-zen{background:#fff;border-right:4px solid #A8402C}
-.sw-night{background:linear-gradient(180deg,#0F1620,#2C3E55)}
+.sw-photo{background:linear-gradient(180deg,#C9A27A 0 62%,#F4ECE1 62%);box-shadow:inset 6px 6px 0 -2px rgba(255,255,255,.9)}
 
 .vcols{display:inline-flex;flex-direction:row-reverse;align-items:flex-start;gap:.45em}
 .ph{background-size:cover;background-position:center;background-repeat:no-repeat;background-color:#fff}
@@ -303,24 +303,31 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 .zn-legend{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:13.5px;color:#6E655B;font-family:var(--sans)}
 .zn-foot{text-align:center;font-family:var(--latin);letter-spacing:.14em;font-size:13px;color:#8A7F76;margin-top:30px}
 
-/* ── 風格三：暗色攝影海報 ── */
-.recipe.r-night{background:#1D2836 repeating-linear-gradient(115deg,rgba(255,255,255,.025) 0 2px,rgba(255,255,255,0) 2px 6px);color:#F2EFE9;border:0;padding:0;overflow:hidden}
-.nt-hero{position:relative;aspect-ratio:4/5}
-.nt-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,22,32,.85) 0%,rgba(15,22,32,.2) 40%,rgba(15,22,32,.12) 62%,#1D2836 100%)}
-.nt-head{position:absolute;top:0;left:0;right:0;text-align:center;padding:30px 18px}
-.nt-title{font-family:"LXGW WenKai TC",var(--serif);font-weight:700;font-size:clamp(36px,10vw,56px);margin:0;line-height:1.2;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.45)}
-.nt-circ{display:inline-block;border:2.5px solid #fff;border-radius:50%;padding:0 .1em;line-height:1.15;margin-left:.04em}
-.nt-sub{font-family:"LXGW WenKai TC",var(--sans);font-size:18px;margin:10px 0 0;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.5)}
-.nt-body{padding:0 24px 26px}
-.nt-sec{margin-top:22px}
-.nt-sec h4{font-family:"LXGW WenKai TC",var(--serif);font-weight:700;font-size:22px;margin:0 0 4px;color:#F3D29B}
-.nt-sec p{font-size:16.5px;line-height:1.95;margin:0;color:#E6E2DA;white-space:pre-wrap;word-break:break-word}
-.nt-pal{display:flex;gap:14px;align-items:center;margin-top:22px;flex-wrap:wrap}
-.nt-pal ul{flex:1;min-width:180px}
-.nt-pal .bar{background:rgba(255,255,255,.12)}
-.nt-sum{text-align:center;font-family:"LXGW WenKai TC",var(--serif);font-size:22px;line-height:1.7;margin:26px 0 0}
-.nt-box{border:1.5px solid #F2EFE9;width:fit-content;margin:18px auto 10px;padding:6px 22px;text-align:center;font-family:var(--latin);letter-spacing:.08em;line-height:1.55;font-size:16px}
-.nt-foot{text-align:center;font-size:13px;opacity:.7}
+/* ── 風格三：暖光攝影 ── */
+.recipe.r-photo{background:#F4ECE1;color:#4A3B30;border:0;padding:0;overflow:hidden}
+.pt-hero{position:relative;aspect-ratio:4/5;color:#fff}
+.pt-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(70,45,25,.38) 0%,rgba(70,45,25,0) 38%,rgba(70,45,25,0) 62%,rgba(70,45,25,.42) 100%)}
+.pt-title{position:absolute;left:22px;top:26px;right:22px;margin:0;font-family:var(--sans);font-weight:700;font-size:clamp(30px,8.6vw,46px);line-height:1.32;letter-spacing:.04em;text-shadow:0 2px 10px rgba(60,35,15,.35)}
+.pt-title>span{display:flex;align-items:center;gap:14px}
+.pt-title small{font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.18em;opacity:.95}
+.pt-doodle{position:absolute;width:64px;height:64px}
+.pt-doodle.d1{right:20px;top:34%} .pt-doodle.d2{right:30px;top:48%;width:70px} .pt-doodle.d3{left:18px;bottom:24%;width:58px}
+.pt-badge{position:absolute;right:-8px;bottom:30%;width:104px;height:104px;border-radius:50%;background:#fff;color:#4A3B30;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;line-height:1.35;font-weight:700;box-shadow:0 6px 16px -6px rgba(0,0,0,.35);padding-right:10px}
+.pt-badge i{font-style:normal;display:block;width:44px;border-top:1.5px solid #4A3B30;margin-top:4px;position:relative}
+.pt-badge i::after{content:"";position:absolute;right:0;top:-5px;width:8px;height:8px;border-top:1.5px solid #4A3B30;border-right:1.5px solid #4A3B30;transform:rotate(45deg)}
+.pt-note{position:absolute;right:22px;bottom:22px;max-width:62%;font-size:14px;line-height:1.85;font-weight:500;padding:6px 0 0 14px;text-shadow:0 1px 6px rgba(60,35,15,.5)}
+.pt-note::before{content:"";position:absolute;left:0;top:0;width:14px;height:14px;border-left:1.5px solid #fff;border-top:1.5px solid #fff}
+.pt-body{padding:6px 24px 26px}
+.pt-sec{margin-top:22px}
+.pt-sec h4{display:flex;align-items:baseline;gap:10px;font-family:var(--sans);font-weight:700;font-size:20px;margin:0 0 6px;color:#9C5A24}
+.pt-sec h4 small{font-size:11px;letter-spacing:.18em;color:#B89A7E;font-weight:500}
+.pt-sec p{font-size:16.5px;line-height:1.95;margin:0;white-space:pre-wrap;word-break:break-word}
+.pt-pal{display:flex;gap:14px;align-items:center;margin-top:22px;flex-wrap:wrap}
+.pt-pal ul{flex:1;min-width:180px}
+.pt-pal .bar{background:#E6DACB}
+.pt-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;margin-top:22px;padding-top:10px;border-top:1px solid #E2D4C3;font-size:13px;color:#8C7766}
+.pt-foot b{font-family:var(--latin);font-weight:400;font-size:20px;color:#4A3B30}
+
 /* ══ 海報（A4 直式 794×1123） ══ */
 .poster-wrap{position:relative;margin:0 auto;overflow:hidden;border-radius:6px;box-shadow:0 24px 50px -24px rgba(60,35,10,.55);cursor:zoom-in}
 .poster{width:var(--pw,794px);transform-origin:0 0;position:absolute;top:0;left:0}
@@ -365,16 +372,23 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 .poster .zn-legend{font-size:16px}
 .poster .zn-bar{height:10px}
 .poster .zn-foot{margin-top:auto;padding-top:30px;font-size:15px}
-/* 暗色 */
-.poster .nt-hero{aspect-ratio:auto;height:520px}
-.poster .nt-head{padding:56px 40px}
-.poster .nt-title{font-size:84px}
-.poster .nt-sub{font-size:28px!important;margin-top:16px}
-.poster .nt-body{flex:1;display:flex;flex-direction:column;padding:0 60px 44px}
-.poster .nt-cols{display:grid;grid-template-columns:1fr 1fr;gap:40px}
-.poster .nt-sec h4{font-size:30px}
-.poster .nt-sum{margin-top:30px}
-.poster .nt-box{font-size:20px;padding:8px 30px}
+/* 暖光攝影 */
+.poster .pt-hero{aspect-ratio:auto;height:660px}
+.poster .pt-title{left:56px;top:54px;font-size:68px}
+.poster .pt-title small{font-size:15px}
+.poster .pt-doodle{width:96px;height:96px}
+.poster .pt-doodle.d1{right:70px} .poster .pt-doodle.d2{right:90px;width:104px} .poster .pt-doodle.d3{left:50px;width:86px}
+.poster .pt-badge{width:150px;height:150px;font-size:18px;right:-6px}
+.poster .pt-badge i{width:60px}
+.poster .pt-note{right:56px;bottom:44px;max-width:52%;font-size:19px!important;padding:10px 0 0 20px}
+.poster .pt-note::before{width:20px;height:20px}
+.poster .pt-body{flex:1;display:flex;flex-direction:column;padding:4px 56px 40px}
+.poster .pt-cols{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.poster .pt-sec h4{font-size:26px}
+.poster .pt-sec h4 small{font-size:13px}
+.poster .pt-pal svg{width:132px;height:132px}
+.poster .pt-foot{margin-top:auto;font-size:15px}
+.poster .pt-foot b{font-size:24px}
 /* 全螢幕 */
 .poster-full{position:fixed;inset:0;z-index:120;background:rgba(20,16,12,.92);display:flex;align-items:center;justify-content:center}
 .pf-host{position:relative;overflow:hidden}
@@ -594,7 +608,7 @@ body.screen{background:#16130F;color:#F6F1E7}
       <div class="sp-row" id="stylePick">
         <button type="button" data-style="sketch"><i class="sp-sw sw-sketch"></i><b>手繪食譜</b><small>插畫標註・粉色底</small></button>
         <button type="button" data-style="zen"><i class="sp-sw sw-zen"></i><b>日式留白</b><small>直書・大量留白</small></button>
-        <button type="button" data-style="night"><i class="sp-sw sw-night"></i><b>暗色海報</b><small>照片滿版・手寫字</small></button>
+        <button type="button" data-style="photo"><i class="sp-sw sw-photo"></i><b>暖光攝影</b><small>照片滿版・白字標題</small></button>
       </div>
     </div>
     <div id="cardHost"></div>
@@ -841,7 +855,7 @@ function bars(n){
 function nl(s){ return esc(s); }
 function renderCard(a, pic, who, style){
   if (style === "zen") return cardZen(a, pic, who);
-  if (style === "night") return cardNight(a, pic, who);
+  if (style === "photo" || style === "night") return cardPhoto(a, pic, who);
   return cardSketch(a, pic, who);
 }
 function renderCardToast(a, pic, who){
@@ -920,22 +934,32 @@ function cardZen(a, pic, who){
     <div class="zn-foot">aftertaste lab ・ ${dateStr(a.at)} ・ ${a.chars||0} 字</div>
   </article>`;
 }
-function cardNight(a, pic, who){
+const DOODLE = {
+  leaf:`<svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 50 C 10 30, 24 12, 50 10 C 52 34, 38 50, 14 50 Z"/><path d="M14 50 C 24 40, 34 28, 44 18"/><path d="M26 38 L 22 30 M 32 32 L 30 23 M 38 26 L 38 18"/></svg>`,
+  steam:`<svg viewBox="0 0 70 64" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 44 C 2 40, 6 28, 16 30 C 14 18, 30 14, 34 24 C 40 12, 58 16, 54 30 C 66 30, 66 46, 54 46 C 50 54, 36 54, 32 48 C 24 54, 12 52, 10 44 Z"/><path d="M28 56 C 26 60, 22 62, 18 62"/></svg>`,
+  sprout:`<svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M32 60 L 32 30"/><path d="M32 34 C 30 20, 16 14, 6 18 C 8 30, 22 36, 32 34 Z"/><path d="M32 30 C 34 16, 48 8, 58 12 C 56 24, 42 30, 32 30 Z"/></svg>`
+};
+function cardPhoto(a, pic, who){
   const c = cardParts(a, pic, who);
-  const ch = Array.from(a.food || ""), last = ch.pop() || "";
-  return `<article class="recipe r-night">
-    <div class="nt-hero ph" style="${c.photo}">
-      <div class="nt-shade"></div>
-      <div class="nt-head"><h3 class="nt-title">${esc(ch.join(""))}<span class="nt-circ">${esc(last)}</span></h3>
-        <p class="nt-sub">與${esc(c.ppl)}，一碗情感特調</p></div>
+  const chars = Array.from(a.food || ""), per = chars.length <= 4 ? 4 : chars.length <= 10 ? Math.ceil(chars.length / 2) : Math.ceil(chars.length / 3);
+  const lines = []; for (let i = 0; i < chars.length; i += per) lines.push(chars.slice(i, i + per).join(""));
+  const labels = ["AFTERTASTE", "EMOTION", "RECIPE"];
+  const t = c.top2[0];
+  return `<article class="recipe r-photo">
+    <div class="pt-hero ph" style="${c.photo}">
+      <div class="pt-shade"></div>
+      <h3 class="pt-title">${lines.map((l,i) => `<span>${esc(l)}<small>${labels[i] || ""}</small></span>`).join("")}</h3>
+      <span class="pt-doodle d1">${DOODLE.leaf}</span><span class="pt-doodle d2">${DOODLE.steam}</span><span class="pt-doodle d3">${DOODLE.sprout}</span>
+      <div class="pt-badge">本日特調${t ? `<span>${t.icon} ${t.name} ${c.n[t.k]}%</span>` : ""}<i></i></div>
+      <p class="pt-note">${esc(a.summary)}</p>
     </div>
-    <div class="nt-body">
-      <div class="nt-cols"><section class="nt-sec"><h4>記憶濾鏡</h4><p>${esc(a.sense)}</p></section>
-      <section class="nt-sec"><h4>${esc(c.m.title)}</h4><p>${esc(a.core)}</p></section></div>
-      <div class="nt-pal">${donut(c.n, 112, true)}${bars(c.n)}</div>
-      <p class="nt-sum">${esc(a.summary)}</p>
-      <div class="nt-box">${dateStr(a.at)}<br>全文 ${a.chars||0} 字</div>
-      <div class="nt-foot">${esc(c.whoTxt)} ・ Aftertaste LAB</div>
+    <div class="pt-body">
+      <div class="pt-cols">
+        <section class="pt-sec"><h4>記憶濾鏡<small>MEMORY</small></h4><p>${esc(a.sense)}</p></section>
+        <section class="pt-sec"><h4>${esc(c.m.title)}<small>PEOPLE</small></h4><p>${esc(a.core)}</p></section>
+      </div>
+      <div class="pt-pal">${donut(c.n, 112)}${bars(c.n)}</div>
+      <div class="pt-foot"><span>與${esc(c.ppl)}同桌<br>${esc(c.whoTxt)}</span><span style="text-align:right"><b>Aftertaste LAB</b><br>${dateStr(a.at)}・${a.chars||0} 字</span></div>
     </div>
   </article>`;
 }
@@ -1222,7 +1246,7 @@ function Student(preview){
     submit(a);
   };
   function drawCard(){
-    const st = ["sketch","zen","night"].includes(D.cardStyle) ? D.cardStyle : "sketch";
+    const st = ["sketch","zen","photo"].includes(D.cardStyle) ? D.cardStyle : D.cardStyle === "night" ? "photo" : "sketch";
     $$("#stylePick button").forEach(b => b.classList.toggle("on", b.dataset.style === st));
     $("#cardHost").innerHTML = `<div class="poster-wrap" id="pWrap"><div class="poster">${renderCard(D.last, getPic(), who, st)}</div></div>`;
     fitPoster($("#pWrap .poster")); scalePoster();

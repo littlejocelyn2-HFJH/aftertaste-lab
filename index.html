@@ -6,7 +6,7 @@
 <title>回味製研所：情感特調</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=LXGW+WenKai+TC:wght@400;700&family=DM+Serif+Display&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=LXGW+WenKai+TC:wght@400;700&family=DM+Serif+Display&family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
 <script src="config.js?v=2"></script>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" defer></script>
 <style>
@@ -183,7 +183,49 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 .rc-foot .latin{font-family:var(--latin);font-size:26px;line-height:1}
 .rc-foot small{color:var(--soft);font-size:13px}
 
-.cover{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-bottom:20px}
+.cover{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-bottom:26px;position:relative}
+body.on-cover{background:#ECEEF0 radial-gradient(circle at 20% 30%,rgba(255,255,255,.7),rgba(255,255,255,0) 40%) fixed}
+body.on-cover::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(rgba(255,255,255,.9) 1px,transparent 1.4px),radial-gradient(rgba(170,176,186,.35) 1px,transparent 1.4px);background-size:7px 7px,11px 11px;background-position:0 0,3px 5px}
+.ph-hero{position:relative;padding:10px 0 4px;color:#24305E}
+.doodles{position:absolute;inset:-10px -10px 0;pointer-events:none;z-index:0}
+.dd{position:absolute;display:block;font-style:normal}
+.dd svg{width:100%;height:100%;display:block}
+.fork1{width:28px;height:84px;left:2%;top:31%;transform:rotate(-28deg)}
+.fork2{width:30px;height:90px;right:3%;top:3%;transform:rotate(22deg)}
+.fork3{display:none}
+.leaf1{width:46px;height:46px;right:2%;top:36%;transform:rotate(80deg)}
+.leaf2{width:36px;height:36px;left:47%;top:60%;transform:rotate(-20deg)}
+.leaf3{width:40px;height:40px;right:0;bottom:-2%;transform:rotate(200deg)}
+.sprig1{width:70px;height:52px;left:30%;top:2%;transform:rotate(-12deg)}
+.sprig2{width:58px;height:44px;left:44%;top:-2%;transform:rotate(160deg);display:none}
+.dot{position:absolute;width:9px;height:9px;border-radius:50%;background:#E0312B;display:block}
+.ph-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:4px 10px;align-items:center}
+.food{display:flex;align-items:center;gap:6px;min-width:0}
+.food .emo{font-size:clamp(64px,19vw,112px);line-height:1;filter:drop-shadow(0 10px 8px rgba(40,40,60,.22))}
+.food p{margin:0;font-size:13px;line-height:1.45;font-weight:700;color:#24305E}
+.food p b{display:block;font-size:14px;white-space:nowrap}
+.food p small{white-space:nowrap}
+.food p small{display:block;font-weight:500;font-size:11px}
+.food p em{display:block;font-style:normal;font-family:var(--latin);font-size:15px;color:#24305E}
+.f1{justify-self:start;margin-left:-6px}
+.f1 .emo{font-size:clamp(54px,15vw,90px)}
+.f2{justify-self:end;flex-direction:row-reverse;text-align:right}
+.f3{justify-self:start}
+.f4{justify-self:end;flex-direction:row-reverse;text-align:right;margin-top:26px}
+.f5{justify-self:start;margin-top:-6px}
+.f6{justify-self:end;flex-direction:row-reverse;text-align:right;margin-top:18px}
+.blob{grid-column:1/-1;position:relative;background:#fff;text-align:center;padding:46px 18px 30px;margin:6px 4px 10px;
+  border-radius:52% 46% 50% 44%/40% 46% 48% 52%;box-shadow:0 16px 40px -22px rgba(40,50,80,.35)}
+.burst{position:absolute;left:50%;top:-6px;width:110px;height:38px;transform:translateX(-50%)}
+.burst svg{width:100%;height:100%}
+.b-kicker{margin:0;color:#E0312B;font-weight:900;font-size:clamp(22px,6.4vw,34px);letter-spacing:.06em;line-height:1.3}
+.b-title{margin:2px 0 8px;color:#E0312B;font-weight:900;font-size:clamp(50px,14.5vw,92px);line-height:1.1;letter-spacing:.02em;font-family:var(--sans)}
+.b-sub{margin:0;color:#24305E;font-weight:700;font-size:clamp(15px,4.2vw,20px);line-height:1.6}
+.cover .btn.toast{background:#E0312B;box-shadow:0 10px 22px -10px rgba(224,49,43,.7)}
+.cover .cover-status{color:#24305E;font-weight:500}
+.cover .cover-steps{color:#5A6380}
+.cover .cover-links a,.cover .cover-links .link{color:#E0312B}
 .cover-cta{text-align:center;margin-top:26px}
 .cover-status{font-size:17px;margin:0 0 12px;min-height:1.6em}
 .btn.big{font-size:22px;padding:17px 46px;box-shadow:0 10px 24px -10px rgba(156,90,36,.7)}
@@ -471,24 +513,29 @@ body.screen{background:#16130F;color:#F6F1E7}
 <template id="tpl-student">
 <div class="wrap">
   <section id="cover" class="cover">
-  <header class="hero">
-    <div class="hero-left">
-      <div class="badge"><span data-v>回味</span><small>since<br>2026</small></div>
-      <p class="hero-lead">一道菜，一段時光。<br>把食物端上桌，<br>把人寫進碗裡，<br>再調出記憶真正的滋味。</p>
+  <header class="ph-hero">
+    <div class="doodles" aria-hidden="true">
+      <i class="dd fork1"><svg viewBox="0 0 40 120" fill="none" stroke="#E0312B" stroke-width="3" stroke-linecap="round"><path d="M10 6 L10 36 M20 4 L20 36 M30 6 L30 36 M8 36 C 8 50, 32 50, 32 36 M20 48 C 19 70, 22 95, 20 116"/></svg></i><i class="dd fork2"><svg viewBox="0 0 40 120" fill="none" stroke="#E0312B" stroke-width="3" stroke-linecap="round"><path d="M10 6 L10 36 M20 4 L20 36 M30 6 L30 36 M8 36 C 8 50, 32 50, 32 36 M20 48 C 19 70, 22 95, 20 116"/></svg></i><i class="dd fork3"><svg viewBox="0 0 40 120" fill="none" stroke="#E0312B" stroke-width="3" stroke-linecap="round"><path d="M10 6 L10 36 M20 4 L20 36 M30 6 L30 36 M8 36 C 8 50, 32 50, 32 36 M20 48 C 19 70, 22 95, 20 116"/></svg></i>
+      <i class="dd leaf1"><svg viewBox="0 0 70 70" fill="none" stroke="#E0312B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 62 C 6 36, 26 12, 62 8 C 64 40, 40 62, 8 62 Z"/><path d="M8 62 C 24 46, 40 30, 54 16"/></svg></i><i class="dd leaf2"><svg viewBox="0 0 70 70" fill="none" stroke="#E0312B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 62 C 6 36, 26 12, 62 8 C 64 40, 40 62, 8 62 Z"/><path d="M8 62 C 24 46, 40 30, 54 16"/></svg></i><i class="dd leaf3"><svg viewBox="0 0 70 70" fill="none" stroke="#E0312B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 62 C 6 36, 26 12, 62 8 C 64 40, 40 62, 8 62 Z"/><path d="M8 62 C 24 46, 40 30, 54 16"/></svg></i>
+      <i class="dd sprig1"><svg viewBox="0 0 80 60" fill="none" stroke="#E0312B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 50 C 30 44, 54 30, 76 8"/><path d="M26 44 C 24 30, 32 22, 40 20 C 42 30, 36 40, 26 44 Z"/><path d="M48 32 C 50 20, 60 14, 68 14 C 66 24, 58 32, 48 32 Z"/></svg></i><i class="dd sprig2"><svg viewBox="0 0 80 60" fill="none" stroke="#E0312B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 50 C 30 44, 54 30, 76 8"/><path d="M26 44 C 24 30, 32 22, 40 20 C 42 30, 36 40, 26 44 Z"/><path d="M48 32 C 50 20, 60 14, 68 14 C 66 24, 58 32, 48 32 Z"/></svg></i>
+      <i class="dot" style="left:6%;top:21%"></i><i class="dot" style="left:47%;top:6%"></i><i class="dot" style="right:8%;top:30%"></i>
+      <i class="dot" style="left:4%;top:58%"></i><i class="dot" style="right:12%;top:57%"></i><i class="dot" style="left:42%;top:72%"></i>
+      <i class="dot" style="right:4%;top:84%"></i><i class="dot" style="left:30%;top:94%"></i>
     </div>
-    <div class="hero-v">
-      <h1 class="v-xl" data-v>回味製研所</h1>
-      <p class="v-l" data-v>情感特調</p>
-      <p class="v-s" data-v>國三散文寫作鷹架</p>
+    <div class="ph-grid">
+      <div class="food f1"><span class="emo">🍵</span></div>
+      <div class="food f2"><span class="emo">🍙</span><p><b>外婆的飯糰</b><small>（醃梅子口味）</small><em>🍬 溫甜</em></p></div>
+      <div class="blob">
+        <i class="burst"><svg viewBox="0 0 120 40" fill="none" stroke="#E0312B" stroke-width="3.2" stroke-linecap="round"><path d="M14 36 L4 22 M36 30 L30 10 M60 28 L60 4 M84 30 L90 10 M106 36 L116 22"/></svg></i>
+        <p class="b-kicker">寫下那道菜的</p>
+        <h1 class="b-title">回味製研所</h1>
+        <p class="b-sub">把一道菜、一個人，<br>調成一碗情感特調。</p>
+      </div>
+      <div class="food f3"><p><b>除夕的水餃</b><small>（韭菜豬肉）</small><em>🌶️ 嗆辣</em></p><span class="emo">🥟</span></div>
+      <div class="food f4"><span class="emo">🍳</span><p><b>阿嬤的菜脯蛋</b><em>🧂 鹹香</em></p></div>
+      <div class="food f5"><p><b>放學的烤地瓜</b><small>（巷口攤車）</small><em>🍋 微酸</em></p><span class="emo">🍠</span></div>
+      <div class="food f6"><span class="emo">🍜</span><p><b>考完試的泡麵</b><em>☕ 苦澀</em></p></div>
     </div>
-    <div class="slices" aria-hidden="true">
-      <div class="slice" style="--c:#F1E08A"><span class="tag" data-v>微酸</span><b>🍋</b></div>
-      <div class="slice" style="--c:#F6C2BB"><span class="tag" data-v>溫甜</span><b>🍬</b></div>
-      <div class="slice" style="--c:#8A6A52"><span class="tag gray" data-v>苦澀</span><b>☕</b></div>
-      <div class="slice" style="--c:#DE7A63"><span class="tag" data-v>嗆辣</span><b>🌶️</b></div>
-      <div class="slice" style="--c:#E2D7C1"><span class="tag matcha" data-v>鹹香</span><b>🧂</b></div>
-    </div>
-    <div class="latin-title">Aftertaste<br>LAB<span class="hand">emotional recipe</span><small>MADE IN 國三教室</small></div>
   </header>
   <div class="cover-cta">
     <p class="cover-status" id="coverStatus"></p>
@@ -1427,8 +1474,9 @@ function Student(preview){
     updateStatus();
   }
   /* 封面 */
-  function showWork(){ $("#cover").hidden = true; $("#work").hidden = false; window.scrollTo(0, 0); if (!D.done && D.picMode === "draw") requestAnimationFrame(fitPad); }
+  function showWork(){ document.body.classList.remove("on-cover"); $("#cover").hidden = true; $("#work").hidden = false; window.scrollTo(0, 0); if (!D.done && D.picMode === "draw") requestAnimationFrame(fitPad); }
   function showCover(){
+    document.body.classList.add("on-cover");
     $("#work").hidden = true; $("#cover").hidden = false; window.scrollTo(0, 0);
     const st = $("#coverStatus"), btn = $("#startBtn");
     $("#coverChange").hidden = !who;

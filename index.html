@@ -61,7 +61,7 @@ a{color:var(--crust)}
 /* ── 學生資訊與步驟條 ── */
 .who-bar{display:flex;justify-content:flex-end;align-items:center;gap:10px;font-size:15px;color:var(--soft);margin:18px 0 6px}
 .link{background:none;border:0;color:var(--crust);text-decoration:underline;padding:0}
-.stepper{position:sticky;top:0;z-index:20;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:10px 0;background:linear-gradient(var(--paper) 80%,rgba(246,241,231,0))}
+.stepper{position:sticky;top:0;z-index:20;display:grid;grid-template-columns:repeat(5,1fr);gap:5px;padding:10px 0;background:linear-gradient(var(--paper) 80%,rgba(246,241,231,0))}
 .stepper button{border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:6px 4px;display:flex;flex-direction:column;align-items:center;line-height:1.25}
 .stepper b{font-family:var(--latin);font-weight:400;font-size:20px}
 .stepper span{font-size:12.5px}
@@ -233,6 +233,16 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 .ov-words{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .ov-words span{border:1.5px solid var(--line);border-radius:6px;padding:0 10px;font-size:15px;background:#fff}
 
+/* ── 工序伍：挑選海報 ── */
+.pick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.pick{border:2px solid var(--rule);background:#fff;border-radius:18px;padding:10px 8px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;line-height:1.35;text-align:center;transition:transform .15s}
+.pick.on{border-color:var(--toast);box-shadow:0 0 0 3px var(--butter);transform:translateY(-3px)}
+.pick .mini{position:relative;overflow:hidden;border-radius:4px;box-shadow:0 6px 14px -8px rgba(0,0,0,.4);margin-bottom:8px;pointer-events:none}
+.pick b{font-size:16px}
+.pick small{font-size:12px;color:var(--soft)}
+.pick.on b::before{content:"✓ ";color:var(--toast)}
+.pick .zoom{font-size:13px;margin-top:4px}
+@media (max-width:520px){ .stepper span{font-size:11px} .stepper b{font-size:17px} .pick-grid{gap:7px} .pick{padding:7px 4px 6px} .pick b{font-size:14px} .pick small{font-size:10.5px} }
 /* ── 卡片風格選擇 ── */
 .style-pick{max-width:620px;margin:6px auto 16px;text-align:center}
 .style-pick p{margin:0 0 8px;font-weight:700}
@@ -509,6 +519,7 @@ body.screen{background:#16130F;color:#F6F1E7}
     <button data-go="2"><b>02<em class="ck"></em></b><span>記憶濾鏡</span></button>
     <button data-go="3"><b>03<em class="ck"></em></b><span>人物刻痕</span></button>
     <button data-go="4"><b>04<em class="ck"></em></b><span>情感調色</span></button>
+    <button data-go="5"><b>05<em class="ck"></em></b><span>海報風格</span></button>
   </nav>
 
   <div id="editor">
@@ -588,27 +599,33 @@ body.screen{background:#16130F;color:#F6F1E7}
       <label class="field"><span>最後，請用一句話總結這碗特調的滋味：</span>
         <input id="summary" maxlength="80" placeholder="（例如：這是一碗在微辣衝突中，帶著鹹鹹日常的記憶。）" autocomplete="off"></label>
       <p class="err" id="err4"></p>
-      <div class="actions"><button class="btn ghost" data-prev="4">← 上一步</button><button class="btn toast" id="finishBtn">完成特調 🍜</button></div>
+      <div class="actions"><button class="btn ghost" data-prev="4">← 上一步</button><button class="btn" data-next="4">下一步：挑選海報 →</button></div>
+    </section>
+
+    <!-- 步驟五 -->
+    <section class="stage" data-step="5" hidden>
+      <span class="tag hang butter" data-v>工序伍</span>
+      <div class="stage-head"><p class="kicker">STEP 05 ・ 出餐擺盤</p><h2>挑選海報風格</h2></div>
+      <p class="lead">文字都寫好了！選一種你喜歡的海報風格，下面是用<b>你自己的作品</b>排出來的樣子。</p>
+      <div class="pick-grid" id="stylePick">
+        <div class="pick" data-style="sketch"><div class="mini"></div><b>手繪食譜</b><small>插畫標註・粉色底</small><button type="button" class="link zoom">🔍 放大看</button></div>
+        <div class="pick" data-style="zen"><div class="mini"></div><b>日式留白</b><small>直書・大量留白</small><button type="button" class="link zoom">🔍 放大看</button></div>
+        <div class="pick" data-style="photo"><div class="mini"></div><b>暖光攝影</b><small>照片滿版・白字標題</small><button type="button" class="link zoom">🔍 放大看</button></div>
+      </div>
+      <p class="err" id="err5"></p>
+      <div class="actions"><button class="btn ghost" data-prev="5">← 上一步</button><button class="btn toast" id="finishBtn">完成特調・產出海報 🍜</button></div>
     </section>
   </div>
 
   <div id="final" hidden>
     <div class="final-head">
       <span class="tag butter" data-v>出餐</span>
-      <h2>你的情感食譜卡</h2>
+      <h2>你的情感海報</h2>
       <div class="sent-box" id="sendState"></div>
       <div class="code-box" id="codeBox" hidden>
         <p style="margin:0 0 6px">沒連上網路？請把下面的「作品碼」複製給老師：</p>
         <textarea id="codeText" readonly></textarea>
         <button class="btn small" id="copyCode" style="margin-top:8px">複製作品碼</button>
-      </div>
-    </div>
-    <div class="style-pick no-print">
-      <p>選一種你喜歡的卡片風格：</p>
-      <div class="sp-row" id="stylePick">
-        <button type="button" data-style="sketch"><i class="sp-sw sw-sketch"></i><b>手繪食譜</b><small>插畫標註・粉色底</small></button>
-        <button type="button" data-style="zen"><i class="sp-sw sw-zen"></i><b>日式留白</b><small>直書・大量留白</small></button>
-        <button type="button" data-style="photo"><i class="sp-sw sw-photo"></i><b>暖光攝影</b><small>照片滿版・白字標題</small></button>
       </div>
     </div>
     <div id="cardHost"></div>
@@ -768,6 +785,7 @@ const MODE = {
      words:["急躁","條理分明","豪邁","堅持","互補","不拘小節"]}
 };
 const MIN = {sense:30, core:50, summary:6};
+const STYLES = ["sketch", "zen", "photo"];
 const COLORS = ["#1E1A16","#9C5A24","#E8A44A","#F3D29B","#C9432B","#7FA05A","#5B83A8","#FFFFFF"];
 
 const $ = (s, r=document) => r.querySelector(s);
@@ -1162,6 +1180,7 @@ function Student(preview){
     if (n === 2 && count(D.sense) < MIN.sense) return `再多寫一點畫面與氣味（目前 ${count(D.sense)} 字，至少 ${MIN.sense} 字）。`;
     if (n === 3) { if (!D.people.length) return "先勾選和你一起吃這道菜的人。"; if (count(D.core) < MIN.core) return `核心寫作區至少 ${MIN.core} 字（目前 ${count(D.core)} 字）。`; }
     if (n === 4) { if (!FLAVORS.some(f => D.flavors[f.k] > 0)) return "至少調一種滋味進去。"; if (count(D.summary) < MIN.summary) return "用一句話總結這碗特調的滋味。"; }
+    if (n === 5 && !STYLES.includes(D.cardStyle)) return "點一下你喜歡的海報風格。";
     return "";
   }
   function showErr(n, msg){ const el = $("#err" + n); el.textContent = msg; const st = $(`.stage[data-step="${n}"]`); st.classList.remove("shake"); void st.offsetWidth; st.classList.add("shake"); }
@@ -1177,6 +1196,7 @@ function Student(preview){
       b.classList.toggle("on", i === n); b.classList.toggle("done", i !== n && i < D.maxStep);
     });
     if (n === 1 && D.picMode === "draw") requestAnimationFrame(fitPad);
+    if (n === 5 || allOpen) requestAnimationFrame(drawPicks);
     const top = $("#stepper").getBoundingClientRect().top + window.scrollY - 4;
     if (allOpen && preview) { const st = $(`.stage[data-step="${n}"]`); window.scrollTo({top:st.getBoundingClientRect().top + window.scrollY - 90, behavior:"smooth"}); }
     else if (window.scrollY > top) window.scrollTo({top, behavior:"smooth"});
@@ -1196,6 +1216,8 @@ function Student(preview){
   /* 完成特調 */
   $("#finishBtn").onclick = () => {
     if (preview && [1,2,3,4].some(i => validate(i))) fillSample();
+    if (preview && !STYLES.includes(D.cardStyle)) { D.cardStyle = "sketch"; drawPicks(); }
+    if (!preview && validate(5)) return showErr(5, validate(5));
     openCheck();
   };
   /* 交件前檢查 */
@@ -1217,7 +1239,8 @@ function Student(preview){
       [3, "勾選共餐者", D.people.length > 0, peopleList().join("、")],
       [3, `人物刻痕至少 ${MIN.core} 字`, count(D.core) >= MIN.core, `目前 ${count(D.core)} 字`],
       [4, "調配情感比例", FLAVORS.some(f => D.flavors[f.k] > 0), ""],
-      [4, "寫下一句話總結", count(D.summary) >= MIN.summary, ""]
+      [4, "寫下一句話總結", count(D.summary) >= MIN.summary, ""],
+      [5, "挑選海報風格", STYLES.includes(D.cardStyle), ({sketch:"手繪食譜", zen:"日式留白", photo:"暖光攝影"})[D.cardStyle] || ""]
     ];
   }
   function openCheck(){
@@ -1239,19 +1262,18 @@ function Student(preview){
   };
   function doFinish(){
     const a = {at:new Date().toISOString(), food:D.food.trim(), people:peopleList(), mode:modeOf(),
-      sense:D.sense.trim(), core:D.core.trim(), flavors:norm(D.flavors), summary:D.summary.trim(), secs:D.active};
+      sense:D.sense.trim(), core:D.core.trim(), flavors:norm(D.flavors), summary:D.summary.trim(), secs:D.active, style:D.cardStyle};
     a.chars = count(a.sense) + count(a.core) + count(a.summary);
     D.done = true; D.last = a; save();
     showFinal();
     submit(a);
   };
   function drawCard(){
-    const st = ["sketch","zen","photo"].includes(D.cardStyle) ? D.cardStyle : D.cardStyle === "night" ? "photo" : "sketch";
-    $$("#stylePick button").forEach(b => b.classList.toggle("on", b.dataset.style === st));
+    const st = STYLES.includes(D.last.style) ? D.last.style : STYLES.includes(D.cardStyle) ? D.cardStyle : "sketch";
     $("#cardHost").innerHTML = `<div class="poster-wrap" id="pWrap"><div class="poster">${renderCard(D.last, getPic(), who, st)}</div></div>`;
     fitPoster($("#pWrap .poster")); scalePoster();
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { const p = $("#pWrap .poster"); if (p) { fitPoster(p); scalePoster(); } });
-    $("#pWrap").onclick = openFull;
+    $("#pWrap").onclick = () => openFull();
   }
   /* 文字太多時自動縮小內文，盡量排進一張 A4 */
   function fitPoster(p){
@@ -1272,25 +1294,47 @@ function Student(preview){
     const avail = Math.min($("#final").clientWidth || 360, 860);
     const p = w.querySelector(".poster"); placePoster(w, p, Math.min(1, avail / (+p.dataset.w)));
   }
-  window.addEventListener("resize", () => { if (!$("#final") || $("#final").hidden) return; scalePoster(); if (!$("#pFull").hidden) openFull(); });
-  function openFull(){
-    const src = $("#pWrap .poster"); if (!src) return;
+  window.addEventListener("resize", () => {
+    if (!$("#final")) return;
+    if (!$("#final").hidden) scalePoster();
+    else if (D && D.step === 5 && !$("#editor").hidden) drawPicks();
+  });
+  function openFull(srcEl){
+    const src = srcEl instanceof Element ? srcEl : $("#pWrap .poster"); if (!src) return;
     const host = $("#pfHost"); host.innerHTML = ""; const p = src.cloneNode(true); host.appendChild(p);
     const k = Math.min((window.innerWidth - 16) / (+src.dataset.w), (window.innerHeight - 16) / (+src.dataset.h));
     placePoster(host, p, k); $("#pFull").hidden = false;
   }
   $("#pfClose").onclick = () => { $("#pFull").hidden = true; };
   $("#pFull").onclick = e => { if (e.target.id === "pFull") $("#pFull").hidden = true; };
-  $("#fullPoster").onclick = openFull;
+  $("#fullPoster").onclick = () => openFull();
   $("#printPoster").onclick = () => {
     const src = $("#pWrap .poster"); if (!src) return;
     const host = $("#printHost"); host.innerHTML = ""; const c = src.cloneNode(true);
     c.style.transform = `scale(${794 / (+src.dataset.w)})`; host.appendChild(c);
     try { window.print(); } catch(e){}
   };
+  /* 工序伍：用學生自己的內容產生三張迷你海報 */
+  function draftAttempt(){
+    const a = {at:new Date().toISOString(), food:D.food.trim(), people:peopleList(), mode:modeOf(),
+      sense:D.sense.trim(), core:D.core.trim(), flavors:norm(D.flavors), summary:D.summary.trim()};
+    a.chars = count(a.sense) + count(a.core) + count(a.summary); return a;
+  }
+  function drawPicks(){
+    const a = draftAttempt(), grid = $("#stylePick");
+    const colW = (grid.clientWidth - 2 * parseFloat(getComputedStyle(grid).columnGap || 12)) / 3 - 20;
+    $$(".pick", grid).forEach(pk => {
+      const st = pk.dataset.style, mini = $(".mini", pk);
+      pk.classList.toggle("on", D.cardStyle === st);
+      mini.innerHTML = `<div class="poster">${renderCard(a, getPic(), who, st)}</div>`;
+      const p = $(".poster", mini); fitPoster(p); placePoster(mini, p, Math.max(.08, colW) / (+p.dataset.w));
+    });
+  }
   $("#stylePick").addEventListener("click", e => {
-    const b = e.target.closest("[data-style]"); if (!b) return;
-    D.cardStyle = b.dataset.style; save(); drawCard();
+    const pk = e.target.closest(".pick"); if (!pk) return;
+    D.cardStyle = pk.dataset.style; save(); clearErr(5);
+    $$("#stylePick .pick").forEach(x => x.classList.toggle("on", x === pk));
+    if (e.target.closest(".zoom")) openFull($(".mini .poster", pk));
   });
   function showFinal(){
     $("#editor").hidden = true; $("#final").hidden = false; $("#resendTip").hidden = true;
@@ -1331,10 +1375,10 @@ function Student(preview){
   $("#copyCode").onclick = async () => {
     const t = $("#codeText"); try { await navigator.clipboard.writeText(t.value); $("#copyCode").textContent = "已複製 ✓"; } catch(e){ t.select(); document.execCommand("copy"); }
   };
-  $("#editAgain").onclick = () => { D.done = false; save(); showStep(4); };
+  $("#editAgain").onclick = () => { D.done = false; save(); showStep(5); };
   $("#newBowl").onclick = () => {
     if (!confirm("要開始調一碗新的嗎？目前的內容會清空（已送出的作品不會消失）。")) return;
-    D = newDraft(); if (preview) D.maxStep = 4; save(); fill(); showStep(1);
+    D = newDraft(); if (preview) D.maxStep = 5; save(); fill(); showStep(1);
   };
   $("#dlCard").onclick = async () => {
     const src = $("#pWrap .poster");
@@ -1369,7 +1413,8 @@ function Student(preview){
   function start(){
     curKey = draftKey();
     $("#whoText").textContent = preview ? "老師預覽（不會記錄）" : `${who.cls} 班 ${who.seat} 號 ${who.name}`;
-    D = preview ? Object.assign(newDraft(), {maxStep:4}) : Object.assign(newDraft(), store.get(draftKey(), {}));
+    D = preview ? Object.assign(newDraft(), {maxStep:5}) : Object.assign(newDraft(), store.get(draftKey(), {}));
+    if (D.cardStyle === "night") D.cardStyle = "photo";
     if (!bound) {
       bound = true;
       bind("food", "food", () => clearErr(1));
@@ -1396,7 +1441,7 @@ function Student(preview){
     if (d.done && sent) { st.innerHTML = `✅ ${esc(name)}，你已在 ${dateStr(d.sent.at, true).slice(5)} 交件。`; btn.textContent = "查看我的食譜卡 →"; }
     else if (d.sent && d.sent.ok) { st.innerHTML = `✏️ ${esc(name)}，你已交過件，正在修改中，<b>改完記得重新交件</b>。`; btn.textContent = "繼續修改 →"; }
     else if (d.sent && !d.sent.ok) { st.innerHTML = `⚠️ ${esc(name)}，你的作品<b>還沒交件成功</b>。`; btn.textContent = "進去重新交件 →"; }
-    else { st.innerHTML = `✏️ ${esc(name)}，你上次寫到工序${"壹貳參肆"[Math.min(d.step || 1, 4) - 1]}，<b>還沒交件</b>。`; btn.textContent = "繼續寫作 →"; }
+    else { st.innerHTML = `✏️ ${esc(name)}，你上次寫到工序${"壹貳參肆伍"[Math.min(d.step || 1, 5) - 1]}，<b>還沒交件</b>。`; btn.textContent = "繼續寫作 →"; }
   }
   $("#startBtn").onclick = () => { if (!who) return openReg(); if (!D || draftKey() !== curKey) start(); showWork(); };
   $("#toCover").onclick = () => { save(); showCover(); };
@@ -1424,7 +1469,7 @@ function Student(preview){
     $("#pvBar").hidden = false; $("#changeWho").hidden = true;
     $("#pvAll").onclick = () => { allOpen = !allOpen; $("#pvAll").textContent = allOpen ? "改回一步一步看" : "展開全部工序"; showStep(allOpen ? 1 : D.step); };
     $("#pvSample").onclick = () => { fillSample(); showStep(D.step); };
-    $("#pvClear").onclick = () => { D = Object.assign(newDraft(), {maxStep:4}); fill(); showStep(1); };
+    $("#pvClear").onclick = () => { D = Object.assign(newDraft(), {maxStep:5}); fill(); showStep(1); };
     start(); showWork();
   }
   else showCover();
@@ -1487,7 +1532,7 @@ function Teacher(){
     const b = e.target.closest("[data-view]"); if (!b) return;
     const x = logRows[+b.dataset.view];
     const latest = (x.r.attempts||[]).slice(-1)[0];
-    $("#vHost").innerHTML = renderCard(x.a, latest && latest.at === x.a.at ? x.r.image : "", x.r);
+    $("#vHost").innerHTML = renderCard(x.a, latest && latest.at === x.a.at ? x.r.image : "", x.r, x.a.style);
     $("#viewer").hidden = false;
   });
   $("#vClose").onclick = () => $("#viewer").hidden = true;
@@ -1605,9 +1650,16 @@ function overviewHTML(){
     <h4>過關條件</h4><p>至少調一種滋味，並寫下總結句。</p>
   </div></div>
 
+  <div class="ov-step"><span class="tag butter" data-v>工序伍</span><div>
+    <h3>挑選海報風格（出餐擺盤）</h3>
+    <p class="ov-q">文字都寫好了！選一種你喜歡的海報風格，下面是用你自己的作品排出來的樣子。</p>
+    <p>三張迷你海報直接用學生的照片與文字排好，可點「🔍 放大看」：手繪食譜、日式留白、暖光攝影。</p>
+    <h4>過關條件</h4><p>選定一種風格。按「完成特調・產出海報」後先跳出交件前檢查。</p>
+  </div></div>
+
   <div class="ov-step"><span class="tag butter" data-v>出餐</span><div>
-    <h3>情感食譜卡</h3>
-    <p>按「完成特調 🍜」後，前面的編輯區會收起，把食物名稱、圖片、共餐者、兩段文字、情感比例（圓餅圖＋長條圖）和總結句排成一張卡片，可存成圖片。作品同時送到老師的試算表。</p>
+    <h3>情感海報</h3>
+    <p>通過交件檢查後，編輯區收起，依學生選的風格產出一張 A4 直式海報，可全螢幕檢視、存成圖片、列印 A4。作品同時送到老師的試算表。</p>
   </div></div>`;
 }
 

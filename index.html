@@ -304,6 +304,13 @@ body:not(.screen)::before{content:"";position:fixed;inset:0;pointer-events:none;
 .essay p{margin:0;text-indent:2em;font-size:18px;line-height:2;white-space:pre-wrap;word-break:break-word}
 .essay .actions{margin-top:14px}
 @media (max-width:520px){ .em-seg span{font-size:11px} .em-arrow{font-size:11px} }
+.wbank{margin-bottom:12px}
+.wb-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:6px;-webkit-overflow-scrolling:touch}
+.wb-tab{flex:none;border:1.5px solid #C9CFDA;background:#fff;border-radius:999px;padding:4px 12px;font-size:14px;font-weight:700;color:var(--soft);white-space:nowrap}
+.wb-tab.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.master{background:#FFF8F1;border:1.5px dashed #F2A49B;border-radius:14px;padding:8px 14px;margin:0 0 12px}
+.master summary{cursor:pointer;font-weight:900;color:var(--crust);font-size:15px}
+.master-body p{margin:6px 0;font-size:15.5px;line-height:1.8}
 /* ── 工序伍：挑選海報 ── */
 .pick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .pick{border:2px solid var(--rule);background:#fff;border-radius:18px;padding:10px 8px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;line-height:1.35;text-align:center;transition:transform .15s}
@@ -680,8 +687,9 @@ a,.link{color:var(--toast)}
         </ul>
       </div>
       <div class="radar" id="radar"></div>
-      <div class="words-label">感官詞彙庫<small>點一下就會放進文字框</small></div>
-      <div class="words"><button type="button" class="word" data-ins="金黃" data-target="sense">［金黃］</button><button type="button" class="word" data-ins="油亮" data-target="sense">［油亮］</button><button type="button" class="word" data-ins="熱氣騰騰" data-target="sense">［熱氣騰騰］</button><button type="button" class="word" data-ins="香氣撲鼻" data-target="sense">［香氣撲鼻］</button><button type="button" class="word" data-ins="滋滋作響" data-target="sense">［滋滋作響］</button><button type="button" class="word" data-ins="咕嚕咕嚕" data-target="sense">［咕嚕咕嚕］</button><button type="button" class="word" data-ins="酥脆" data-target="sense">［酥脆］</button><button type="button" class="word" data-ins="軟嫩" data-target="sense">［軟嫩］</button><button type="button" class="word" data-ins="入口即化" data-target="sense">［入口即化］</button><button type="button" class="word" data-ins="鹹香" data-target="sense">［鹹香］</button><button type="button" class="word" data-ins="甘甜" data-target="sense">［甘甜］</button><button type="button" class="word" data-ins="燙口" data-target="sense">［燙口］</button></div>
+      <div class="words-label">詞彙庫<small>先選類別，點一下詞語就會放進文字框</small></div>
+      <div class="wbank" data-bank="sense"></div>
+      <details class="master"><summary>📚 名家這樣寫</summary><div class="master-body" data-master="sense"></div></details>
       <textarea id="sense" rows="8" placeholder="請在這裡寫下這道食物出場的畫面、氣味與滋味..."></textarea>
       <div class="counter" id="c-sense"></div>
       <p class="err" id="err2"></p>
@@ -705,8 +713,9 @@ a,.link{color:var(--toast)}
         <h3 id="mTitle"></h3>
         <p class="mission-text" id="mText"></p>
         <p class="note" id="mWho"></p>
-        <div class="words-label">烹調動作詞<small>點一下就會放進文字框</small></div>
-        <div class="words"><button type="button" class="word" data-ins="切" data-target="core">［切］</button><button type="button" class="word" data-ins="翻炒" data-target="core">［翻炒］</button><button type="button" class="word" data-ins="攪拌" data-target="core">［攪拌］</button><button type="button" class="word" data-ins="撒上" data-target="core">［撒上］</button><button type="button" class="word" data-ins="燉煮" data-target="core">［燉煮］</button><button type="button" class="word" data-ins="盛起" data-target="core">［盛起］</button><button type="button" class="word" data-ins="端上桌" data-target="core">［端上桌］</button><button type="button" class="word" data-ins="夾" data-target="core">［夾］</button><button type="button" class="word" data-ins="吹涼" data-target="core">［吹涼］</button><button type="button" class="word" data-ins="叮嚀" data-target="core">［叮嚀］</button></div>
+        <div class="words-label">詞彙庫<small>先選類別，點一下詞語就會放進文字框</small></div>
+        <div class="wbank" data-bank="core"></div>
+        <details class="master"><summary>📚 名家這樣寫</summary><div class="master-body" data-master="core"></div></details>
         <div class="words-label">人物刻痕詞<small>點一下就會放進文字框</small></div>
         <div class="words" id="words"></div>
         <textarea id="core" rows="10" placeholder="先寫做菜的過程與你們的互動，再寫出人物的特點..."></textarea>
@@ -732,8 +741,9 @@ a,.link{color:var(--toast)}
         <li><em>回到現在</em>現在的你，再想起（或再吃到）這道菜時，有什麼感覺？</li>
         <li><em>領悟</em>這道菜、這個人，讓你明白了什麼？</li>
         <li><em>成長</em>這段記憶怎麼陪你長大？以後的你會怎麼做？</li></ol></div>
-      <div class="words-label">句型開頭<small>點一下就會放進文字框，再接著寫</small></div>
-      <div class="words"><button type="button" class="word" data-ins="直到現在我才明白，" data-target="grow">直到現在我才明白，…</button><button type="button" class="word" data-ins="長大後再吃到這道菜，" data-target="grow">長大後再吃到這道菜，…</button><button type="button" class="word" data-ins="原來那一碗裡，" data-target="grow">原來那一碗裡，…</button><button type="button" class="word" data-ins="每當我想起那個味道，就會" data-target="grow">每當我想起那個味道，就會…</button><button type="button" class="word" data-ins="我想，以後的我" data-target="grow">我想，以後的我…</button></div>
+      <div class="words-label">詞彙與句型<small>先選類別，點一下就會放進文字框</small></div>
+      <div class="wbank" data-bank="grow"></div>
+      <details class="master"><summary>📚 名家這樣寫</summary><div class="master-body" data-master="grow"></div></details>
       <textarea id="grow" rows="8" placeholder="請寫下你的領悟：這道菜、這個人，讓你明白了什麼？這段記憶怎麼陪你長大？"></textarea>
       <div class="counter" id="c-grow"></div>
       <h3 class="sub-h">③ 一句話收尾</h3>
@@ -922,12 +932,44 @@ const PEOPLE = ["爸爸","媽媽","阿公","阿嬤","自己","朋友","其他"];
 const MODE = {
   A:{title:"⏳ 時間魔法發動",
      text:"時間會在食物上留下痕跡。請寫下他/她『以前』吃這道菜的習慣是什麼？『現在』有改變嗎？你覺得這個改變代表了什麼？",
-     words:["歲月","講究","匆忙","細嚼慢嚥","捨不得","變老"]},
+     words:["歲月","講究","匆忙","細嚼慢嚥","捨不得","變老","佝僂的背","手腳慢了","牙口不好","記性差了","依然堅持","不再像從前","一如往常","漸漸地"]},
   B:{title:"⚔️ 餐桌上的性格對比",
      text:"同一道食物，每個人吃法都不同。請寫出這兩個人吃這道菜『最不同的地方』。他們的吃法，跟他們平常做事的個性有什麼關聯？",
-     words:["急躁","條理分明","豪邁","堅持","互補","不拘小節"]}
+     words:["急躁","條理分明","豪邁","堅持","互補","不拘小節","慢條斯理","狼吞虎嚥","精打細算","小心翼翼","挑剔","隨和","一絲不苟","大剌剌"]}
 };
 const MIN = {sense:40, core:80, grow:50, summary:6};
+/* 詞彙庫：整理自飲食散文常見的寫法（分類呈現，點選插入） */
+const WORDBANK = {
+  sense:[
+    ["🕰 時機場景", ["寒流來襲的夜晚","颱風天","除夕圍爐","放學回家","拜拜的供桌上","生病的時候","考試前一晚","週末的早晨","夏日午後"]],
+    ["👀 色澤外觀", ["金黃","油亮","晶瑩剔透","琥珀色","焦褐","翠綠","白嫩","紅潤","圓滾滾","層層疊疊","冒著熱氣","熱氣氤氳","色澤誘人"]],
+    ["👃 香氣", ["香氣撲鼻","香氣四溢","濃郁","清香","焦香","蔥香","米香","醬香","撲鼻而來","勾起饞蟲","飄滿屋子","鑽進鼻子"]],
+    ["👂 聲音", ["滋滋作響","劈哩啪啦","咕嚕咕嚕","嘶的一聲","篤篤篤的切菜聲","呼嚕呼嚕","鍋鏟碰撞","碗筷叮噹"]],
+    ["👅 滋味", ["鹹香","甘甜","鮮美","酸溜溜","微苦","辛辣","回甘","鹹中帶甜","清爽不膩","濃而不膩","齒頰留香","餘韻無窮"]],
+    ["✋ 口感", ["酥脆","軟嫩","Q彈","綿密","滑順","入口即化","外酥內軟","嚼勁十足","軟爛","爽脆","燙口","暖胃"]]
+  ],
+  core:[
+    ["🔪 烹調動作", ["切","剁","削皮","醃","揉","攪拌","爆香","翻炒","煎","炸","燉","熬","蒸","滷","勾芡","撒上","淋上","盛起","端上桌"]],
+    ["🤝 互動動作", ["夾菜","添飯","盛湯","遞碗筷","吹涼","叮嚀","催促","偷吃一口","圍在灶邊","搶最後一塊","相視而笑","默默收拾"]],
+    ["🗣 一句對話", ["「趁熱吃！」","「多吃一點，你太瘦了。」","「小心燙。」","「這要慢慢熬才好吃。」","「去洗手，準備吃飯。」","「好吃嗎？」"]],
+    ["🧑‍🍳 人物神態", ["彎著腰","額頭冒汗","笑瞇瞇","皺著眉","一臉得意","手腳俐落","慢吞吞","專注","嘴裡唸著","哼著歌"]]
+  ],
+  grow:[
+    ["✍️ 句型開頭", ["直到現在我才明白，","長大後再吃到這道菜，","原來那一碗裡，","每當我想起那個味道，就會","我想，以後的我","那時的我不懂，","後來我才知道，","如果還能再吃一次，","這道菜教會我的是，"]],
+    ["💭 情感詞", ["懷念","思念","不捨","愧疚","感激","溫暖","心酸","悵然","釋懷","珍惜","遺憾","踏實"]],
+    ["🌱 領悟成長", ["終於明白","不知不覺","時過境遷","味道還在","人事已非","傳承","陪伴","記憶的味道","慢慢長大","學會體諒"]]
+  ]
+};
+const MASTERS = {
+  sense:`<p>飲食散文名家（如梁實秋《雅舍談吃》、焦桐《台灣味道》）寫食物時，常把顏色、香氣、聲音、口感寫得<b>很具體</b>，讓讀者「看得到、聞得到、嘗得到」。</p><p>小技巧：不要只寫「很好吃」，改寫「<b>哪裡</b>好吃」：是外皮酥脆？還是湯頭回甘？</p>`,
+  core:`<p>林文月《飲膳札記》記錄自己做過的菜，寫做法的同時，也寫下一起吃飯的親友和當時的情景，讓<b>做菜的過程變成人情的記憶</b>。</p><p>小技巧：寫 2～3 個連續動作（切→炒→盛起），再加一句人物說的話，畫面就會動起來。</p>`,
+  grow:`<p>朱自清〈背影〉裡，父親爬過月台去買橘子的身影，讓作者流下淚來；琦君〈春酒〉從母親釀的酒，寫到對母親與家鄉的懷念。這就是<b>「以食寫人、以人寫情」</b>：結尾從一道菜回到人與時間。</p><p>小技巧：用「那時…，如今…」對照過去和現在，領悟就會自然浮現。</p>`
+};
+function bankHTML(k, active){
+  const cats = WORDBANK[k]; active = active || 0;
+  return `<div class="wb-tabs">${cats.map(([c], i) => `<button type="button" class="wb-tab${i === active ? " on" : ""}" data-cat="${i}">${c}</button>`).join("")}</div>
+    <div class="words">${cats[active][1].map(w => `<button type="button" class="word" data-ins="${esc(w)}" data-target="${k}">${/[，、]$/.test(w) ? esc(w) + "…" : "［" + esc(w) + "］"}</button>`).join("")}</div>`;
+}
 const PARAS = [["sense","第一段・外觀與滋味"],["core","第二段・烹調與互動"],["grow","第三段・領悟與成長"]];
 const SENSES = [
   ["👀 視覺", /[色黃紅綠白黑亮圓透焦]|金黃|油亮|冒|熱氣|蒸氣|形狀|看/],
@@ -1348,6 +1390,12 @@ function Student(preview){
     ta.value = ta.value.slice(0, st) + w + ta.value.slice(en);
     ta.focus(); ta.setSelectionRange(st + w.length, st + w.length);
     ta.dispatchEvent(new Event("input"));
+  });
+  $$(".wbank").forEach(el => { el.innerHTML = bankHTML(el.dataset.bank, 0); });
+  $$("[data-master]").forEach(el => { el.innerHTML = MASTERS[el.dataset.master]; });
+  $("#editor").addEventListener("click", e => {
+    const t = e.target.closest(".wb-tab"); if (!t) return;
+    const bank = t.closest(".wbank"); bank.innerHTML = bankHTML(bank.dataset.bank, +t.dataset.cat);
   });
   /* 三段式寫作地圖 */
   function updateMap(){
@@ -1836,7 +1884,8 @@ function overviewHTML(){
     <h4>這一段可以這樣寫（鷹架）</h4>
     <ul><li>時機：它通常在什麼時候出現？</li><li>外觀：顏色、形狀、裝在什麼碗盤裡？</li><li>氣味・聲音：還沒吃到之前，先聞到、聽到什麼？</li><li>滋味・口感：第一口吃下去是什麼感覺？</li></ul>
     <h4>感官雷達</h4><p>依學生文字自動點亮：👀 視覺、👃 嗅覺、👂 聽覺、👅 味覺、✋ 觸覺（建議至少 3 盞，不強制）。</p>
-    <h4>感官詞彙庫</h4><div class="ov-words"><span>［金黃］</span><span>［油亮］</span><span>［熱氣騰騰］</span><span>［香氣撲鼻］</span><span>［滋滋作響］</span><span>［咕嚕咕嚕］</span><span>［酥脆］</span><span>［軟嫩］</span><span>［入口即化］</span><span>［鹹香］</span><span>［甘甜］</span><span>［燙口］</span></div>
+    <h4>詞彙庫（分類）</h4>${WORDBANK.sense.map(([c, ws]) => `<p style="margin:6px 0 2px"><b>${c}</b></p><div class="ov-words">${ws.map(w => `<span>${esc(w)}</span>`).join("")}</div>`).join("")}
+    <h4>📚 名家這樣寫</h4>${MASTERS.sense}
     <h4>💡 靈感小提示</h4><ul><li>這道食物通常出現在什麼特定的時刻？（例如：冬天的宵夜、下雨天、拜拜的桌上）</li><li>它剛端上桌時，有什麼特別的氣味、顏色或是聲音？</li></ul>
     <h4>過關條件</h4><p>至少 ${MIN.sense} 字。</p>
   </div></div>
@@ -1847,7 +1896,8 @@ function overviewHTML(){
     <h4>這一段可以這樣寫（鷹架）</h4>
     <ul><li>烹調：誰做的？寫出 2～3 個做菜的動作。</li><li>互動：你在旁邊做什麼？他說了什麼話？</li><li>人物：依照寫作任務寫出這個人的特點。</li></ul>
     <h4>共餐者（可複選）</h4><div class="ov-words">${PEOPLE.map(p => `<span>☐ ${p}</span>`).join("")}</div>
-    <h4>烹調動作詞</h4><div class="ov-words"><span>［切］</span><span>［翻炒］</span><span>［攪拌］</span><span>［撒上］</span><span>［燉煮］</span><span>［盛起］</span><span>［端上桌］</span><span>［夾］</span><span>［吹涼］</span><span>［叮嚀］</span></div>
+    <h4>詞彙庫（分類）</h4>${WORDBANK.core.map(([c, ws]) => `<p style="margin:6px 0 2px"><b>${c}</b></p><div class="ov-words">${ws.map(w => `<span>${esc(w)}</span>`).join("")}</div>`).join("")}
+    <h4>📚 名家這樣寫</h4>${MASTERS.core}
     <h4>只勾 1 人時出現</h4>${mode(MODE.A)}
     <h4>勾 2 人以上時出現</h4>${mode(MODE.B)}
     <h4>過關條件</h4><p>至少勾 1 人，文字至少 ${MIN.core} 字。</p>
@@ -1860,7 +1910,8 @@ function overviewHTML(){
     <ul>${FLAVORS.map(f => `<li>${f.icon} ${f.name}（${f.sub}）</li>`).join("")}</ul>
     <h4>② 領悟與成長（鷹架）</h4>
     <ul><li>回到現在：再想起（或再吃到）這道菜時，有什麼感覺？</li><li>領悟：這道菜、這個人，讓你明白了什麼？</li><li>成長：這段記憶怎麼陪你長大？以後的你會怎麼做？</li></ul>
-    <h4>句型開頭</h4><div class="ov-words"><span>直到現在我才明白，…</span><span>長大後再吃到這道菜，…</span><span>原來那一碗裡，…</span><span>每當我想起那個味道，就會…</span><span>我想，以後的我…</span></div>
+    <h4>詞彙與句型（分類）</h4>${WORDBANK.grow.map(([c, ws]) => `<p style="margin:6px 0 2px"><b>${c}</b></p><div class="ov-words">${ws.map(w => `<span>${esc(w)}</span>`).join("")}</div>`).join("")}
+    <h4>📚 名家這樣寫</h4>${MASTERS.grow}
     <h4>③ 一句話收尾</h4>
     <p class="ov-q">最後，請用一句話總結這碗特調的滋味（會成為文章最後一句與海報標語）。</p>
     <h4>過關條件</h4><p>至少調一種滋味；領悟至少 ${MIN.grow} 字；寫下總結句。</p>

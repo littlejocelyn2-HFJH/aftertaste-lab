@@ -275,6 +275,35 @@ body:not(.screen)::before{content:"";position:fixed;inset:0;pointer-events:none;
 .ov-words{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .ov-words span{border:1.5px solid var(--line);border-radius:6px;padding:0 10px;font-size:15px;background:#fff}
 
+/* ── 三段式寫作 ── */
+.essay-map{background:#fff;border-radius:20px;padding:10px 12px 12px;margin:4px 0 0;box-shadow:0 10px 26px -22px rgba(36,48,94,.5)}
+.em-t{margin:0 0 6px;font-weight:900;font-size:15px;display:flex;justify-content:space-between;align-items:baseline}
+.em-t small{font-weight:500;color:var(--soft);font-size:13px}
+.em-row{display:flex;align-items:stretch;gap:4px}
+.em-seg{flex:1;border:1.5px solid #C9CFDA;background:#fff;border-radius:14px;padding:6px 4px;display:flex;flex-direction:column;align-items:center;line-height:1.3;min-width:0}
+.em-seg b{font-size:13px;color:var(--toast)}
+.em-seg span{font-size:12.5px;font-weight:700;text-align:center}
+.em-seg em{font-style:normal;font-size:12px;color:var(--soft)}
+.em-seg.ok{border-color:#7FB069;background:#F2F8EC}
+.em-seg.ok em{color:#3E7A2E}
+.em-seg.on{border-color:var(--toast);box-shadow:0 0 0 2px #FFDCD6}
+.em-arrow{align-self:center;font-style:normal;color:var(--toast);font-size:14px}
+.scaffold{background:#F3F5FA;border-radius:16px;padding:12px 16px;margin:0 0 14px}
+.scaffold b{display:block;font-size:15px;margin-bottom:4px}
+.scaffold ol{margin:0;padding-left:1.4em;font-size:16px;line-height:1.75}
+.scaffold em{font-style:normal;font-weight:900;color:var(--toast);margin-right:6px}
+.sub-h{font-size:19px;font-weight:900;margin:22px 0 8px;color:var(--ink)}
+.radar{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.radar span{border:1.5px dashed #C9CFDA;border-radius:999px;padding:3px 12px;font-size:15px;color:#9AA1B5;transition:all .2s}
+.radar span.on{border-style:solid;border-color:var(--toast);background:#FFF1EE;color:var(--crust);font-weight:700}
+.radar .r-sum{border:0;color:var(--soft);font-size:14px;padding:3px 2px}
+.essay{max-width:700px;margin:18px auto 0;background:#fff;border-radius:22px;padding:26px 24px 20px;box-shadow:0 18px 40px -26px rgba(36,48,94,.45)}
+.essay h3{text-align:center;font-size:26px;font-weight:900;margin:0 0 4px}
+.essay .by{text-align:center;color:var(--soft);font-size:14px;margin:0 0 16px}
+.essay .para-tag{display:inline-block;font-size:12px;font-weight:700;color:var(--toast);border:1px solid #FFC9C0;border-radius:999px;padding:0 8px;margin:10px 0 2px}
+.essay p{margin:0;text-indent:2em;font-size:18px;line-height:2;white-space:pre-wrap;word-break:break-word}
+.essay .actions{margin-top:14px}
+@media (max-width:520px){ .em-seg span{font-size:11px} .em-arrow{font-size:11px} }
 /* ── 工序伍：挑選海報 ── */
 .pick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .pick{border:2px solid var(--rule);background:#fff;border-radius:18px;padding:10px 8px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;line-height:1.35;text-align:center;transition:transform .15s}
@@ -401,7 +430,8 @@ body:not(.screen)::before{content:"";position:fixed;inset:0;pointer-events:none;
 .poster .sk-flav.f0{left:4%} .poster .sk-flav.f1{right:4%}
 .poster .sk-bottom{flex:1;display:flex;flex-direction:column;margin:0 -60px -40px;padding:62px 60px 34px;background:linear-gradient(175deg,rgba(243,211,200,0) 0 70px,#F3D3C8 71px)}
 .poster .sk-bottom h4{font-size:31px}
-.poster .sk-cols{grid-template-columns:1fr 1fr;gap:30px}
+.poster .sk-cols{grid-template-columns:1fr 1fr;gap:24px 30px}
+.poster .sk-cols section:nth-child(3),.poster .zn-cols section:nth-child(3),.poster .pt-cols section:nth-child(3){grid-column:1/-1}
 .poster .sk-pal svg,.poster .nt-pal svg,.poster .pt-pal svg{width:150px;height:150px}
 .poster .bar-li{font-size:20px;grid-template-columns:112px 1fr 62px;margin:3px 0}
 .poster .sk-pal,.poster .nt-pal{margin-top:18px}
@@ -577,7 +607,7 @@ a,.link{color:var(--toast)}
   <div class="cover-cta">
     <p class="cover-status" id="coverStatus"></p>
     <button class="btn toast big" id="startBtn">開始調製 →</button>
-    <p class="cover-steps">選材上菜 ・ 記憶濾鏡 ・ 人物刻痕 ・ 情感調色 ・ 出餐</p>
+    <p class="cover-steps">選材上菜 ・ 外觀滋味 ・ 烹調互動 ・ 領悟成長 ・ 海報出餐</p>
     <div class="cover-links"><button class="link" id="coverChange" hidden>不是我，重新登記</button><a href="#preview">老師預覽</a><a href="#scores">教師後台</a></div>
   </div>
   </section>
@@ -599,12 +629,13 @@ a,.link{color:var(--toast)}
 
   <nav class="stepper no-print" id="stepper">
     <button data-go="1"><b>01<em class="ck"></em></b><span>選材上菜</span></button>
-    <button data-go="2"><b>02<em class="ck"></em></b><span>記憶濾鏡</span></button>
-    <button data-go="3"><b>03<em class="ck"></em></b><span>人物刻痕</span></button>
-    <button data-go="4"><b>04<em class="ck"></em></b><span>情感調色</span></button>
+    <button data-go="2"><b>02<em class="ck"></em></b><span>外觀滋味</span></button>
+    <button data-go="3"><b>03<em class="ck"></em></b><span>烹調互動</span></button>
+    <button data-go="4"><b>04<em class="ck"></em></b><span>領悟成長</span></button>
     <button data-go="5"><b>05<em class="ck"></em></b><span>海報風格</span></button>
   </nav>
 
+  <div class="essay-map no-print" id="essayMap" hidden></div>
   <div id="editor">
     <!-- 步驟一 -->
     <section class="stage" data-step="1">
@@ -630,12 +661,17 @@ a,.link{color:var(--toast)}
       <div class="actions"><span></span><button class="btn" data-next="1">端上桌，下一步 →</button></div>
     </section>
 
-    <!-- 步驟二 -->
+    <!-- 步驟二：第一段 -->
     <section class="stage" data-step="2" hidden>
-      <span class="tag hang" data-v>工序貳</span>
-      <div class="stage-head"><p class="kicker">STEP 02 ・ 感官前奏</p><h2>記憶濾鏡</h2></div>
-      <p class="lead">先別急著寫人，讓這道菜「出場」。</p>
-      <div class="ta-head"><span class="label">這道食物出場的畫面</span><button type="button" class="hint-btn" id="hintBtn" aria-expanded="false">💡 靈感小提示</button></div>
+      <span class="tag hang" data-v>第一段</span>
+      <div class="stage-head"><p class="kicker">STEP 02 ・ 第一段 ・ 記憶濾鏡</p><h2>食物外觀與滋味</h2></div>
+      <p class="lead">文章的開頭，先別急著寫人，讓這道菜「出場」：寫出它的樣子、氣味和味道。</p>
+      <div class="scaffold"><b>這一段可以這樣寫</b><ol>
+        <li><em>時機</em>它通常在什麼時候出現？（冬天的宵夜、下雨天、拜拜的桌上）</li>
+        <li><em>外觀</em>顏色、形狀、裝在什麼碗盤裡？</li>
+        <li><em>氣味・聲音</em>還沒吃到之前，先聞到、聽到什麼？</li>
+        <li><em>滋味・口感</em>第一口吃下去是什麼感覺？</li></ol></div>
+      <div class="ta-head"><span class="label">感官雷達 <small class="note">寫到哪一種感官，燈就會亮（至少點亮 3 盞）</small></span><button type="button" class="hint-btn" id="hintBtn" aria-expanded="false">💡 靈感小提示</button></div>
       <div class="hint" id="hint" hidden>
         <p>不知道怎麼開頭嗎？試著想想：</p>
         <ul>
@@ -643,17 +679,25 @@ a,.link{color:var(--toast)}
           <li>它剛端上桌時，有什麼特別的氣味、顏色或是聲音？</li>
         </ul>
       </div>
-      <textarea id="sense" rows="8" placeholder="請在這裡寫下這道食物出場的畫面與氣味..."></textarea>
+      <div class="radar" id="radar"></div>
+      <div class="words-label">感官詞彙庫<small>點一下就會放進文字框</small></div>
+      <div class="words"><button type="button" class="word" data-ins="金黃" data-target="sense">［金黃］</button><button type="button" class="word" data-ins="油亮" data-target="sense">［油亮］</button><button type="button" class="word" data-ins="熱氣騰騰" data-target="sense">［熱氣騰騰］</button><button type="button" class="word" data-ins="香氣撲鼻" data-target="sense">［香氣撲鼻］</button><button type="button" class="word" data-ins="滋滋作響" data-target="sense">［滋滋作響］</button><button type="button" class="word" data-ins="咕嚕咕嚕" data-target="sense">［咕嚕咕嚕］</button><button type="button" class="word" data-ins="酥脆" data-target="sense">［酥脆］</button><button type="button" class="word" data-ins="軟嫩" data-target="sense">［軟嫩］</button><button type="button" class="word" data-ins="入口即化" data-target="sense">［入口即化］</button><button type="button" class="word" data-ins="鹹香" data-target="sense">［鹹香］</button><button type="button" class="word" data-ins="甘甜" data-target="sense">［甘甜］</button><button type="button" class="word" data-ins="燙口" data-target="sense">［燙口］</button></div>
+      <textarea id="sense" rows="8" placeholder="請在這裡寫下這道食物出場的畫面、氣味與滋味..."></textarea>
       <div class="counter" id="c-sense"></div>
       <p class="err" id="err2"></p>
-      <div class="actions"><button class="btn ghost" data-prev="2">← 上一步</button><button class="btn" data-next="2">下一步 →</button></div>
+      <div class="actions"><button class="btn ghost" data-prev="2">← 上一步</button><button class="btn" data-next="2">寫第二段 →</button></div>
     </section>
 
     <!-- 步驟三 -->
     <section class="stage" data-step="3" hidden>
-      <span class="tag hang matcha" data-v>工序參</span>
-      <div class="stage-head"><p class="kicker">STEP 03 ・ 核心寫作區</p><h2>靈魂人物與刻痕</h2></div>
-      <p class="lead">誰和你一起吃這道菜？（可複選）</p>
+      <span class="tag hang matcha" data-v>第二段</span>
+      <div class="stage-head"><p class="kicker">STEP 03 ・ 第二段 ・ 人物刻痕</p><h2>烹調過程與互動</h2></div>
+      <p class="lead">這道菜是怎麼來到桌上的？寫出做菜的過程，和你們之間的互動。</p>
+      <div class="scaffold"><b>這一段可以這樣寫</b><ol>
+        <li><em>烹調</em>誰做的？寫出 2～3 個做菜的動作。</li>
+        <li><em>互動</em>你在旁邊做什麼？他說了什麼話？（加一句對話會更生動）</li>
+        <li><em>人物</em>依照下面的寫作任務，寫出這個人的特點。</li></ol></div>
+      <p class="lead" style="margin-top:18px">誰和你一起吃這道菜？（可複選）</p>
       <div class="chips" id="people"></div>
       <input id="otherName" maxlength="10" placeholder="「其他」是誰？例如：舅舅" hidden>
       <div class="empty-tip" id="noPeople">先勾選共餐者，寫作任務就會出現。</div>
@@ -661,25 +705,39 @@ a,.link{color:var(--toast)}
         <h3 id="mTitle"></h3>
         <p class="mission-text" id="mText"></p>
         <p class="note" id="mWho"></p>
-        <div class="words-label">靈感詞彙庫<small>點一下就會放進文字框</small></div>
+        <div class="words-label">烹調動作詞<small>點一下就會放進文字框</small></div>
+        <div class="words"><button type="button" class="word" data-ins="切" data-target="core">［切］</button><button type="button" class="word" data-ins="翻炒" data-target="core">［翻炒］</button><button type="button" class="word" data-ins="攪拌" data-target="core">［攪拌］</button><button type="button" class="word" data-ins="撒上" data-target="core">［撒上］</button><button type="button" class="word" data-ins="燉煮" data-target="core">［燉煮］</button><button type="button" class="word" data-ins="盛起" data-target="core">［盛起］</button><button type="button" class="word" data-ins="端上桌" data-target="core">［端上桌］</button><button type="button" class="word" data-ins="夾" data-target="core">［夾］</button><button type="button" class="word" data-ins="吹涼" data-target="core">［吹涼］</button><button type="button" class="word" data-ins="叮嚀" data-target="core">［叮嚀］</button></div>
+        <div class="words-label">人物刻痕詞<small>點一下就會放進文字框</small></div>
         <div class="words" id="words"></div>
-        <textarea id="core" rows="10" placeholder="請在這裡寫下你的觀察與感受..."></textarea>
+        <textarea id="core" rows="10" placeholder="先寫做菜的過程與你們的互動，再寫出人物的特點..."></textarea>
         <div class="counter" id="c-core"></div>
       </div>
       <p class="err" id="err3"></p>
-      <div class="actions"><button class="btn ghost" data-prev="3">← 上一步</button><button class="btn" data-next="3">下一步 →</button></div>
+      <div class="actions"><button class="btn ghost" data-prev="3">← 上一步</button><button class="btn" data-next="3">寫第三段 →</button></div>
     </section>
 
-    <!-- 步驟四 -->
+    <!-- 步驟四：第三段 -->
     <section class="stage" data-step="4" hidden>
-      <span class="tag hang gray" data-v>工序肆</span>
-      <div class="stage-head"><p class="kicker">STEP 04 ・ 複合情緒歸納</p><h2>情感調色盤與餘韻</h2></div>
-      <p class="lead">記憶的滋味從來不是單一的。請調配這段回憶的情感比例。</p>
+      <span class="tag hang gray" data-v>第三段</span>
+      <div class="stage-head"><p class="kicker">STEP 04 ・ 第三段 ・ 情感調色</p><h2>情感領悟與成長記憶</h2></div>
+      <p class="lead">文章的結尾：先調出這段回憶的滋味，再寫下你從中明白的事。</p>
+      <h3 class="sub-h">① 調配情感比例</h3>
+      <p class="note" style="margin-top:0">記憶的滋味從來不是單一的。請調配這段回憶的情感比例。</p>
       <div class="mixer">
         <div id="sliders"></div>
         <div class="mix-preview"><div id="liveDonut"></div><p class="note">比例會自動換算成 100%</p></div>
       </div>
-      <label class="field"><span>最後，請用一句話總結這碗特調的滋味：</span>
+      <h3 class="sub-h">② 寫下領悟與成長</h3>
+      <div class="scaffold"><b>這一段可以這樣寫</b><ol>
+        <li><em>回到現在</em>現在的你，再想起（或再吃到）這道菜時，有什麼感覺？</li>
+        <li><em>領悟</em>這道菜、這個人，讓你明白了什麼？</li>
+        <li><em>成長</em>這段記憶怎麼陪你長大？以後的你會怎麼做？</li></ol></div>
+      <div class="words-label">句型開頭<small>點一下就會放進文字框，再接著寫</small></div>
+      <div class="words"><button type="button" class="word" data-ins="直到現在我才明白，" data-target="grow">直到現在我才明白，…</button><button type="button" class="word" data-ins="長大後再吃到這道菜，" data-target="grow">長大後再吃到這道菜，…</button><button type="button" class="word" data-ins="原來那一碗裡，" data-target="grow">原來那一碗裡，…</button><button type="button" class="word" data-ins="每當我想起那個味道，就會" data-target="grow">每當我想起那個味道，就會…</button><button type="button" class="word" data-ins="我想，以後的我" data-target="grow">我想，以後的我…</button></div>
+      <textarea id="grow" rows="8" placeholder="請寫下你的領悟：這道菜、這個人，讓你明白了什麼？這段記憶怎麼陪你長大？"></textarea>
+      <div class="counter" id="c-grow"></div>
+      <h3 class="sub-h">③ 一句話收尾</h3>
+      <label class="field"><span>最後，請用一句話總結這碗特調的滋味（會成為文章最後一句與海報標語）：</span>
         <input id="summary" maxlength="80" placeholder="（例如：這是一碗在微辣衝突中，帶著鹹鹹日常的記憶。）" autocomplete="off"></label>
       <p class="err" id="err4"></p>
       <div class="actions"><button class="btn ghost" data-prev="4">← 上一步</button><button class="btn" data-next="4">下一步：挑選海報 →</button></div>
@@ -712,10 +770,12 @@ a,.link{color:var(--toast)}
       </div>
     </div>
     <div id="cardHost"></div>
+    <div id="essayHost" hidden></div>
     <div class="actions center no-print">
       <button class="btn" id="dlCard">⬇ 存成海報圖片</button>
       <button class="btn ghost" id="fullPoster">🔍 全螢幕看海報</button>
       <button class="btn ghost" id="printPoster">🖨 列印 A4</button>
+      <button class="btn ghost" id="showEssay">📄 看完整文章</button>
       <button class="btn ghost" id="editAgain">回去修改</button>
       <button class="btn ghost" id="newBowl">再調一碗</button>
     </div>
@@ -806,7 +866,7 @@ a,.link{color:var(--toast)}
         <input id="fSeat" placeholder="篩座號" style="width:110px">
         <label><input type="checkbox" id="fFlag"> 只看需留意</label>
         <label>用時少於 <input type="number" id="thSecs" value="180" min="0" style="width:90px"> 秒</label>
-        <label>字數少於 <input type="number" id="thChars" value="150" min="0" style="width:90px"></label>
+        <label>字數少於 <input type="number" id="thChars" value="200" min="0" style="width:90px"></label>
         <button class="btn small ghost" id="copyTsv">複製（貼到 Excel）</button>
       </div>
       <div class="tbl-wrap"><table id="logs"></table></div>
@@ -867,7 +927,23 @@ const MODE = {
      text:"同一道食物，每個人吃法都不同。請寫出這兩個人吃這道菜『最不同的地方』。他們的吃法，跟他們平常做事的個性有什麼關聯？",
      words:["急躁","條理分明","豪邁","堅持","互補","不拘小節"]}
 };
-const MIN = {sense:30, core:50, summary:6};
+const MIN = {sense:40, core:80, grow:50, summary:6};
+const PARAS = [["sense","第一段・外觀與滋味"],["core","第二段・烹調與互動"],["grow","第三段・領悟與成長"]];
+const SENSES = [
+  ["👀 視覺", /[色黃紅綠白黑亮圓透焦]|金黃|油亮|冒|熱氣|蒸氣|形狀|看/],
+  ["👃 嗅覺", /香|聞|氣味|味道|飄|嗆|撲鼻/],
+  ["👂 聽覺", /聲|響|滋|劈啪|咕嚕|嘩|喀|嘶|叮|沙沙/],
+  ["👅 味覺", /[鹹甜酸苦辣鮮甘]|入口|吃起來|嘗|滋味|吃下/],
+  ["✋ 觸覺", /[燙熱涼冰軟硬酥脆嫩黏綿滑Q]|口感/]
+];
+function essayText(a){
+  return [a.sense, a.core, [a.grow, a.summary].filter(Boolean).join("")].map(t => String(t || "").trim()).filter(Boolean);
+}
+function renderEssay(a, who){
+  const ps = essayText(a);
+  return `<article class="essay"><h3>${esc(a.food)}</h3><p class="by" style="text-indent:0">${esc(who.cls)}班 ${esc(who.seat)}號 ${esc(who.name || "")}・全文 ${a.chars || 0} 字</p>
+    ${ps.map((t,i) => `<span class="para-tag">${["第一段・食物外觀與滋味","第二段・烹調過程與互動","第三段・情感領悟與成長記憶"][i]}</span><p>${esc(t)}</p>`).join("")}</article>`;
+}
 const STYLES = ["sketch", "zen", "photo"];
 const COLORS = ["#1E1A16","#9C5A24","#E8A44A","#F3D29B","#C9432B","#7FA05A","#5B83A8","#FFFFFF"];
 
@@ -1000,8 +1076,9 @@ function cardSketch(a, pic, who){
     </div>
     <div class="sk-bottom">
       <div class="sk-cols">
-        <section><h4>記憶濾鏡：出場的畫面</h4><p>${esc(a.sense)}</p></section>
-        <section><h4>${esc(c.m.title)}</h4><p>${esc(a.core)}</p></section>
+        <section><h4>外觀與滋味</h4><p>${esc(a.sense)}</p></section>
+        <section><h4>烹調與互動</h4><p>${esc(a.core)}</p></section>
+        ${a.grow ? `<section><h4>領悟與成長</h4><p>${esc(a.grow)}</p></section>` : ""}
       </div>
       <div class="sk-pal">${donut(c.n, 112)}${bars(c.n)}</div>
       <p class="sk-ps"><em>P.S.</em>${esc(a.summary)}</p>
@@ -1026,8 +1103,9 @@ function cardZen(a, pic, who){
       <div class="zn-photo ph" style="${c.photo}"></div>
     </div>
     <p class="zn-people">與 ${esc(c.ppl)} 同桌</p>
-    <div class="zn-cols"><section class="zn-sec"><h4>記憶濾鏡</h4><p>${esc(a.sense)}</p></section>
-    <section class="zn-sec"><h4>${esc(c.m.title.replace(/^\S+\s/, ""))}</h4><p>${esc(a.core)}</p></section></div>
+    <div class="zn-cols"><section class="zn-sec"><h4>外觀與滋味</h4><p>${esc(a.sense)}</p></section>
+    <section class="zn-sec"><h4>烹調與互動</h4><p>${esc(a.core)}</p></section>
+    ${a.grow ? `<section class="zn-sec"><h4>領悟與成長</h4><p>${esc(a.grow)}</p></section>` : ""}</div>
     <section class="zn-sec"><h4>滋味比例</h4>
       <div class="zn-bar">${FLAVORS.map(f => c.n[f.k] ? `<i style="width:${c.n[f.k]}%;background:${f.color}"></i>` : "").join("")}</div>
       <div class="zn-legend">${FLAVORS.map(f => `<span>${f.icon} ${f.name} ${c.n[f.k]}%</span>`).join("")}</div>
@@ -1056,8 +1134,9 @@ function cardPhoto(a, pic, who){
     </div>
     <div class="pt-body">
       <div class="pt-cols">
-        <section class="pt-sec"><h4>記憶濾鏡<small>MEMORY</small></h4><p>${esc(a.sense)}</p></section>
-        <section class="pt-sec"><h4>${esc(c.m.title)}<small>PEOPLE</small></h4><p>${esc(a.core)}</p></section>
+        <section class="pt-sec"><h4>外觀與滋味<small>TASTE</small></h4><p>${esc(a.sense)}</p></section>
+        <section class="pt-sec"><h4>烹調與互動<small>COOKING</small></h4><p>${esc(a.core)}</p></section>
+        ${a.grow ? `<section class="pt-sec"><h4>領悟與成長<small>MEMORY</small></h4><p>${esc(a.grow)}</p></section>` : ""}
       </div>
       <div class="pt-pal">${donut(c.n, 112)}${bars(c.n)}</div>
       <div class="pt-foot"><span>與${esc(c.ppl)}同桌<br>${esc(c.whoTxt)}</span><span style="text-align:right"><b>Aftertaste LAB</b><br>${dateStr(a.at)}・${a.chars||0} 字</span></div>
@@ -1069,7 +1148,8 @@ function flagsOf(a, th){
   if ((a.secs||0) < th.secs) f.push("用時過短");
   if ((a.chars||0) < th.chars) f.push("字數偏少");
   if (count(a.sense) > 0 && String(a.sense).replace(/\s/g,"") === String(a.core).replace(/\s/g,"")) f.push("兩段重複");
-  if (/(.)\1{7,}/.test(String(a.sense) + String(a.core))) f.push("連續重複字");
+  if (count(a.grow) > 0 && [a.sense, a.core].some(t => String(t).replace(/\s/g,"") === String(a.grow).replace(/\s/g,""))) f.push("段落重複");
+  if (/(.)\1{7,}/.test(String(a.sense) + String(a.core) + String(a.grow || ""))) f.push("連續重複字");
   return f;
 }
 function loadImage(src){ return new Promise((ok, no) => { const im = new Image(); im.onload = () => ok(im); im.onerror = no; im.src = src; }); }
@@ -1110,7 +1190,7 @@ function Student(preview){
   let D = null;
   const draftKey = () => `mzd_draft_${who.cls}_${who.seat}`;
   const newDraft = () => ({step:1, maxStep:1, food:"", picMode:"upload", upPic:"", drawPic:"", sense:"",
-    people:[], other:"", core:"", flavors:{sour:20,sweet:20,bitter:20,spicy:20,salty:20}, summary:"", active:0, done:false, last:null});
+    people:[], other:"", core:"", grow:"", flavors:{sour:20,sweet:20,bitter:20,spicy:20,salty:20}, summary:"", active:0, done:false, last:null});
   const sig = () => JSON.stringify([D.food, D.sense, D.core, D.summary, D.people, D.other, D.flavors, (getPic() || "").length]);
   const sendStatus = () => !D || !D.sent ? "none" : !D.sent.ok ? "fail" : D.sent.sig === sig() ? "ok" : "changed";
   function updateStatus(){
@@ -1121,6 +1201,7 @@ function Student(preview){
     pill.textContent = preview ? "👀 預覽不交件" : m[0]; pill.className = "st-pill " + (preview ? "st-none" : m[1]);
     $("#resendTip").hidden = preview || st !== "changed" || D.done;
     $$("#stepper button").forEach(b => { b.querySelector(".ck").textContent = validate(+b.dataset.go) ? "" : "✓"; });
+    updateMap();
   }
   const save = () => { if (!preview) store.set(draftKey(), D); updateStatus(); };
   const getPic = () => D.picMode === "draw" ? D.drawPic : D.upPic;
@@ -1251,18 +1332,45 @@ function Student(preview){
   /* 文字輸入綁定 */
   const bind = (id, key, after) => { const el = $("#" + id); el.value = D[key] || ""; el.addEventListener("input", () => { D[key] = el.value; save(); after && after(); }); };
   function counters(){
-    [["sense","c-sense",MIN.sense],["core","c-core",MIN.core]].forEach(([k,id,min]) => {
+    const lit = SENSES.filter(([, re]) => re.test(D.sense || "")).length;
+    $("#radar").innerHTML = SENSES.map(([lab, re]) => `<span class="${re.test(D.sense || "") ? "on" : ""}">${lab}</span>`).join("") + `<span class="r-sum">已點亮 ${lit}／5${lit >= 3 ? " ✓" : ""}</span>`;
+    [["sense","c-sense",MIN.sense],["core","c-core",MIN.core],["grow","c-grow",MIN.grow]].forEach(([k,id,min]) => {
       const n = count(D[k]); const el = $("#" + id);
       el.textContent = n >= min ? `${n} 字 ✓` : `${n} 字・至少 ${min} 字`; el.classList.toggle("ok", n >= min);
     });
   }
 
+  /* 詞彙／句型插入（通用） */
+  $("#editor").addEventListener("click", e => {
+    const b = e.target.closest("[data-ins]"); if (!b) return;
+    const ta = $("#" + b.dataset.target), w = b.dataset.ins;
+    const st = ta.selectionStart ?? ta.value.length, en = ta.selectionEnd ?? ta.value.length;
+    ta.value = ta.value.slice(0, st) + w + ta.value.slice(en);
+    ta.focus(); ta.setSelectionRange(st + w.length, st + w.length);
+    ta.dispatchEvent(new Event("input"));
+  });
+  /* 三段式寫作地圖 */
+  function updateMap(){
+    const m = $("#essayMap"); if (!m || !D) return;
+    const show = !$("#editor").hidden && D.step >= 2 && D.step <= 5 && !allOpen;
+    m.hidden = !show; if (!show) return;
+    const P = [[2,"第一段","食物外觀與滋味","sense"],[3,"第二段","烹調過程與互動","core"],[4,"第三段","情感領悟與成長記憶","grow"]];
+    const total = count(D.sense) + count(D.core) + count(D.grow) + count(D.summary);
+    m.innerHTML = `<p class="em-t">📝 三段式寫作地圖<small>全文 ${total} 字</small></p><div class="em-row">` +
+      P.map(([st, no, name, k]) => { const n = count(D[k]), ok = n >= MIN[k];
+        return `<button type="button" class="em-seg${D.step === st ? " on" : ""}${ok ? " ok" : ""}" data-go2="${st}"><b>${no}</b><span>${name}</span><em>${n} 字${ok ? " ✓" : ""}</em></button>`; }).join('<i class="em-arrow">➔</i>') + `</div>`;
+  }
+  $("#essayMap").addEventListener("click", e => {
+    const b = e.target.closest("[data-go2]"); if (!b) return;
+    const n = +b.dataset.go2; if (n <= D.maxStep) showStep(n);
+  });
+
   /* 驗證與換頁 */
   function validate(n){
     if (n === 1) { if (!D.food.trim()) return "先寫下這道食物的名稱。"; if (!getPic()) return D.picMode === "draw" ? "在畫布上畫下它的樣子吧！" : "上傳一張照片，或切換到「畫下它」。"; }
-    if (n === 2 && count(D.sense) < MIN.sense) return `再多寫一點畫面與氣味（目前 ${count(D.sense)} 字，至少 ${MIN.sense} 字）。`;
-    if (n === 3) { if (!D.people.length) return "先勾選和你一起吃這道菜的人。"; if (count(D.core) < MIN.core) return `核心寫作區至少 ${MIN.core} 字（目前 ${count(D.core)} 字）。`; }
-    if (n === 4) { if (!FLAVORS.some(f => D.flavors[f.k] > 0)) return "至少調一種滋味進去。"; if (count(D.summary) < MIN.summary) return "用一句話總結這碗特調的滋味。"; }
+    if (n === 2 && count(D.sense) < MIN.sense) return `第一段再多寫一點外觀與滋味（目前 ${count(D.sense)} 字，至少 ${MIN.sense} 字）。`;
+    if (n === 3) { if (!D.people.length) return "先勾選和你一起吃這道菜的人。"; if (count(D.core) < MIN.core) return `第二段至少 ${MIN.core} 字（目前 ${count(D.core)} 字）。`; }
+    if (n === 4) { if (!FLAVORS.some(f => D.flavors[f.k] > 0)) return "至少調一種滋味進去。"; if (count(D.grow) < MIN.grow) return `第三段的領悟至少 ${MIN.grow} 字（目前 ${count(D.grow)} 字）。`; if (count(D.summary) < MIN.summary) return "用一句話總結這碗特調的滋味。"; }
     if (n === 5 && !STYLES.includes(D.cardStyle)) return "點一下你喜歡的海報風格。";
     return "";
   }
@@ -1280,6 +1388,7 @@ function Student(preview){
     });
     if (n === 1 && D.picMode === "draw") requestAnimationFrame(fitPad);
     if (n === 5 || allOpen) requestAnimationFrame(drawPicks);
+    updateMap();
     const top = $("#stepper").getBoundingClientRect().top + window.scrollY - 4;
     if (allOpen && preview) { const st = $(`.stage[data-step="${n}"]`); window.scrollTo({top:st.getBoundingClientRect().top + window.scrollY - 90, behavior:"smooth"}); }
     else if (window.scrollY > top) window.scrollTo({top, behavior:"smooth"});
@@ -1305,23 +1414,26 @@ function Student(preview){
   };
   /* 交件前檢查 */
   const SELF = {
-    A:["我在「記憶濾鏡」寫出了這道菜的氣味、顏色或聲音。",
-       "我寫出了這個人吃這道菜的具體動作或習慣。",
-       "我寫出了「以前」和「現在」的不同，以及這個改變代表什麼。",
-       "我已經從頭讀過一遍，修正了錯字和不通順的句子。"],
-    B:["我在「記憶濾鏡」寫出了這道菜的氣味、顏色或聲音。",
-       "我寫出了兩個人吃這道菜「最不同的地方」。",
-       "我寫出了他們的吃法和平常個性之間的關聯。",
-       "我已經從頭讀過一遍，修正了錯字和不通順的句子。"]
+    A:["第一段：我寫出了這道菜的外觀，和至少兩種感官（氣味、聲音、滋味、口感）。",
+       "第二段：我寫出了做這道菜的過程（至少兩個動作），以及我們之間的互動。",
+       "第二段：我寫出了他「以前」和「現在」吃這道菜的不同。",
+       "第三段：我寫出了自己的領悟，以及這段記憶怎麼陪我長大。",
+       "我已經把三段從頭讀過一遍，段落之間接得起來，也修正了錯字。"],
+    B:["第一段：我寫出了這道菜的外觀，和至少兩種感官（氣味、聲音、滋味、口感）。",
+       "第二段：我寫出了做這道菜的過程（至少兩個動作），以及我們之間的互動。",
+       "第二段：我寫出了兩個人吃法最不同的地方，和他們的個性。",
+       "第三段：我寫出了自己的領悟，以及這段記憶怎麼陪我長大。",
+       "我已經把三段從頭讀過一遍，段落之間接得起來，也修正了錯字。"]
   };
   function autoChecks(){
     return [
       [1, "寫下食物名稱", !!D.food.trim(), D.food.trim()],
       [1, "上傳照片或畫下它", !!getPic(), ""],
-      [2, `記憶濾鏡至少 ${MIN.sense} 字`, count(D.sense) >= MIN.sense, `目前 ${count(D.sense)} 字`],
+      [2, `第一段 外觀與滋味 至少 ${MIN.sense} 字`, count(D.sense) >= MIN.sense, `目前 ${count(D.sense)} 字`],
       [3, "勾選共餐者", D.people.length > 0, peopleList().join("、")],
-      [3, `人物刻痕至少 ${MIN.core} 字`, count(D.core) >= MIN.core, `目前 ${count(D.core)} 字`],
+      [3, `第二段 烹調與互動 至少 ${MIN.core} 字`, count(D.core) >= MIN.core, `目前 ${count(D.core)} 字`],
       [4, "調配情感比例", FLAVORS.some(f => D.flavors[f.k] > 0), ""],
+      [4, `第三段 領悟與成長 至少 ${MIN.grow} 字`, count(D.grow) >= MIN.grow, `目前 ${count(D.grow)} 字`],
       [4, "寫下一句話總結", count(D.summary) >= MIN.summary, ""],
       [5, "挑選海報風格", STYLES.includes(D.cardStyle), ({sketch:"手繪食譜", zen:"日式留白", photo:"暖光攝影"})[D.cardStyle] || ""]
     ];
@@ -1345,8 +1457,8 @@ function Student(preview){
   };
   function doFinish(){
     const a = {at:new Date().toISOString(), food:D.food.trim(), people:peopleList(), mode:modeOf(),
-      sense:D.sense.trim(), core:D.core.trim(), flavors:norm(D.flavors), summary:D.summary.trim(), secs:D.active, style:D.cardStyle};
-    a.chars = count(a.sense) + count(a.core) + count(a.summary);
+      sense:D.sense.trim(), core:D.core.trim(), grow:D.grow.trim(), flavors:norm(D.flavors), summary:D.summary.trim(), secs:D.active, style:D.cardStyle};
+    a.chars = count(a.sense) + count(a.core) + count(a.grow) + count(a.summary);
     D.done = true; D.last = a; save();
     showFinal();
     submit(a);
@@ -1400,8 +1512,8 @@ function Student(preview){
   /* 工序伍：用學生自己的內容產生三張迷你海報 */
   function draftAttempt(){
     const a = {at:new Date().toISOString(), food:D.food.trim(), people:peopleList(), mode:modeOf(),
-      sense:D.sense.trim(), core:D.core.trim(), flavors:norm(D.flavors), summary:D.summary.trim()};
-    a.chars = count(a.sense) + count(a.core) + count(a.summary); return a;
+      sense:D.sense.trim(), core:D.core.trim(), grow:D.grow.trim(), flavors:norm(D.flavors), summary:D.summary.trim()};
+    a.chars = count(a.sense) + count(a.core) + count(a.grow) + count(a.summary); return a;
   }
   function drawPicks(){
     const a = draftAttempt(), grid = $("#stylePick");
@@ -1419,7 +1531,20 @@ function Student(preview){
     $$("#stylePick .pick").forEach(x => x.classList.toggle("on", x === pk));
     if (e.target.closest(".zoom")) openFull($(".mini .poster", pk));
   });
+  $("#showEssay").onclick = () => {
+    const h = $("#essayHost"); h.hidden = !h.hidden;
+    $("#showEssay").textContent = h.hidden ? "📄 看完整文章" : "📄 收起文章";
+    if (!h.hidden) {
+      h.innerHTML = renderEssay(D.last, who) + `<div class="actions center"><button class="btn small" id="copyEssay">複製全文</button></div>`;
+      $("#copyEssay").onclick = async () => {
+        const t = D.last.food + "\n\n" + essayText(D.last).map(x => "　　" + x).join("\n\n");
+        try { await navigator.clipboard.writeText(t); $("#copyEssay").textContent = "已複製 ✓"; } catch(e){ $("#copyEssay").textContent = "請長按文章手動複製"; }
+      };
+      h.scrollIntoView({behavior:"smooth", block:"start"});
+    }
+  };
   function showFinal(){
+    $("#essayHost").hidden = true; $("#showEssay").textContent = "📄 看完整文章"; $("#essayMap").hidden = true;
     $("#editor").hidden = true; $("#final").hidden = false; $("#resendTip").hidden = true;
     if (preview) renderSent("preview", D.last);
     else if (D.sent && D.sent.at === D.last.at) renderSent(D.sent.ok ? (D.sent.local ? "local" : "ok") : "fail", D.last);
@@ -1485,7 +1610,7 @@ function Student(preview){
   }, 1000));
 
   function fill(){
-    $("#food").value = D.food; $("#sense").value = D.sense; $("#core").value = D.core;
+    $("#food").value = D.food; $("#sense").value = D.sense; $("#core").value = D.core; $("#grow").value = D.grow || "";
     $("#summary").value = D.summary; $("#otherName").value = D.other;
     $$("#people input").forEach(i => i.checked = D.people.includes(i.value));
     $("#mTitle").dataset.mode = "";
@@ -1503,6 +1628,7 @@ function Student(preview){
       bind("food", "food", () => clearErr(1));
       bind("sense", "sense", () => { counters(); clearErr(2); });
       bind("core", "core", () => { counters(); clearErr(3); });
+      bind("grow", "grow", () => { counters(); clearErr(4); });
       bind("summary", "summary", () => clearErr(4));
       bind("otherName", "other", updateMission);
     }
@@ -1544,8 +1670,9 @@ function Student(preview){
   }
   function fillSample(){
     Object.assign(D, {food:"阿嬤的菜脯蛋", picMode:"upload", upPic:samplePic(), people:["阿嬤","爸爸"], other:"",
-      sense:"每到寒流來的晚上，廚房就會傳出「滋——」的一聲。菜脯在熱油裡翻滾，鹹香混著蛋香一路飄進客廳，連電視的聲音都蓋不住。端上桌時，蛋的邊緣煎得焦黃酥脆，中間還冒著熱氣。",
-      core:"爸爸吃菜脯蛋總是很急躁，筷子一夾就是一大塊，三兩口配著白飯扒完，好像等一下還有什麼事要趕。阿嬤卻不一樣，她會先把焦黑的邊挑起來放在自己碗裡，把最軟嫩的中間推到我面前，自己細嚼慢嚥地吃那些別人不要的部分。爸爸做事也是這樣，衝第一、不拘小節；阿嬤則是把好的都留給別人。他們一快一慢，剛好互補。",
+      sense:"每到寒流來的晚上，廚房就會傳出「滋——」的一聲。菜脯在熱油裡翻滾，鹹香混著蛋香一路飄進客廳，連電視的聲音都蓋不住。端上桌時，蛋的邊緣煎得金黃酥脆，中間還冒著熱氣，咬下去先是脆，再來是軟嫩的蛋和鹹鹹的菜脯。",
+      core:"阿嬤總是先把菜脯切得細細碎碎，泡水去鹹，再打三顆蛋用筷子攪拌。我站在旁邊幫忙剝蒜，她一邊翻炒一邊叮嚀：「油會噴，站遠一點！」端上桌後，爸爸筷子一夾就是一大塊，三兩口配著白飯扒完，好像等一下還有什麼事要趕；阿嬤卻先把焦黑的邊挑到自己碗裡，把最軟嫩的中間推到我面前，自己細嚼慢嚥。爸爸做事衝第一、不拘小節，阿嬤則是把好的都留給別人。他們一快一慢，剛好互補。",
+      grow:"直到現在我才明白，阿嬤挑走的不只是焦邊，而是她捨不得讓我們吃到的那一點苦。長大後我自己學著煎菜脯蛋，才發現要煎得剛剛好有多難。每當我想起那個味道，就會想起廚房裡那個彎著腰的背影，提醒我也要學會把好的留給身邊的人。",
       flavors:{sour:15, sweet:35, bitter:5, spicy:15, salty:30}, summary:"這是一碗在微辣衝突中，帶著鹹鹹日常與溫甜心意的記憶。"});
     fill();
   }
@@ -1616,7 +1743,7 @@ function Teacher(){
     const b = e.target.closest("[data-view]"); if (!b) return;
     const x = logRows[+b.dataset.view];
     const latest = (x.r.attempts||[]).slice(-1)[0];
-    $("#vHost").innerHTML = renderCard(x.a, latest && latest.at === x.a.at ? x.r.image : "", x.r, x.a.style);
+    $("#vHost").innerHTML = renderCard(x.a, latest && latest.at === x.a.at ? x.r.image : "", x.r, x.a.style) + renderEssay(x.a, x.r);
     $("#viewer").hidden = false;
   });
   $("#vClose").onclick = () => $("#viewer").hidden = true;
@@ -1644,20 +1771,20 @@ function Teacher(){
   $("#fFlag").addEventListener("change", render);
 
   $("#copyTsv").onclick = async () => {
-    const head = ["完成時間","班級","座號","姓名","料理","共餐者","字數","用時(秒)","提醒","記憶濾鏡","人物刻痕","一句話總結"];
+    const head = ["完成時間","班級","座號","姓名","料理","共餐者","字數","用時(秒)","提醒","第一段 外觀與滋味","第二段 烹調與互動","第三段 領悟與成長","一句話總結"];
     const clean = s => String(s ?? "").replace(/[\t\r\n]+/g, " ");
     const lines = [head.join("\t")].concat(logRows.map(x => [dateStr(x.a.at,true), x.r.cls, x.r.seat, x.r.name, x.a.food, (x.a.people||[]).join("、"),
-      x.a.chars, x.a.secs, x.f.join("、"), x.a.sense, x.a.core, x.a.summary].map(clean).join("\t")));
+      x.a.chars, x.a.secs, x.f.join("、"), x.a.sense, x.a.core, x.a.grow, x.a.summary].map(clean).join("\t")));
     try { await navigator.clipboard.writeText(lines.join("\n")); $("#copyTsv").textContent = "已複製 ✓"; }
     catch(e){ alert("瀏覽器不允許複製，請改用「匯出本班 CSV」。"); }
     setTimeout(() => $("#copyTsv").textContent = "複製（貼到 Excel）", 1800);
   };
   $("#exportCsv").onclick = () => {
     const q = s => `"${String(s ?? "").replace(/"/g, '""')}"`;
-    const head = ["完成時間","班級","座號","姓名","料理","共餐者","寫作任務","記憶濾鏡","人物刻痕",...FLAVORS.map(f => f.name + "%"),"一句話總結","字數","用時(秒)"];
+    const head = ["完成時間","班級","座號","姓名","料理","共餐者","寫作任務","第一段 外觀與滋味","第二段 烹調與互動","第三段 領悟與成長",...FLAVORS.map(f => f.name + "%"),"一句話總結","字數","用時(秒)"];
     const rows = [];
     records.filter(r => String(r.cls) === cls).forEach(r => (r.attempts||[]).forEach(a => rows.push([dateStr(a.at,true), r.cls, r.seat, r.name, a.food, (a.people||[]).join("、"),
-      (MODE[a.mode]||MODE.A).title, a.sense, a.core, ...FLAVORS.map(f => (a.flavors||{})[f.k]||0), a.summary, a.chars, a.secs])));
+      (MODE[a.mode]||MODE.A).title, a.sense, a.core, a.grow || "", ...FLAVORS.map(f => (a.flavors||{})[f.k]||0), a.summary, a.chars, a.secs])));
     const csv = "﻿" + [head, ...rows].map(r => r.map(q).join(",")).join("\r\n");
     const link = document.createElement("a");
     link.href = URL.createObjectURL(new Blob([csv], {type:"text/csv"})); link.download = `回味製研所_${cls}.csv`; link.click();
@@ -1703,35 +1830,40 @@ function overviewHTML(){
     <h4>過關條件</h4><p>有食物名稱，且有照片或畫。</p>
   </div></div>
 
-  <div class="ov-step"><span class="tag" data-v>工序貳</span><div>
-    <h3>記憶濾鏡（感官前奏）</h3>
-    <p class="ov-q">先別急著寫人，讓這道菜「出場」。</p>
-    <h4>💡 靈感小提示（按鈕展開）</h4>
-    <p>不知道怎麼開頭嗎？試著想想：</p>
-    <ul><li>這道食物通常出現在什麼特定的時刻？（例如：冬天的宵夜、下雨天、拜拜的桌上）</li>
-    <li>它剛端上桌時，有什麼特別的氣味、顏色或是聲音？</li></ul>
-    <h4>大文字框</h4><p class="ov-ph">請在這裡寫下這道食物出場的畫面與氣味...</p>
+  <div class="ov-step"><span class="tag" data-v>第一段</span><div>
+    <h3>工序貳：食物外觀與滋味（記憶濾鏡）</h3>
+    <p class="ov-q">文章的開頭，先別急著寫人，讓這道菜「出場」：寫出它的樣子、氣味和味道。</p>
+    <h4>這一段可以這樣寫（鷹架）</h4>
+    <ul><li>時機：它通常在什麼時候出現？</li><li>外觀：顏色、形狀、裝在什麼碗盤裡？</li><li>氣味・聲音：還沒吃到之前，先聞到、聽到什麼？</li><li>滋味・口感：第一口吃下去是什麼感覺？</li></ul>
+    <h4>感官雷達</h4><p>依學生文字自動點亮：👀 視覺、👃 嗅覺、👂 聽覺、👅 味覺、✋ 觸覺（建議至少 3 盞，不強制）。</p>
+    <h4>感官詞彙庫</h4><div class="ov-words"><span>［金黃］</span><span>［油亮］</span><span>［熱氣騰騰］</span><span>［香氣撲鼻］</span><span>［滋滋作響］</span><span>［咕嚕咕嚕］</span><span>［酥脆］</span><span>［軟嫩］</span><span>［入口即化］</span><span>［鹹香］</span><span>［甘甜］</span><span>［燙口］</span></div>
+    <h4>💡 靈感小提示</h4><ul><li>這道食物通常出現在什麼特定的時刻？（例如：冬天的宵夜、下雨天、拜拜的桌上）</li><li>它剛端上桌時，有什麼特別的氣味、顏色或是聲音？</li></ul>
     <h4>過關條件</h4><p>至少 ${MIN.sense} 字。</p>
   </div></div>
 
-  <div class="ov-step"><span class="tag matcha" data-v>工序參</span><div>
-    <h3>靈魂人物與刻痕（核心寫作區）</h3>
-    <p class="ov-q">誰和你一起吃這道菜？（可複選）</p>
-    <div class="ov-words">${PEOPLE.map(p => `<span>☐ ${p}</span>`).join("")}</div>
+  <div class="ov-step"><span class="tag matcha" data-v>第二段</span><div>
+    <h3>工序參：烹調過程與互動（人物刻痕）</h3>
+    <p class="ov-q">這道菜是怎麼來到桌上的？寫出做菜的過程，和你們之間的互動。</p>
+    <h4>這一段可以這樣寫（鷹架）</h4>
+    <ul><li>烹調：誰做的？寫出 2～3 個做菜的動作。</li><li>互動：你在旁邊做什麼？他說了什麼話？</li><li>人物：依照寫作任務寫出這個人的特點。</li></ul>
+    <h4>共餐者（可複選）</h4><div class="ov-words">${PEOPLE.map(p => `<span>☐ ${p}</span>`).join("")}</div>
+    <h4>烹調動作詞</h4><div class="ov-words"><span>［切］</span><span>［翻炒］</span><span>［攪拌］</span><span>［撒上］</span><span>［燉煮］</span><span>［盛起］</span><span>［端上桌］</span><span>［夾］</span><span>［吹涼］</span><span>［叮嚀］</span></div>
     <h4>只勾 1 人時出現</h4>${mode(MODE.A)}
     <h4>勾 2 人以上時出現</h4>${mode(MODE.B)}
-    <p class="note">勾超過兩位時另有提醒：挑出對比最強烈的兩位來寫。</p>
     <h4>過關條件</h4><p>至少勾 1 人，文字至少 ${MIN.core} 字。</p>
   </div></div>
 
-  <div class="ov-step"><span class="tag gray" data-v>工序肆</span><div>
-    <h3>情感調色盤與餘韻（複合情緒歸納）</h3>
-    <p class="ov-q">記憶的滋味從來不是單一的。請調配這段回憶的情感比例。</p>
-    <h4>五個滑動拉桿（自動換算成 100%，旁邊即時顯示圓餅圖）</h4>
+  <div class="ov-step"><span class="tag gray" data-v>第三段</span><div>
+    <h3>工序肆：情感領悟與成長記憶（情感調色）</h3>
+    <p class="ov-q">文章的結尾：先調出這段回憶的滋味，再寫下你從中明白的事。</p>
+    <h4>① 情感比例（五個拉桿，自動換算 100%）</h4>
     <ul>${FLAVORS.map(f => `<li>${f.icon} ${f.name}（${f.sub}）</li>`).join("")}</ul>
-    <h4>一句話總結</h4>
-    <p class="ov-q">最後，請用一句話總結這碗特調的滋味：（例如：這是一碗在微辣衝突中，帶著鹹鹹日常的記憶。）</p>
-    <h4>過關條件</h4><p>至少調一種滋味，並寫下總結句。</p>
+    <h4>② 領悟與成長（鷹架）</h4>
+    <ul><li>回到現在：再想起（或再吃到）這道菜時，有什麼感覺？</li><li>領悟：這道菜、這個人，讓你明白了什麼？</li><li>成長：這段記憶怎麼陪你長大？以後的你會怎麼做？</li></ul>
+    <h4>句型開頭</h4><div class="ov-words"><span>直到現在我才明白，…</span><span>長大後再吃到這道菜，…</span><span>原來那一碗裡，…</span><span>每當我想起那個味道，就會…</span><span>我想，以後的我…</span></div>
+    <h4>③ 一句話收尾</h4>
+    <p class="ov-q">最後，請用一句話總結這碗特調的滋味（會成為文章最後一句與海報標語）。</p>
+    <h4>過關條件</h4><p>至少調一種滋味；領悟至少 ${MIN.grow} 字；寫下總結句。</p>
   </div></div>
 
   <div class="ov-step"><span class="tag butter" data-v>工序伍</span><div>
@@ -1743,7 +1875,7 @@ function overviewHTML(){
 
   <div class="ov-step"><span class="tag butter" data-v>出餐</span><div>
     <h3>情感海報</h3>
-    <p>通過交件檢查後，編輯區收起，依學生選的風格產出一張 A4 直式海報，可全螢幕檢視、存成圖片、列印 A4。作品同時送到老師的試算表。</p>
+    <p>通過交件檢查後，編輯區收起，依學生選的風格產出一張 A4 直式海報（含三段文字），可全螢幕檢視、存成圖片、列印 A4。按「📄 看完整文章」會把三段＋收尾句自動組成一篇散文，可複製全文。作品同時送到老師的試算表。</p>
   </div></div>`;
 }
 

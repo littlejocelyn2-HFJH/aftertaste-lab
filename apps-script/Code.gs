@@ -11,7 +11,7 @@ const ACT = "diner";
 const DATA_SHEET = "data";
 const LOG_SHEET = "作品紀錄";
 const DATA_HEADERS = ["key", "班級", "座號", "姓名", "活動", "最多字數", "作品數", "最後完成", "最新料理", "最新情感", "最新圖片", "attemptsJSON"];
-const LOG_HEADERS = ["完成時間", "班級", "座號", "姓名", "料理", "共餐者", "步驟二 記憶濾鏡", "步驟三 人物與刻痕", "情感比例", "一句話總結", "總字數", "用時(秒)", "提醒"];
+const LOG_HEADERS = ["完成時間", "班級", "座號", "姓名", "料理", "共餐者", "第一段 外觀與滋味", "第二段 烹調與互動", "情感比例", "一句話總結", "總字數", "用時(秒)", "提醒", "第三段 領悟與成長", "海報風格"];
 const FLAVOR_NAMES = { sour: "微酸", sweet: "溫甜", bitter: "苦澀", spicy: "嗆辣", salty: "鹹香" };
 
 function doGet() {
@@ -49,6 +49,8 @@ function sheet_(name, headers) {
     sh.getRange(1, 1, 1000, headers.length).setNumberFormat("@"); // 全部當文字，避免座號、時間被自動轉格式
     sh.getRange(1, 1, 1, headers.length).setValues([headers]).setFontWeight("bold");
     sh.setFrozenRows(1);
+  } else if (sh.getLastColumn() < headers.length) {
+    sh.getRange(1, 1, 1, headers.length).setValues([headers]).setFontWeight("bold"); // 舊表補上新欄位
   }
   return sh;
 }
@@ -128,12 +130,13 @@ function save_(req) {
         const flTxt = Object.keys(FLAVOR_NAMES).map(function (k) { return FLAVOR_NAMES[k] + (Number(fl[k]) || 0) + "%"; }).join(" ");
         const notes = [];
         if ((Number(a.secs) || 0) < 180) notes.push("用時過短");
-        if ((Number(a.chars) || 0) < 150) notes.push("字數偏少");
+        if ((Number(a.chars) || 0) < 200) notes.push("字數偏少");
         log.appendRow([
           Utilities.formatDate(new Date(a.at), "Asia/Taipei", "yyyy/MM/dd HH:mm"),
           cls, seat, txt_(name, 20), txt_(a.food, 40), txt_((a.people || []).join("、"), 80),
           txt_(a.sense), txt_(a.core), flTxt, txt_(a.summary, 200),
-          Number(a.chars) || 0, Number(a.secs) || 0, notes.join("、")
+          Number(a.chars) || 0, Number(a.secs) || 0, notes.join("、"),
+          txt_(a.grow), ({ sketch: "手繪食譜", zen: "日式留白", photo: "暖光攝影" })[a.style] || ""
         ]);
       });
     }
